@@ -1,3 +1,17 @@
+var appConfig = {};
+
+function loadAppConfig(){
+    appConfig.server = 'http://localhost/CaUP/CaUP/';
+    appConfig.loginPage = 'http://localhost/CaUP/CaUP/';
+    appConfig.services = appConfig.server+'core/services.php';
+    appConfig.port = '';
+    appConfig.userData = {
+        user: getUser(),
+        token: getToken()
+    };
+    appConfig.messageHideIn = 5000
+}
+
 function initRouter(){ 
     if(window.location.hash){
         var aContent = 'a[data-link="pages/'+window.location.hash.replace('#','').split('?')[0]+'.html"]';
@@ -40,10 +54,13 @@ function loadPage(params){
             afterLoad(params);
             if(parameters){
                 getParameters();
-                if(getOperation() === 'update'  || getOperation() === 'read'){
-                    getId();
-                    console.info(getId(), getOperation());
-                } 
+                if(getParameters('id')){
+                    setId();
+                    if(getOperation() === 'update'  || getOperation() === 'read'){
+                        getId();
+                        console.info(getId(), getOperation());
+                    }
+                }
             }
         });
     }
@@ -63,6 +80,52 @@ function loadMessage(message){
     $('#message-content .box-body .alert').addClass(message.type);
     $('#message-content .box-body .alert h4').before($('#message-content .row .alert h4 i')).text(message.text);
     $('#message-content').removeClass('hidden'); 
+    setTimeout(function(){
+        $('#message-content').fadeOut()
+    }, appConfig.messageHideIn);
+}
+
+function notifications(){
+    var messages = checkNotifications('messages');
+    var notifications = checkNotifications('notifications');
+    if(messages && messages.success && messages.qtd > 0){
+        $('.messages-menu a span').text(messages.qtd).removeClass('hidden');
+    }
+    else{
+        $('.messages-menu a span').addClass('hidden');   
+    }
+    if(notifications && notifications.success && notifications.qtd > 0){
+        $('.notifications-menu a span').text(notifications.qtd).removeClass('hidden');
+    }
+    else{
+        $('.notifications-menu a span').addClass('hidden');   
+    }
+}
+
+function checkNotifications(type){
+    $.ajax({
+        url: appConfig.services,
+        data: $.extend({
+            service: 'checkNotifications',
+            type: type
+        }, appConfig.userData),
+        success: function(res){
+            return res
+        }
+    })
+    .fail( function(e){
+        console.info(ajaxError(e));
+        return {success: false};
+    });
+}
+
+function ajaxError(params){
+    switch(params){
+        case params.status = 404:
+            return '404';
+        default:
+            return 'Erro desconhecido'
+    }
 }
 
 function getParameters(param){
@@ -80,7 +143,11 @@ function getParameters(param){
 }
 
 function getOperation(){
-    return getParameters('op');
+    return $('#main-content').data('content-op');
+}
+
+function setOperation(){
+    $('#main-content').data('content-op', getParameters('op'));
 }
 
 function getId(){
@@ -89,6 +156,7 @@ function getId(){
 
 function setId(){
     $('#main-content').data('content-id', getParameters('id'));
+    setOperation();
 }
 
 function setReadOnly(){
@@ -96,7 +164,7 @@ function setReadOnly(){
 }
 
 function goLoginPage(){
-    document.location.href = 'http://google.com';
+    document.location.href = appConfing.loginPage;
 }
 
 function getToken(){
@@ -113,21 +181,22 @@ function setToken(){
 
 function auth(){
     $.ajax({
-        url: '#', 
-        data: {
-            token: getToken(),
-            app_user: getUser()
-        },
+        url: appConfig.services,
+        data: $.extend({
+            service: 'auth'
+        }, appConfig.userData),
         success: function(res){
-            //DELETE
-            console.info('Auth true');
-            return true;
+            return res
         },
         error: function(res){
             //DELETE
             console.info('Auth false');
             return false;
         }
+    })
+    .fail( function(e){
+        console.info(ajaxError(e));
+        return {success: false};
     });
     //DELETE
     return true;
@@ -146,8 +215,8 @@ function logout(){
 
 function afterLoad(params){
     params.message = {
-        text: 'Teste de Mensagem',
-        type: 'alert-info'
+        text: params.text,
+        type: params.type
     }
     if(params.message){
         loadMessage(params.message);
@@ -162,18 +231,21 @@ function setGlobalEvents(){
         $('.loading-bg').removeClass('hidden');
     })
     .on('loadPageFinish', function(){
+        window.location.hash = window.location.hash.split('?')[0];
         $('.loading-bg').addClass('hidden');
         console.info('loadPageFinish');
     });
-}
-
-$(function ($) {
-    // disables Ajax cache (remove it after developing)
+        // disables Ajax cache (remove it after developing)
     $.ajaxSetup({
         cache: false
     });
-    setGlobalEvents();
+    loadAppConfig();
     initRouter();
+    notifications();
+}
+
+$(function ($) {
+    setGlobalEvents();
 });    
 
 
