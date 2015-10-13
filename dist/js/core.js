@@ -77,6 +77,13 @@ function loadHeader(params){
 
 function loadMessage(message){
     console.info('start message', message);
+    var messageType = switch(message.type){
+        case : 
+            return  
+        default:
+            return 
+            break;
+    }
     $('#message-content .box-body .alert').addClass(message.type);
     $('#message-content .box-body .alert h4').before($('#message-content .row .alert h4 i')).text(message.text);
     $('#message-content').removeClass('hidden'); 
@@ -214,10 +221,10 @@ function logout(){
 }
 
 function afterLoad(params){
-    params.message = {
-        text: params.text,
-        type: params.type
-    }
+    //params.message = {
+    //    text: params.text,
+    //    type: params.type
+    //}
     if(params.message){
         loadMessage(params.message);
     }
