@@ -70,18 +70,23 @@ function loadPage(params){
 }
 
 function loadHeader(params){
+    getUserInfo();
     $('.content-header h1').text(params.title);
     $('.breadcrumb li:eq(0) a i').removeClass().attr('class', params.iconClass);
     $('.breadcrumb .active').text(params.title);
+    $('.user a span').text('Caio');
+    $('.user a img').attr('src','');
 }
 
 function loadMessage(message){
     console.info('start message', message);
-    var messageType = switch(message.type){
-        case : 
-            return  
+    var messageType;
+    switch(message.type){
+        case 'error': 
+            messageType = 'alert-warning'; 
+            break;
         default:
-            return 
+            messageType = 'alert-warning';
             break;
     }
     $('#message-content .box-body .alert').addClass(message.type);
@@ -190,7 +195,8 @@ function auth(){
     $.ajax({
         url: appConfig.services,
         data: $.extend({
-            service: 'auth'
+            service: 'auth',
+            location: window.location.hash.split('?')[0]
         }, appConfig.userData),
         success: function(res){
             return res
@@ -213,7 +219,15 @@ function login(){
     localStorage.setItem('app_token',setToken());
     localStorage.setItem('app_user','Caio');
     localStorage.setItem('app_user_id',11);
+    getUserInfo();
 }
+
+function getUserInfo(){
+    $('.user ul .user-header p').text('Caio').append('<small>teste</small>');
+    $('.user ul .user-header img').attr('src','');
+    
+}
+
 
 function logout(){
     localStorage.clear();
