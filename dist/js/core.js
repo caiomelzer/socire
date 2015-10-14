@@ -1,15 +1,17 @@
 var appConfig = {};
 
 function loadAppConfig(){
-    appConfig.server = 'http://localhost/CaUP/CaUP/';
-    appConfig.loginPage = 'http://localhost/CaUP/CaUP/';
+    appConfig.server = 'http://localhost/rep/CaUP/';
+    appConfig.front = 'http://localhost/rep/CaUP/';
+    appConfig.loginPage = 'http://localhost/rep/CaUP/';
     appConfig.services = appConfig.server+'core/services.php';
+    appConfig.failedPage = appConfig.failedPage+'pages/404.html';
     appConfig.port = '';
     appConfig.userData = {
         user: getUser(),
         token: getToken()
     };
-    appConfig.messageHideIn = 5000
+    appConfig.messageHideIn = 5000;
 }
 
 function initRouter(){ 
@@ -38,35 +40,47 @@ function initRouter(){
 }
 
 function loadPage(params){
-    if(auth()){
-        $(document).trigger('loadPageStart');
-        var parameters = window.location.href.split('?')[1];
-        window.location.hash = (parameters !== undefined) ? params.url.split('/')[1].replace('.html','')+'?'+parameters : params.url.split('/')[1].replace('.html','');
-        loadHeader(params);
-        $('#main-content').empty();
-        $.ajax({
-            url: params.url,
-            success: function(res){
+    $(document).trigger('loadPageStart');
+    var parameters = window.location.href.split('?')[1];
+    window.location.hash = (parameters !== undefined) ? params.url.split('/')[1].replace('.html','')+'?'+parameters : params.url.split('/')[1].replace('.html','');
+    loadHeader(params);
+    $('#main-content').empty();
+    $.ajax({
+        url: params.url,
+        success: function(res){
+            if(auth()){
                 $('#main-content').html(res);
             }
-        })
-        .done(function(){
-            afterLoad(params);
-            if(parameters){
-                getParameters();
-                if(getParameters('id')){
-                    setId();
-                    if(getOperation() === 'update'  || getOperation() === 'read'){
-                        getId();
-                        console.info(getId(), getOperation());
-                    }
+            else{
+                goLoginPage();
+            }
+        }
+    })
+    .fail(function(){
+        failedPage();
+    })
+    .done(function(){
+        afterLoad(params);
+        if(parameters){
+            getParameters();
+            if(getParameters('id')){
+                setId();
+                if(getOperation() === 'update'  || getOperation() === 'read'){
+                    getId();
+                    console.info(getId(), getOperation());
                 }
             }
-        });
-    }
-    else{
-        goLoginPage();
-    }    
+        }
+    });
+}
+
+function failedPage(){
+    $.ajax({
+        url: params.url,
+        success: function(res){
+            $('#main-content').html(res);
+        }
+    })
 }
 
 function loadHeader(params){
@@ -124,7 +138,7 @@ function ajaxError(params){
         case params.status = 404:
             return '404';
         default:
-            return 'Erro desconhecido'
+            return 'Erro desconhecido '+params;
     }
 }
 
@@ -214,10 +228,10 @@ function logout(){
 }
 
 function afterLoad(params){
-    params.message = {
-        text: params.text,
-        type: params.type
-    }
+    // params.message = {
+    //     text: params.text,
+    //     type: params.type
+    // }
     if(params.message){
         loadMessage(params.message);
     }
@@ -239,12 +253,12 @@ function setGlobalEvents(){
     $.ajaxSetup({
         cache: false
     });
-    loadAppConfig();
     initRouter();
     notifications();
 }
 
 $(function ($) {
+    loadAppConfig();
     setGlobalEvents();
 });    
 
