@@ -189,10 +189,6 @@ function getUser(){
     return localStorage.getItem('app_user');
 }
 
-function setToken(){
-    return Math.random().toString(36).substr(2) + Math.random().toString(36).substr(2);
-}
-
 function auth(){
     $.ajax({
         url: appConfig.services,
@@ -218,7 +214,7 @@ function auth(){
 
 function login(){
     localStorage.setItem('app_token',setToken());
-    localStorage.setItem('app_user','Caio');
+    localStorage.setItem('app_user','caiomelzer');
     localStorage.setItem('app_user_id',11);
 }
 
