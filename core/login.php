@@ -12,13 +12,14 @@ $errors = $lang->errors;
 
 //FUNCTIONS DEFINITIONS
 function login($email, $password, $token){
-	global $conn, $response;
+	global $conn, $response, $errors;
 	$sql = "SELECT * FROM sys_users WHERE email = '".$email."' AND password = '".$password."'";
 	$result = mysqli_query($conn, $sql);
 	if(mysqli_num_rows($result) > 0) {
 		while($row = mysqli_fetch_assoc($result)) {
 	    	$sql = "UPDATE sys_users SET token = '".$token."' WHERE email = '".$email."' AND password = '".$password."'";
-			if($conn->query($sql) === FALSE) {
+			if($conn->query($sql) === FALSE){
+				$response->message = $errors->user_password_is_wrong;
 			    return false;
 			} 
 			else{
@@ -27,8 +28,30 @@ function login($email, $password, $token){
 			        'email'  => $row["email"],
 			        'id'  => $row["id"],
 			        'token'  => $token,
-			        'url' => 'http://localhost/rep/CaUPgit/index.html'
-				);   
+			        'url' => 'http://localhost/rep/CaUPgit/index.html',
+			        'status' => $row['status']
+				);
+				switch ($user->status) {
+					case 'A':
+						return true;
+						break;
+					case 'I':
+						$response->message = $errors->user_inactive;
+						return false;
+						break;	
+					case 'D':
+						$response->message = $errors->user_disable;
+						return false;
+						break;		
+					default:
+						$response->message = $errors->generic;
+						return false;
+						break;
+				}
+				if( !== 'A'){
+					$response->message = $errors->user_disable;
+					return false;
+				}
 				$response->user = $user; 
 				return true;
 			}
@@ -49,9 +72,6 @@ if(isset($_GET['email'])){
 			$password = $_GET['password'];
 			if(login($email, $password, $token)){
 				$response->success = true;
-			}
-			else{
-				$response->message = $errors->user_password_is_wrong;
 			}
 		}
 		else{

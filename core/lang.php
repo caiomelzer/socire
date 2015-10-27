@@ -10,7 +10,10 @@ $lang = (object) array(
 		'missing_user' => 'Missing User',
 		'user_password_is_wrong' => 'User/Password is wrong',
 		'missing_password' => 'Missing Password',
-		'missing_email' => 'Missing Email'
+		'missing_email' => 'Missing Email',
+		'user_disable' => 'User is not enable',
+		'user_inactive' => 'User is inactive',
+		'generic' => 'Something is wrong, wait for a moment'
 	),
 	'messages' => (object) array()
 );
