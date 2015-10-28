@@ -13,3 +13,18 @@
     left: 40%;
     top: 38%;
 }
+/* CHAT CSS */
+.last-messages{
+
+}
+.last-messages li{
+	
+}
+.last-messages li a{
+	
+}
+.last-messages li a img{
+	height: 25px;
+	width: 25px;
+	margin-right: 5px;
+}

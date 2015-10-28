@@ -3,13 +3,18 @@ var appConfig = {};
 function loadAppConfig(){
     appConfig.server = 'http://localhost/rep/CaUP/';
     appConfig.front = 'http://localhost/rep/CaUP/';
-    appConfig.loginPage = 'http://localhost/rep/CaUP/home.html';
+    appConfig.loginPage = 'http://localhost/rep/CaUP/index.html';
     appConfig.services = appConfig.server+'core/services.php';
-    appConfig.failedPage = appConfig.failedPage+'pages/404.html';
+    appConfig.failedPage = {
+        url: 'pages/404.html',
+        iconClass: '',
+        title: 'Página não encontrada!'
+    };    
     appConfig.port = '';
     appConfig.userData = {
         user: getUser(),
-        token: getToken()
+        token: getToken(),
+        role: getRole()
     };
     appConfig.messageHideIn = 5000;
 }
@@ -23,6 +28,9 @@ function initRouter(){
             url: $(aContent).attr('data-link')
         }
         loadPage(params);
+    }
+    else{
+        goLoginPage();
     }
     $(document).on('click', 'a[href="#"]', function(e){
         if($(this).attr('data-link')){
@@ -42,43 +50,51 @@ function initRouter(){
 function loadPage(params){
     $(document).trigger('loadPageStart');
     var parameters = window.location.href.split('?')[1];
-    window.location.hash = (parameters !== undefined) ? params.url.split('/')[1].replace('.html','')+'?'+parameters : params.url.split('/')[1].replace('.html','');
-    loadHeader(params);
-    $('#main-content').empty();
-    $.ajax({
-        url: params.url,
-        success: function(res){
-            if(auth()){
-                $('#main-content').html(res);
-            }
-            else{
-                goLoginPage();
-            }
-        }
-    })
-    .fail(function(){
-        failedPage();
-    })
-    .done(function(){
-        afterLoad(params);
-        if(parameters){
-            getParameters();
-            if(getParameters('id')){
-                setId();
-                if(getOperation() === 'update'  || getOperation() === 'read'){
-                    getId();
-                    console.info(getId(), getOperation());
+    if(params.url !== undefined){
+        window.location.hash = (parameters !== undefined) ? params.url.split('/')[1].replace('.html','')+'?'+parameters : params.url.split('/')[1].replace('.html','');
+        loadHeader(params);
+        $('#main-content').empty();
+        $.ajax({
+            async: false,
+            url: params.url,
+            success: function(res){
+                if(auth(params.url)){
+                    $('#main-content').html(res);
+                }
+                else{
+                    goLoginPage();
                 }
             }
-        }
-    });
+        })
+        .fail(function(){
+            failedPage();
+        })
+        .done(function(){
+            afterLoad(params);
+            if(parameters){
+                getParameters();
+                if(getParameters('id')){
+                    setId();
+                    if(getOperation() === 'update'  || getOperation() === 'read'){
+                        getId();
+                        console.info(getId(), getOperation());
+                    }
+                }
+            }
+        });
+    }
+    else{
+        failedPage();
+    }
 }
 
 function failedPage(){
     $.ajax({
-        url: params.url,
+        url: appConfig.failedPage.url,
         success: function(res){
             $('#main-content').html(res);
+            loadHeader(appConfig.failedPage)
+            afterLoad();
         }
     })
 }
@@ -146,6 +162,27 @@ function ajaxError(params){
     }
 }
 
+function generateMenu(){
+    $.ajax({
+        url: appConfig.services,
+        data: $.extend({
+            service: 'getMenu'
+        }, appConfig.userData),
+        success: function(res){
+            var response = JSON.parse(res);
+            if(response.success){
+                var menuContent = '';
+                for(var i in response.menu){
+                    menuContent += '<li>';
+                    menuContent += '<a href="#" data-link="'+response.menu[i].url+'"><i class="'+response.menu[i].icon+'"></i> <span>'+response.menu[i].name+'</span></a>';
+                    menuContent += '</li>';
+                }
+                $('.sidebar-menu').html(menuContent);
+            }    
+        }
+    });
+}
+
 function getParameters(param){
     var hashParameters = window.location.hash.split('?')[1].split('&');
     if(hashParameters){
@@ -182,7 +219,7 @@ function setReadOnly(){
 }
 
 function goLoginPage(){
-    document.location.href = appConfing.loginPage;
+    document.location.href = appConfig.loginPage;
 }
 
 function getToken(){
@@ -190,36 +227,39 @@ function getToken(){
 }
 
 function getUser(){
-    return localStorage.getItem('app_user');
+    return localStorage.getItem('app_username');
 }
 
-function auth(){
+function getRole(){
+    return localStorage.getItem('app_user_role');
+}
+
+function auth(urlLoad){
+    var success = false;
     $.ajax({
+        async: false,
         url: appConfig.services,
         data: $.extend({
-            service: 'auth'
+            service: 'auth',
+            url: urlLoad
         }, appConfig.userData),
         success: function(res){
-            return res
-        },
-        error: function(res){
-            //DELETE
-            console.info('Auth false');
-            return false;
+            var response = JSON.parse(res);
+            if(response.success){
+                success = true;
+            }   
         }
-    })
-    .fail( function(e){
-        console.info(ajaxError(e));
-        return {success: false};
     });
-    //DELETE
-    return true;
+    return success;
 }
 
 function login(){
     loadProfile(null,null);
-    $('.user-menu a img').attr('src','');
-    $('.user-menu a span').text('');
+    $('.user-menu a img').attr('src',localStorage.getItem('app_avatar'));
+    $('.user-menu a span').text(localStorage.getItem('app_fullname'));
+    $('.user-menu .dropdown-menu .user-header img').attr('src',localStorage.getItem('app_avatar'));
+    $('.user-menu .dropdown-menu .user-header p').text(localStorage.getItem('app_fullname'));
+
 }
 
 function logout(){
@@ -232,7 +272,7 @@ function afterLoad(params){
     //     text: params.text,
     //     type: params.type
     // }
-    if(params.message){
+    if(params && params !== undefined && params.message){
         loadMessage(params.message);
     }
     $(document).trigger('loadPageFinish');
@@ -248,6 +288,9 @@ function setGlobalEvents(){
         window.location.hash = window.location.hash.split('?')[0];
         $('.loading-bg').addClass('hidden');
         console.info('loadPageFinish');
+    })
+    .on('click','#sign-out', function(){
+        logout();
     });
         // disables Ajax cache (remove it after developing)
     $.ajaxSetup({
@@ -260,6 +303,7 @@ function setGlobalEvents(){
 $(function ($) {
     loadAppConfig();
     login();
+    generateMenu();
     setGlobalEvents();
 });    
 

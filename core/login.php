@@ -13,7 +13,7 @@ $errors = $lang->errors;
 //FUNCTIONS DEFINITIONS
 function login($email, $password, $token){
 	global $conn, $response, $errors;
-	$sql = "SELECT * FROM sys_users WHERE email = '".$email."' AND password = '".$password."'";
+	$sql = "SELECT * FROM vw_sys_users WHERE email = '".$email."' AND password = '".$password."'";
 	$result = mysqli_query($conn, $sql);
 	if(mysqli_num_rows($result) > 0) {
 		while($row = mysqli_fetch_assoc($result)) {
@@ -28,9 +28,11 @@ function login($email, $password, $token){
 			        'app_email'  => $row["email"],
 			        'app_id'  => $row["id"],
 			        'app_token'  => $token,
-			        'app_url' => 'http://localhost/rep/CaUP/home.html',
-			        'app_avatar' => 'http://localhost/rep/CaUP/dist/img/user2-160x160.jpg',
-			        'app_status' => $row['status']
+			        'app_url' => 'http://localhost/rep/CaUP/home.html#dashboard',
+			        'app_avatar' => $row['avatar'],
+			        'app_status' => $row['status'],
+			        'app_fullname' => $row['fullname'],
+			        'app_user_role' => $row['role']
 				);
 				switch ($user->app_status) {
 					case 'A':

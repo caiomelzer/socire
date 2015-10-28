@@ -36,38 +36,44 @@ if(isset($_GET['user'])){
 					$service = $_GET['service'];
 					global $conn;
 					switch ($service) {
-						case 'getMenu':
-							$sql = "SELECT pages.name AS name, pages.url AS url, pages.icon AS icon FROM sys_pages pages INNER JOIN sys_roles_pages roles ON roles.id_page = pages.id WHERE roles.id_role = '".$role."'";
-							$result = mysqli_query($conn, $sql);	
-							if(mysqli_num_rows($result) > 0) {
-								$page = array();
-								$i=0;
-								while($row = mysqli_fetch_assoc($result)){
-									$page[$i]['name'] = utf8_encode($row['name']);
-									$page[$i]['url'] = $row['url'];
-									$page[$i]['icon'] = $row['icon'];
-									$i++;
-								}
-								$response->menu = $page;
-								$response->success = true;
-							} 
-							break;
-						case 'auth':
-							if(isset($_GET['url'])){
-								$page_url = $_GET['url'];
-								$sql = "SELECT * FROM sys_pages pages INNER JOIN sys_roles_pages roles ON roles.id_page = pages.id WHERE roles.id_role = '".$role."' AND pages.url = '".$page_url."'";
-								$result = mysqli_query($conn, $sql);	
-								if(mysqli_num_rows($result) > 0) {
-									while($row = mysqli_fetch_assoc($result)){
-										$pageContent = $page_url;
+						case 'send':
+							if(isset($_GET['user_from'])){
+								$user_from = $_GET['user_from'];
+								if(isset($_GET['content'])){
+									$content = $_GET['content'];
+									$sql = "SELECT id FROM sys_users WHERE username = '".$user."'";
+									$result = mysqli_query($conn, $sql);	
+									if(mysqli_num_rows($result) > 0) {
+										while($row = mysqli_fetch_assoc($result)){
+											$user_to = $row['id'];
+										}
+									} 
+									$sql = "INSERT INTO `sys_messages`(`id_user_to`, `id_user_from`, `content`, `date`) VALUES ('".$user_to."','".$user_from."','".$content."',CURDATE())";
+									if (mysqli_query($conn, $sql)) {
+									    $response->success = true;
+									} else {
+									    $response->message = $errors->message_problem_to_send;
 									}
-									$response->page = $pageContent;
-									$response->success = true;
-								} 
+								}
+								else{
+									$response->message = $errors->message_missing_content;
+								}	
 							}
 							else{
-								$response->message = $errors->service_auth_missing_url;
+								$response->message = $errors->message_user_select;
 							}
+							break;
+						case 'read':
+							$page_url = $_GET['url'];
+							$sql = "SELECT * FROM sys_messages pages INNER JOIN sys_roles_pages roles ON roles.id_page = pages.id WHERE roles.id_role = '".$role."' AND pages.url = '".$page_url."'";
+							$result = mysqli_query($conn, $sql);	
+							if(mysqli_num_rows($result) > 0) {
+								while($row = mysqli_fetch_assoc($result)){
+									$pageContent = $page_url;
+								}
+								$response->page = $pageContent;
+								$response->success = true;
+							} 
 							break;	
 						default:
 							$response->success = false;
