@@ -24,15 +24,17 @@ function login($email, $password, $token){
 			} 
 			else{
 				$user = (object) array(
-					'username' => $row["username"],
-			        'email'  => $row["email"],
-			        'id'  => $row["id"],
-			        'token'  => $token,
-			        'url' => 'http://localhost/rep/CaUPgit/index.html',
-			        'status' => $row['status']
+					'app_username' => $row["username"],
+			        'app_email'  => $row["email"],
+			        'app_id'  => $row["id"],
+			        'app_token'  => $token,
+			        'app_url' => 'http://localhost/rep/CaUP/home.html',
+			        'app_avatar' => 'http://localhost/rep/CaUP/dist/img/user2-160x160.jpg',
+			        'app_status' => $row['status']
 				);
-				switch ($user->status) {
+				switch ($user->app_status) {
 					case 'A':
+						$response->user = $user; 
 						return true;
 						break;
 					case 'I':
@@ -48,16 +50,11 @@ function login($email, $password, $token){
 						return false;
 						break;
 				}
-				if( !== 'A'){
-					$response->message = $errors->user_disable;
-					return false;
-				}
-				$response->user = $user; 
-				return true;
 			}
 	    }
 	} 
 	else{
+		$response->message = $errors->generic;
 	    return false;
 	}
 	mysqli_close($conn);
@@ -83,8 +80,7 @@ if(isset($_GET['email'])){
 	}
 }
 else{
-	$response->message = $errors->missing_email;
-	
+	$response->message = $errors->missing_email;	
 }
 
 

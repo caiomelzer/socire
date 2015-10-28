@@ -3,7 +3,7 @@ var appConfig = {};
 function loadAppConfig(){
     appConfig.server = 'http://localhost/rep/CaUP/';
     appConfig.front = 'http://localhost/rep/CaUP/';
-    appConfig.loginPage = 'http://localhost/rep/CaUP/';
+    appConfig.loginPage = 'http://localhost/rep/CaUP/home.html';
     appConfig.services = appConfig.server+'core/services.php';
     appConfig.failedPage = appConfig.failedPage+'pages/404.html';
     appConfig.port = '';
@@ -81,6 +81,10 @@ function failedPage(){
             $('#main-content').html(res);
         }
     })
+}
+
+function loadProfile(id, token){
+    console.info('teste');
 }
 
 function loadHeader(params){
@@ -213,9 +217,9 @@ function auth(){
 }
 
 function login(){
-    localStorage.setItem('app_token',setToken());
-    localStorage.setItem('app_user','caiomelzer');
-    localStorage.setItem('app_user_id',11);
+    loadProfile(null,null);
+    $('.user-menu a img').attr('src','');
+    $('.user-menu a span').text('');
 }
 
 function logout(){
@@ -255,6 +259,7 @@ function setGlobalEvents(){
 
 $(function ($) {
     loadAppConfig();
+    login();
     setGlobalEvents();
 });    
 
