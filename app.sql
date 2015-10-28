@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 27, 2015 at 10:20 AM
+-- Generation Time: Oct 28, 2015 at 10:18 AM
 -- Server version: 5.6.25
 -- PHP Version: 5.6.11
 
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `sys_users` (
   `email` varchar(150) NOT NULL,
   `password` varchar(14) DEFAULT NULL,
   `token` varchar(40) DEFAULT NULL,
-  `status` varchar(1) NOT NULL,
+  `status` varchar(1) NOT NULL DEFAULT 'I',
   `role` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `sys_users` (
 --
 
 INSERT INTO `sys_users` (`id`, `username`, `email`, `password`, `token`, `status`, `role`) VALUES
-(1, 'caiomelzer', 'melzer.caio@gmail.com', 'mewtwo', 'ob1662vsnbkb7qfrc2mke8iydhg2e29', '', 0);
+(1, 'caiomelzer', 'melzer.caio@gmail.com', 'mewtwo', 'gp96gqfywpyl23xrpem3ck3h1is02j4i', 'A', 0);
 
 -- --------------------------------------------------------
 
