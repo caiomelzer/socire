@@ -23,6 +23,29 @@ function auth($user, $token, $role){
 	}
 }
 
+function getUserId($user){
+	global $conn;
+	$sql = "SELECT id FROM sys_users WHERE username = '".$user."'";
+	$result = mysqli_query($conn, $sql);	
+	if(mysqli_num_rows($result) > 0) {
+		while($row = mysqli_fetch_assoc($result)){
+			$user_id = $row['id'];
+		}
+	} 
+	return $user_id;
+}
+
+function setLog($user, $service, $dat){
+	global $conn, $response;
+	$sql = "INSERT INTO `sys_log`(`id_user`, `date`, `id_page`, `action`, `data`) VALUES ('".getUserId($user)."',NOW(),'','".$service."','".json_encode($_POST)."')";
+	if (mysqli_query($conn, $sql)) {
+	    $response->success = true;
+	} 
+	else {
+	    $response->message = $errors->log_error_set;
+	}
+}
+
 //CORE
 if(isset($_GET['user'])){
 	if(isset($_GET['token'])){
@@ -80,6 +103,7 @@ if(isset($_GET['user'])){
 			else{
 				$response->message = $errors->user_token_is_wrong;
 			}
+			setLog($user, $_GET['service'], $response);
 		}
 		else{
 			$response->message = $errors->missing_role;
@@ -87,7 +111,7 @@ if(isset($_GET['user'])){
 	}
 	else{
 		$response->message = $errors->missing_token;
-	}
+	}	
 }
 else{
 	$response->message = $errors->missing_user;

@@ -19,7 +19,8 @@ $lang = (object) array(
 		'service_auth_missing_url' => 'Missing url parameter',
 		'message_user_select' => 'Missing user to send message',
 		'message_problem_to_send' => 'Something is wrong while trying to send a message',
-		'message_missing_content' => 'Missing message'
+		'message_missing_content' => 'Missing message',
+		'log_error_set' => 'Error when trying to set log' 
 	),
 	'messages' => (object) array()
 );

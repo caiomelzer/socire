@@ -16,7 +16,8 @@ function loadAppConfig(){
     appConfig.userData = {
         user: getUser(),
         token: getToken(),
-        role: getRole()
+        role: getRole(),
+        page: getPage()
     };
     appConfig.messageHideIn = 5000;
 }
@@ -28,6 +29,11 @@ function initRouter(){
             iconClass: $(aContent).find('i').attr('class'),
             title: $(aContent).find('span').html(),
             url: $(aContent).attr('data-link')
+        }
+        if(params.url === undefined){
+            params.iconClass = "fa fa-dashboard";
+            params.title = "Dashboard";
+            params.url = "pages/dashboard.html";
         }
         loadPage(params);
     }
@@ -207,6 +213,10 @@ function setOperation(){
     $('#main-content').data('content-op', getParameters('op'));
 }
 
+function getPage(){
+    return window.location.hash.replace('#','').split('?')[0];
+}
+
 function getId(){
     return $('#main-content').data('content-id');
 }
@@ -255,17 +265,12 @@ function auth(urlLoad){
     return success;
 }
 
-
-
-
-
 function login(){
     loadProfile(null,null);
     $('.user-menu a img').attr('src',localStorage.getItem('app_avatar'));
     $('.user-menu a span').text(localStorage.getItem('app_fullname'));
     $('.user-menu .dropdown-menu .user-header img').attr('src',localStorage.getItem('app_avatar'));
     $('.user-menu .dropdown-menu .user-header p').text(localStorage.getItem('app_fullname'));
-
 }
 
 function logout(){
