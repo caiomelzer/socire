@@ -142,7 +142,6 @@ var mensagens = {
 	}
 };
 
-
 $(function($){
 	mensagens.openChat();
 	mensagens.read();
@@ -153,6 +152,10 @@ $(function($){
 			$('#new-message').removeClass('hidden');
 			$('.box-contacts').addClass('hidden');
 		}
+	})
+	.on('click','.close-contacts', function(){
+		$('#new-message').removeClass('hidden');
+		$('.box-contacts').addClass('hidden');
 	});
 	$('#btn-message-send').on('click', function(){
 		if($('#fld-message-content').val().length > 0){
