@@ -1,10 +1,12 @@
 var appConfig = {};
 
 function loadAppConfig(){
-    appConfig.server = 'http://localhost/rep/CaUP/';
-    appConfig.front = 'http://localhost/rep/CaUP/';
-    appConfig.loginPage = 'http://localhost/rep/CaUP/index.html';
+    appConfig.url = 'http://'+window.location.hostname;
+    appConfig.server = appConfig.url+'/rep/CaUP/';
+    appConfig.front = appConfig.url+'/rep/CaUP/';
+    appConfig.loginPage = appConfig.url+'/rep/CaUP/index.html';
     appConfig.services = appConfig.server+'core/services.php';
+    appConfig.chat = appConfig.server+'core/chat.php';
     appConfig.failedPage = {
         url: 'pages/404.html',
         iconClass: '',
@@ -252,6 +254,10 @@ function auth(urlLoad){
     });
     return success;
 }
+
+
+
+
 
 function login(){
     loadProfile(null,null);

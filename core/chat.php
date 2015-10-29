@@ -48,12 +48,18 @@ if(isset($_GET['user'])){
 											$user_to = $row['id'];
 										}
 									} 
-									$sql = "INSERT INTO `sys_messages`(`id_user_to`, `id_user_from`, `content`, `date`) VALUES ('".$user_to."','".$user_from."','".$content."',CURDATE())";
-									if (mysqli_query($conn, $sql)) {
-									    $response->success = true;
-									} else {
+									if($user_from != $user_to){
+										$sql = "INSERT INTO `sys_messages`(`id_user_to`, `id_user_from`, `content`, `date`) VALUES ('".$user_to."','".$user_from."','".utf8_decode($content)."',NOW())";
+										if (mysqli_query($conn, $sql)) {
+										    $response->success = true;
+										} 
+										else {
+										    $response->message = $errors->message_problem_to_send;
+										}
+									} 
+									else {
 									    $response->message = $errors->message_problem_to_send;
-									}
+									}	
 								}
 								else{
 									$response->message = $errors->message_missing_content;
@@ -64,17 +70,98 @@ if(isset($_GET['user'])){
 							}
 							break;
 						case 'read':
-							$page_url = $_GET['url'];
-							$sql = "SELECT * FROM sys_messages pages INNER JOIN sys_roles_pages roles ON roles.id_page = pages.id WHERE roles.id_role = '".$role."' AND pages.url = '".$page_url."'";
+							if(isset($_GET['user_from'])){
+								$user_from = $_GET['user_from'];
+								$sql = "SELECT id FROM sys_users WHERE username = '".$user."'";
+								$result = mysqli_query($conn, $sql);	
+								if(mysqli_num_rows($result) > 0) {
+									while($row = mysqli_fetch_assoc($result)){
+										$user_to = $row['id'];
+									}
+								}
+								$sql = "SELECT * FROM vw_sys_chat WHERE id_user_to in ('".$user_to."','".$user_from."') AND id_user_from in ('".$user_to."','".$user_from."') ORDER BY date ASC";
+								$result = mysqli_query($conn, $sql);	
+								if(mysqli_num_rows($result) > 0) {
+									$chat = array();
+									$i=0;
+									while($row = mysqli_fetch_assoc($result)){
+										if($user_to == $row['id_user_to']){
+											$chat[$i]['direction'] = 'S';
+										}
+										else{
+											$chat[$i]['direction'] = 'R';
+										}
+										$chat[$i]['id_user_to'] = $row['id_user_to'];
+										$chat[$i]['id_user_from'] = $row['id_user_from'];
+										$chat[$i]['user_to'] = utf8_encode($row['user_to']);
+										$chat[$i]['user_from'] = utf8_encode($row['user_from']);
+										$chat[$i]['content'] = utf8_encode($row['content']);
+										$chat[$i]['date'] = $row['DATE'];
+										$chat[$i]['user_from_avatar'] = $row['avatar_user_from'];
+										$chat[$i]['user_to_avatar'] = $row['avatar_user_to'];
+										$response->user_from = $row['user_from'];
+										$i++;
+									}
+									$response->chat = $chat;
+								} 
+								else{
+									$sql = "SELECT fullname FROM vw_sys_users WHERE id = '".$user_from."'";
+									$result = mysqli_query($conn, $sql);	
+									if(mysqli_num_rows($result) > 0) {
+										while($row = mysqli_fetch_assoc($result)){
+											$response->user_from = $row['fullname'];
+										}
+									}
+								}
+								
+								$response->success = true;
+							}
+							else{
+								$response->message = $errors->message_user_select;
+							}
+							break;	
+						case 'list':
+							$sql = "SELECT id FROM sys_users WHERE username = '".$user."'";
 							$result = mysqli_query($conn, $sql);	
 							if(mysqli_num_rows($result) > 0) {
 								while($row = mysqli_fetch_assoc($result)){
-									$pageContent = $page_url;
+									$user_to = $row['id'];
 								}
-								$response->page = $pageContent;
-								$response->success = true;
+							}
+							$sql = "SELECT * FROM vw_chat_last_messages WHERE id_user_to = '".$user_to."' OR id_user_from = '".$user_to."'";
+							$result = mysqli_query($conn, $sql);	
+							if(mysqli_num_rows($result) > 0) {
+								$chat = array();
+								$i=0;
+								while($row = mysqli_fetch_assoc($result)){
+									if($row['id_user_to'] == $user_to){
+										$chat[$i]['id_user_from'] = $row['id_user_from'];
+										$chat[$i]['user_from'] = utf8_encode($row['user_from']);
+										$chat[$i]['content'] = utf8_encode($row['content']);
+										$chat[$i]['user_from_avatar'] = $row['avatar_user_from'];
+									}
+									$i++;
+								}
+								$response->chat = $chat;
 							} 
-							break;	
+							$response->success = true;
+							break;		
+						case 'contacts':
+							$sql = "SELECT * FROM vw_sys_users WHERE username <> '".$user."'";
+							$result = mysqli_query($conn, $sql);	
+							if(mysqli_num_rows($result) > 0) {
+								$contact = array();
+								$i=0;
+								while($row = mysqli_fetch_assoc($result)){
+									$contact[$i]['id'] = $row['id'];
+									$contact[$i]['fullname'] = utf8_encode($row['fullname']);
+									$contact[$i]['avatar'] = utf8_encode($row['avatar']);
+									$i++;
+								}
+								$response->contact = $contact;
+							} 
+							$response->success = true;
+							break;			
 						default:
 							$response->success = false;
 							break;

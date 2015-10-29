@@ -28,7 +28,7 @@ function login($email, $password, $token){
 			        'app_email'  => $row["email"],
 			        'app_id'  => $row["id"],
 			        'app_token'  => $token,
-			        'app_url' => 'http://localhost/rep/CaUP/home.html#dashboard',
+			        'app_url' => '/rep/CaUP/home.html#dashboard',
 			        'app_avatar' => $row['avatar'],
 			        'app_status' => $row['status'],
 			        'app_fullname' => $row['fullname'],

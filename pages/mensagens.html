@@ -1,6 +1,23 @@
 <div class="row">
   <div class="col-md-3">
-    <a href="compose.html" class="btn btn-primary btn-block margin-bottom">Nova mensagem</a>
+    <a href="#" class="btn btn-primary btn-block margin-bottom" id="new-message">Nova mensagem</a>
+
+    <div class="box box-solid box-contacts hidden">
+      <div class="box-header with-border">
+        <h3 class="box-title">Contatos</h3>
+        <div class="box-tools">
+          <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+      </div>
+      <div class="box-body no-padding">
+        <ul class="nav nav-pills nav-stacked all-contacts">
+          
+        </ul>
+      </div><!-- /.box-body -->
+    </div><!-- /. box -->
+
+
+
     <div class="box box-solid">
       <div class="box-header with-border">
         <h3 class="box-title">Histórico</h3>
@@ -10,8 +27,7 @@
       </div>
       <div class="box-body no-padding">
         <ul class="nav nav-pills nav-stacked last-messages">
-          <li class="active"><a href="#">
-            <img src="https://scontent.xx.fbcdn.net/hprofile-xaf1/v/l/t1.0-1/c40.0.160.160/p160x160/426706_10201225953992372_1074153850_n.jpg?oh=6aa923e973c4d34171d62f256c1f3ccb&amp;oe=56D06F02" class="user-image" alt="User Image"> E ai, tudo bom? <span class="label label-primary pull-right">1</span></a></li>
+          
         </ul>
       </div><!-- /.box-body -->
     </div><!-- /. box -->
@@ -19,45 +35,24 @@
     <div class="col-md-9">
       <div class="box box-primary direct-chat direct-chat-warning">
         <div class="box-header with-border">
-          <h3 class="box-title">Caio Melzer</h3>
+          <h3 class="box-title"></h3>
         </div><!-- /.box-header -->
         <div class="box-body">
           <!-- Conversations are loaded here -->
           <div class="direct-chat-messages">
             <!-- Message. Default to the left -->
-            <div class="direct-chat-msg">
-              <div class="direct-chat-info clearfix">
-                <span class="direct-chat-name pull-left">Alexander Pierce</span>
-                <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
-              </div><!-- /.direct-chat-info -->
-              <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
-              <div class="direct-chat-text">
-                Is this template really for free? That's unbelievable!
-              </div><!-- /.direct-chat-text -->
-            </div><!-- /.direct-chat-msg -->
-
-            <!-- Message to the right -->
-            <div class="direct-chat-msg right">
-              <div class="direct-chat-info clearfix">
-                <span class="direct-chat-name pull-right">Sarah Bullock</span>
-                <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
-              </div><!-- /.direct-chat-info -->
-              <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
-              <div class="direct-chat-text">
-                You better believe it!
-              </div><!-- /.direct-chat-text -->
-            </div><!-- /.direct-chat-msg -->
+            
 
             
           <!-- Contacts are loaded here -->
           
         </div><!-- /.box-body -->
         <div class="box-footer">
-          <form action="#" method="post">
+          <form name="form-message">
             <div class="input-group">
-              <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+              <input type="text" name="message" placeholder="Type Message ..." class="form-control" id="fld-message-content">
               <span class="input-group-btn">
-                <button type="button" class="btn btn-primary btn-flat">Send</button>
+                <button type="button" class="btn btn-primary btn-flat" id="btn-message-send">Send</button>
               </span>
             </div>
           </form>
@@ -67,3 +62,5 @@
     </div><!-- /. box -->
   </div><!-- /.col -->
 </div><!-- /.row -->
+
+<script src="dist/js/pages/mensagens.js"></script>
