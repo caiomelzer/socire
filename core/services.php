@@ -37,7 +37,7 @@ function getUserId($user){
 
 function setLog($user, $service, $dat){
 	global $conn, $response;
-	$sql = "INSERT INTO `sys_log`(`id_user`, `date`, `id_page`, `action`, `data`) VALUES ('".getUserId($user)."',NOW(),'','".$service."','".json_encode($_POST)."')";
+	$sql = "INSERT INTO `sys_log`(`id_user`, `date`, `id_page`, `action`, `data`) VALUES ('".getUserId($user)."',NOW(),'','".$service."','".json_encode($_GET)."')";
 	if (mysqli_query($conn, $sql)) {
 	    $response->success = true;
 	} 
