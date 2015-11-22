@@ -1,25 +1,26 @@
-var appConfig = {};
+var app = {};
+app.config = {};
 
 function loadAppConfig(){
-    appConfig.url = 'http://'+window.location.hostname;
-    appConfig.server = appConfig.url+'/rep/CaUP/';
-    appConfig.front = appConfig.url+'/rep/CaUP/';
-    appConfig.loginPage = appConfig.url+'/rep/CaUP/index.html';
-    appConfig.services = appConfig.server+'core/services.php';
-    appConfig.chat = appConfig.server+'core/chat.php';
-    appConfig.failedPage = {
+    app.config.url = 'http://'+window.location.hostname;
+    app.config.server = app.config.url+'/rep/CaUP/';
+    app.config.front = app.config.url+'/rep/CaUP/';
+    app.config.loginPage = app.config.url+'/rep/CaUP/index.html';
+    app.config.services = app.config.server+'core/services.php';
+    app.config.chat = app.config.server+'core/chat.php';
+    app.config.failedPage = {
         url: 'pages/404.html',
         iconClass: '',
         title: 'Página não encontrada!'
     };    
-    appConfig.port = '';
-    appConfig.userData = {
+    app.config.port = '';
+    app.config.userData = {
         user: getUser(),
         token: getToken(),
         role: getRole(),
         page: getPage()
     };
-    appConfig.messageHideIn = 5000;
+    app.config.messageHideIn = 5000;
 }
 
 function initRouter(){ 
@@ -98,10 +99,10 @@ function loadPage(params){
 
 function failedPage(){
     $.ajax({
-        url: appConfig.failedPage.url,
+        url: app.config.failedPage.url,
         success: function(res){
             $('#main-content').html(res);
-            loadHeader(appConfig.failedPage)
+            loadHeader(app.config.failedPage)
             afterLoad();
         }
     })
@@ -124,7 +125,7 @@ function loadMessage(message){
     $('#message-content').removeClass('hidden'); 
     setTimeout(function(){
         $('#message-content').fadeOut()
-    }, appConfig.messageHideIn);
+    }, app.config.messageHideIn);
 }
 
 function notifications(){
@@ -146,11 +147,11 @@ function notifications(){
 
 function checkNotifications(type){
     $.ajax({
-        url: appConfig.services,
+        url: app.config.services,
         data: $.extend({
             service: 'checkNotifications',
             type: type
-        }, appConfig.userData),
+        }, app.config.userData),
         success: function(res){
             return res
         }
@@ -172,10 +173,10 @@ function ajaxError(params){
 
 function generateMenu(){
     $.ajax({
-        url: appConfig.services,
+        url: app.config.services,
         data: $.extend({
             service: 'getMenu'
-        }, appConfig.userData),
+        }, app.config.userData),
         success: function(res){
             var response = JSON.parse(res);
             if(response.success){
@@ -231,7 +232,7 @@ function setReadOnly(){
 }
 
 function goLoginPage(){
-    document.location.href = appConfig.loginPage;
+    document.location.href = app.config.loginPage;
 }
 
 function getToken(){
@@ -250,11 +251,11 @@ function auth(urlLoad){
     var success = false;
     $.ajax({
         async: false,
-        url: appConfig.services,
+        url: app.config.services,
         data: $.extend({
             service: 'auth',
             url: urlLoad
-        }, appConfig.userData),
+        }, app.config.userData),
         success: function(res){
             var response = JSON.parse(res);
             if(response.success){

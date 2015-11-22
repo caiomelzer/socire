@@ -3,12 +3,12 @@ var mensagens = {
 	currentUser : '', 
 	send: function(){
 		$.ajax({
-	        url: appConfig.chat,
+	        url: app.config.chat,
 	        data: $.extend({
 	            service: 'send',
 	            user_from: mensagens.currentUserId,
 	            content: $('#fld-message-content').val()
-	        }, appConfig.userData),
+	        }, app.config.userData),
 	        success: function(res){
 	            var response = JSON.parse(res);
 	        	if(response.success){
@@ -23,10 +23,10 @@ var mensagens = {
 	},
 	list: function(){
 		$.ajax({
-	        url: appConfig.chat,
+	        url: app.config.chat,
 	        data: $.extend({
 	            service: 'list'
-	        }, appConfig.userData),
+	        }, app.config.userData),
 	        async: false,
 	        success: function(res){
 	            var response = JSON.parse(res);
@@ -55,10 +55,10 @@ var mensagens = {
 	},
 	contacts: function(){
 		$.ajax({
-	        url: appConfig.chat,
+	        url: app.config.chat,
 	        data: $.extend({
 	            service: 'contacts'
-	        }, appConfig.userData),
+	        }, app.config.userData),
 	        async: false,
 	        success: function(res){
 	            var response = JSON.parse(res);
@@ -90,11 +90,11 @@ var mensagens = {
 	},
 	chatRefresh: function(){
 		$.ajax({
-	        url: appConfig.chat,
+	        url: app.config.chat,
 	        data: $.extend({
 	            service: 'read',
 	            user_from: mensagens.currentUserId
-	        }, appConfig.userData),
+	        }, app.config.userData),
 	        async: false,
 	        success: function(res){
 	        	var response = JSON.parse(res);
