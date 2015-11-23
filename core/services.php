@@ -90,7 +90,7 @@ if(isset($_GET['user'])){
 							else{
 								$response->message = $errors->service_auth_missing_url;
 							}
-							break;	
+							break;
 						default:
 							$response->success = false;
 							break;

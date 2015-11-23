@@ -20,7 +20,8 @@ $lang = (object) array(
 		'message_user_select' => 'Missing user to send message',
 		'message_problem_to_send' => 'Something is wrong while trying to send a message',
 		'message_missing_content' => 'Missing message',
-		'log_error_set' => 'Error when trying to set log' 
+		'log_error_set' => 'Error when trying to set log',
+		'service_connect_social' => 'Error when trying to connect on Social' 
 	),
 	'messages' => (object) array()
 );
