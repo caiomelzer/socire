@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.12
+-- version 4.2.11
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Nov 23, 2015 at 10:10 AM
--- Server version: 5.6.25
--- PHP Version: 5.6.11
+-- Host: 127.0.0.1
+-- Generation Time: Nov 23, 2015 at 08:59 PM
+-- Server version: 5.6.21
+-- PHP Version: 5.6.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `app`
@@ -27,12 +27,28 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `app_profiles` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `profile` varchar(20) NOT NULL,
   `date` datetime NOT NULL,
   `avatar` text NOT NULL,
   `background` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `app_profiles`
+--
+
+INSERT INTO `app_profiles` (`id`, `profile`, `date`, `avatar`, `background`) VALUES
+(1, 'Teste', '2015-11-23 14:19:24', 'https://dyn.web.whatsapp.com/pp?t=s&u=5511972312350%40c.us&i=1447979569', 'bg-yellow'),
+(2, 'Teste', '2015-11-23 14:29:25', 'https://dyn.web.whatsapp.com/pp?t=s&u=5511972312350%40c.us&i=1447979569', 'bg-yellow'),
+(3, 'Teste', '2015-11-23 14:50:50', 'https://dyn.web.whatsapp.com/pp?t=s&u=551176676867-1342913561%40g.us&i=1446060088', 'bg-yellow'),
+(4, 'Teste', '2015-11-23 14:52:10', 'https://dyn.web.whatsapp.com/pp?t=s&u=551176676867-1342913561%40g.us&i=1446060088', 'bg-yellow'),
+(5, 'Teste', '2015-11-23 14:52:15', 'https://dyn.web.whatsapp.com/pp?t=s&u=551176676867-1342913561%40g.us&i=1446060088', 'bg-yellow'),
+(6, 'Teste', '2015-11-23 14:53:08', 'https://dyn.web.whatsapp.com/pp?t=s&u=551176676867-1342913561%40g.us&i=1446060088', 'bg-yellow'),
+(7, 'Teste', '2015-11-23 14:54:54', 'https://dyn.web.whatsapp.com/pp?t=s&u=551176676867-1342913561%40g.us&i=1446060088', 'bg-yellow'),
+(8, 'Teste', '2015-11-23 15:13:32', 'https://dyn.web.whatsapp.com/pp?t=s&u=551176676867-1342913561%40g.us&i=1446060088', 'bg-yellow'),
+(9, 'AndrÃ©', '2015-11-23 17:53:58', 'https://dyn.web.whatsapp.com/pp?t=s&u=5511998701740%40c.us&i=1425034879', 'bg-yellow'),
+(10, '', '2015-11-23 17:56:46', 'https://dyn.web.whatsapp.com/pp?t=s&u=5511985665711-1428954517%40g.us&i=1446225179', 'bg-blue');
 
 -- --------------------------------------------------------
 
@@ -45,6 +61,15 @@ CREATE TABLE IF NOT EXISTS `app_profiles_active` (
   `status` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `app_profiles_active`
+--
+
+INSERT INTO `app_profiles_active` (`id_profile`, `status`) VALUES
+(8, 'A'),
+(9, 'A'),
+(10, 'A');
+
 -- --------------------------------------------------------
 
 --
@@ -56,6 +81,15 @@ CREATE TABLE IF NOT EXISTS `app_profiles_user` (
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `app_profiles_user`
+--
+
+INSERT INTO `app_profiles_user` (`id_profile`, `id_user`) VALUES
+(8, 1),
+(9, 1),
+(10, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -63,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `app_profiles_user` (
 --
 
 CREATE TABLE IF NOT EXISTS `app_services` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `service` varchar(10) NOT NULL,
   `url` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -75,13 +109,13 @@ CREATE TABLE IF NOT EXISTS `app_services` (
 --
 
 CREATE TABLE IF NOT EXISTS `sys_log` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `date` date NOT NULL,
   `id_page` int(11) NOT NULL,
   `action` text NOT NULL,
   `data` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=268 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=689 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `sys_log`
@@ -354,7 +388,430 @@ INSERT INTO `sys_log` (`id`, `id_user`, `date`, `id_page`, `action`, `data`) VAL
 (264, 1, '2015-11-22', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"cll1tj9rppb65hfr6rt56bhg4cjif6r","role":"1","page":"profiles","_":"1448223373546"}'),
 (265, 1, '2015-11-22', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"cll1tj9rppb65hfr6rt56bhg4cjif6r","role":"1","page":"profiles","_":"1448223373549"}'),
 (266, 1, '2015-11-22', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"cll1tj9rppb65hfr6rt56bhg4cjif6r","role":"1","page":"profiles","_":"1448223373552"}'),
-(267, 1, '2015-11-22', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"cll1tj9rppb65hfr6rt56bhg4cjif6r","role":"1","page":"profiles","_":"1448223373555"}');
+(267, 1, '2015-11-22', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"cll1tj9rppb65hfr6rt56bhg4cjif6r","role":"1","page":"profiles","_":"1448223373555"}'),
+(268, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"1dcbha10xpzoxbt9hc77e90t76ojq0k9","role":"1","page":"dashboard"}'),
+(269, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"1dcbha10xpzoxbt9hc77e90t76ojq0k9","role":"1","page":"dashboard","_":"1448280385430"}'),
+(270, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"1dcbha10xpzoxbt9hc77e90t76ojq0k9","role":"1","page":"dashboard","_":"1448280385432"}');
+INSERT INTO `sys_log` (`id`, `id_user`, `date`, `id_page`, `action`, `data`) VALUES
+(271, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"1dcbha10xpzoxbt9hc77e90t76ojq0k9","role":"1","page":"dashboard","_":"1448280385431"}'),
+(272, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397075"}'),
+(273, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard"}'),
+(274, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397077"}'),
+(275, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397076"}'),
+(276, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397079"}'),
+(277, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/mensagens.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397082"}'),
+(278, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397095"}'),
+(279, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397112"}'),
+(280, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397143"}'),
+(281, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/mensagens.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397149"}'),
+(282, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397160"}'),
+(283, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397163"}'),
+(284, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397172"}'),
+(285, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397191"}'),
+(286, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397195"}'),
+(287, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397207"}'),
+(288, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397304"}'),
+(289, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397308"}'),
+(290, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397331"}'),
+(291, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397334"}'),
+(292, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397359"}'),
+(293, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397376"}'),
+(294, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397440"}'),
+(295, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397459"}'),
+(296, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397480"}'),
+(297, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397571"}'),
+(298, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397592"}'),
+(299, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397601"}'),
+(300, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397606"}'),
+(301, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/mensagens.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397612"}'),
+(302, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397619"}'),
+(303, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"xb34igy0gvfv42t9s7z3cex0gytlnmi","role":"1","page":"dashboard","_":"1448280397658"}'),
+(304, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard"}'),
+(305, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard","_":"1448281763835"}'),
+(306, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard","_":"1448281763836"}'),
+(307, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard","_":"1448281763837"}'),
+(308, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/mensagens.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard","_":"1448281763843"}'),
+(309, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard","_":"1448281763866"}'),
+(310, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(311, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448282237756"}'),
+(312, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448282237758"}'),
+(313, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448282237757"}'),
+(314, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448282237760"}'),
+(315, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448282237763"}'),
+(316, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448282237766"}'),
+(317, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448282237768"}'),
+(318, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448282237770"}'),
+(319, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(320, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448292766563"}'),
+(321, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448292766564"}'),
+(322, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448292766565"}'),
+(323, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448292766567"}'),
+(324, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448292766569"}'),
+(325, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448292766570"}'),
+(326, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448292766571"}'),
+(327, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(328, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448293312070"}'),
+(329, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448293312071"}'),
+(330, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448293312072"}'),
+(331, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard","_":"1448293324608"}'),
+(332, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard","_":"1448293324609"}'),
+(333, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard"}'),
+(334, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard","_":"1448293324610"}'),
+(335, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard","_":"1448293324612"}'),
+(336, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(337, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448293631139"}'),
+(338, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448293631140"}'),
+(339, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448293631141"}'),
+(340, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448293631143"}'),
+(341, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard"}'),
+(342, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard","_":"1448294341063"}'),
+(343, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard","_":"1448294341065"}'),
+(344, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard","_":"1448294341064"}'),
+(345, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard"}'),
+(346, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard","_":"1448294421550"}'),
+(347, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard","_":"1448294421551"}'),
+(348, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard","_":"1448294421552"}'),
+(349, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard","_":"1448294421554"}'),
+(350, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"create","data":"","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"dashboard","_":"1448294421556"}'),
+(351, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(352, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294514149"}'),
+(353, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294514150"}'),
+(354, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294514151"}'),
+(355, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294514153"}'),
+(356, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"create","data":"input-profile=Test&input-avatar=teste&input-background=bg-yellow","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294514155"}'),
+(357, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(358, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294854527"}'),
+(359, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294854528"}'),
+(360, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294854529"}'),
+(361, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294854531"}'),
+(362, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(363, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294967013"}'),
+(364, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294967014"}'),
+(365, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294967015"}'),
+(366, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294967017"}'),
+(367, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(368, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294992153"}'),
+(369, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294992154"}'),
+(370, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294992155"}'),
+(371, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294992157"}'),
+(372, 1, '2015-11-23', 0, 'profiles', '{"0":"i","1":"n","2":"p","3":"u","4":"t","5":"-","6":"p","7":"r","8":"o","9":"f","10":"i","11":"l","12":"e","13":"=","14":"T","15":"e","16":"s","17":"t","18":"e","19":"&","20":"i","21":"n","22":"p","23":"u","24":"t","25":"-","26":"a","27":"v","28":"a","29":"t","30":"a","31":"r","32":"=","33":"h","34":"t","35":"t","36":"p","37":"s","38":"%","39":"3","40":"A","41":"%","42":"2","43":"F","44":"%","45":"2","46":"F","47":"d","48":"y","49":"n","50":".","51":"w","52":"e","53":"b","54":".","55":"w","56":"h","57":"a","58":"t","59":"s","60":"a","61":"p","62":"p","63":".","64":"c","65":"o","66":"m","67":"%","68":"2","69":"F","70":"p","71":"p","72":"%","73":"3","74":"F","75":"t","76":"%","77":"3","78":"D","79":"s","80":"%","81":"2","82":"6","83":"u","84":"%","85":"3","86":"D","87":"5","88":"5","89":"1","90":"1","91":"9","92":"7","93":"2","94":"3","95":"1","96":"2","97":"3","98":"5","99":"0","100":"%","101":"2","102":"5","103":"4","104":"0","105":"c","106":".","107":"u","108":"s","109":"%","110":"2","111":"6","112":"i","113":"%","114":"3","115":"D","116":"1","117":"4","118":"4","119":"7","120":"9","121":"7","122":"9","123":"5","124":"6","125":"9","126":"&","127":"i","128":"n","129":"p","130":"u","131":"t","132":"-","133":"b","134":"a","135":"c","136":"k","137":"g","138":"r","139":"o","140":"u","141":"n","142":"d","143":"=","144":"b","145":"g","146":"-","147":"y","148":"e","149":"l","150":"l","151":"o","152":"w","service":"profiles","crud":"create","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294992159"}'),
+(373, 1, '2015-11-23', 0, 'profiles', '{"0":"i","1":"n","2":"p","3":"u","4":"t","5":"-","6":"p","7":"r","8":"o","9":"f","10":"i","11":"l","12":"e","13":"=","14":"T","15":"e","16":"s","17":"t","18":"e","19":"&","20":"i","21":"n","22":"p","23":"u","24":"t","25":"-","26":"a","27":"v","28":"a","29":"t","30":"a","31":"r","32":"=","33":"h","34":"t","35":"t","36":"p","37":"s","38":"%","39":"3","40":"A","41":"%","42":"2","43":"F","44":"%","45":"2","46":"F","47":"d","48":"y","49":"n","50":".","51":"w","52":"e","53":"b","54":".","55":"w","56":"h","57":"a","58":"t","59":"s","60":"a","61":"p","62":"p","63":".","64":"c","65":"o","66":"m","67":"%","68":"2","69":"F","70":"p","71":"p","72":"%","73":"3","74":"F","75":"t","76":"%","77":"3","78":"D","79":"s","80":"%","81":"2","82":"6","83":"u","84":"%","85":"3","86":"D","87":"5","88":"5","89":"1","90":"1","91":"9","92":"7","93":"2","94":"3","95":"1","96":"2","97":"3","98":"5","99":"0","100":"%","101":"2","102":"5","103":"4","104":"0","105":"c","106":".","107":"u","108":"s","109":"%","110":"2","111":"6","112":"i","113":"%","114":"3","115":"D","116":"1","117":"4","118":"4","119":"7","120":"9","121":"7","122":"9","123":"5","124":"6","125":"9","126":"&","127":"i","128":"n","129":"p","130":"u","131":"t","132":"-","133":"b","134":"a","135":"c","136":"k","137":"g","138":"r","139":"o","140":"u","141":"n","142":"d","143":"=","144":"b","145":"g","146":"-","147":"y","148":"e","149":"l","150":"l","151":"o","152":"w","service":"profiles","crud":"create","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294992159"}'),
+(374, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294992159"}'),
+(375, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(376, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448295420951"}'),
+(377, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448295420953"}'),
+(378, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448295420952"}'),
+(379, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448295420955"}'),
+(380, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(381, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448295478596"}'),
+(382, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448295478597"}'),
+(383, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448295478598"}'),
+(384, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448295478600"}'),
+(385, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(386, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448295550800"}'),
+(387, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448295550801"}'),
+(388, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448295550802"}'),
+(389, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448295550804"}'),
+(390, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","input-profile":"Teste","input-avatar":"https://dyn.web.whatsapp.com/pp?t=s&u=5511972312350%40c.us&i=1447979569","input-background":"bg-yellow","_":"1448295550806"}'),
+(391, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","input-profile":"Teste","input-avatar":"https://dyn.web.whatsapp.com/pp?t=s&u=5511972312350%40c.us&i=1447979569","input-background":"bg-yellow","_":"1448295550807"}'),
+(392, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448294992159"}'),
+(393, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(394, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448297418125"}'),
+(395, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448297418126"}'),
+(396, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448297418127"}'),
+(397, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448297418129"}'),
+(398, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","input-profile":"Teste","input-avatar":"https://dyn.web.whatsapp.com/pp?t=s&u=551176676867-1342913561%40g.us&i=1446060088","input-background":"bg-yellow","_":"1448297418131"}'),
+(399, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","input-profile":"Teste","input-avatar":"https://dyn.web.whatsapp.com/pp?t=s&u=551176676867-1342913561%40g.us&i=1446060088","input-background":"bg-yellow","_":"1448297418132"}'),
+(400, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","input-profile":"Teste","input-avatar":"https://dyn.web.whatsapp.com/pp?t=s&u=551176676867-1342913561%40g.us&i=1446060088","input-background":"bg-yellow","_":"1448297418133"}'),
+(401, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","input-profile":"Teste","input-avatar":"https://dyn.web.whatsapp.com/pp?t=s&u=551176676867-1342913561%40g.us&i=1446060088","input-background":"bg-yellow","_":"1448297418134"}'),
+(402, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","input-profile":"Teste","input-avatar":"https://dyn.web.whatsapp.com/pp?t=s&u=551176676867-1342913561%40g.us&i=1446060088","input-background":"bg-yellow","_":"1448297418135"}'),
+(403, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","input-profile":"Teste","input-avatar":"https://dyn.web.whatsapp.com/pp?t=s&u=551176676867-1342913561%40g.us&i=1446060088","input-background":"bg-yellow","_":"1448297418136"}'),
+(404, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(405, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448299828834"}'),
+(406, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448299828835"}'),
+(407, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448299828836"}'),
+(408, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448299828838"}'),
+(409, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448299828840"}'),
+(410, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448299828842"}'),
+(411, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448299828844"}'),
+(412, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448299828846"}'),
+(413, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448299828848"}'),
+(414, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(415, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448300039253"}'),
+(416, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448300039254"}'),
+(417, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448300039255"}'),
+(418, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448300039257"}'),
+(419, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448300039259"}'),
+(420, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304241063"}'),
+(421, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(422, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304241064"}'),
+(423, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304241065"}'),
+(424, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304241067"}'),
+(425, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304241069"}'),
+(426, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304274656"}'),
+(427, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(428, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304274657"}'),
+(429, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304274658"}'),
+(430, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304274660"}'),
+(431, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304274662"}'),
+(432, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(433, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304289644"}'),
+(434, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304289645"}'),
+(435, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304289646"}'),
+(436, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304289648"}'),
+(437, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304289650"}'),
+(438, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304289653"}'),
+(439, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304289655"}'),
+(440, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(441, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304415043"}'),
+(442, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304415045"}'),
+(443, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304415044"}'),
+(444, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304415047"}'),
+(445, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304415049"}'),
+(446, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(447, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304626983"}'),
+(448, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304626984"}'),
+(449, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304626985"}'),
+(450, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304626987"}'),
+(451, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304626989"}'),
+(452, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304644132"}'),
+(453, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(454, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304644133"}'),
+(455, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304644134"}'),
+(456, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304644136"}'),
+(457, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304644138"}'),
+(458, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304644141"}'),
+(459, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304644143"}'),
+(460, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(461, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304656549"}'),
+(462, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304656550"}'),
+(463, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304656551"}'),
+(464, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304656553"}'),
+(465, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304656555"}'),
+(466, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(467, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304953669"}'),
+(468, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304953670"}'),
+(469, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304953671"}'),
+(470, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304953673"}'),
+(471, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448304953675"}'),
+(472, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(473, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305038173"}'),
+(474, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305038174"}'),
+(475, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305038175"}'),
+(476, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305038177"}'),
+(477, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305038179"}'),
+(478, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(479, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305310348"}'),
+(480, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305310349"}'),
+(481, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305310350"}'),
+(482, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305310352"}'),
+(483, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305310354"}'),
+(484, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(485, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305406868"}'),
+(486, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305406869"}'),
+(487, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305406870"}'),
+(488, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305406872"}'),
+(489, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305406874"}'),
+(490, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(491, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305506423"}'),
+(492, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305506424"}'),
+(493, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305506425"}'),
+(494, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305506427"}'),
+(495, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305506429"}'),
+(496, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(497, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305685728"}'),
+(498, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305685729"}'),
+(499, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305685730"}'),
+(500, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305685732"}'),
+(501, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305685734"}'),
+(502, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(503, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305709764"}'),
+(504, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305709765"}'),
+(505, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305709766"}'),
+(506, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305709768"}'),
+(507, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305709770"}');
+INSERT INTO `sys_log` (`id`, `id_user`, `date`, `id_page`, `action`, `data`) VALUES
+(508, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305718361"}'),
+(509, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(510, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305718362"}'),
+(511, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305718363"}'),
+(512, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305718365"}'),
+(513, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305718367"}'),
+(514, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305718370"}'),
+(515, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448305718372"}'),
+(516, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(517, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306033451"}'),
+(518, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306033452"}'),
+(519, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306033453"}'),
+(520, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306033455"}'),
+(521, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306033457"}'),
+(522, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(523, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306417602"}'),
+(524, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306417603"}'),
+(525, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306417604"}'),
+(526, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306417606"}'),
+(527, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306417608"}'),
+(528, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306516591"}'),
+(529, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(530, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306516592"}'),
+(531, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306516593"}'),
+(532, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306516595"}'),
+(533, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306516597"}'),
+(534, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(535, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306586206"}'),
+(536, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306586207"}'),
+(537, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306586208"}'),
+(538, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306586210"}'),
+(539, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306586212"}'),
+(540, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(541, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306890598"}'),
+(542, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306890600"}'),
+(543, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306890599"}'),
+(544, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306890602"}'),
+(545, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306890604"}'),
+(546, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(547, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306978690"}'),
+(548, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306978691"}'),
+(549, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306978692"}'),
+(550, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306978694"}'),
+(551, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448306978696"}'),
+(552, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(553, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307251397"}'),
+(554, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307251398"}'),
+(555, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307251399"}'),
+(556, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307251401"}'),
+(557, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307251403"}'),
+(558, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(559, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307355619"}'),
+(560, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307355620"}'),
+(561, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307355621"}'),
+(562, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307355623"}'),
+(563, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307355625"}'),
+(564, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(565, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307437293"}'),
+(566, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307437294"}'),
+(567, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307437295"}'),
+(568, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307437297"}'),
+(569, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307437299"}'),
+(570, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(571, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307513126"}'),
+(572, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307513127"}'),
+(573, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307513128"}'),
+(574, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307513130"}'),
+(575, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307513132"}'),
+(576, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(577, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307707767"}'),
+(578, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307707768"}'),
+(579, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307707769"}'),
+(580, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307707771"}'),
+(581, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307707773"}'),
+(582, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(583, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307903624"}'),
+(584, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307903625"}'),
+(585, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307903626"}'),
+(586, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307903628"}'),
+(587, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307903630"}'),
+(588, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(589, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307976410"}'),
+(590, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307976411"}'),
+(591, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307976412"}'),
+(592, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307976414"}'),
+(593, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448307976416"}'),
+(594, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(595, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308026016"}'),
+(596, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308026017"}'),
+(597, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308026018"}'),
+(598, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308026020"}'),
+(599, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308026022"}'),
+(600, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(601, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308049696"}'),
+(602, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308049697"}'),
+(603, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308049698"}'),
+(604, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308049700"}'),
+(605, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308049702"}'),
+(606, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(607, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308111166"}'),
+(608, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308111167"}'),
+(609, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308111168"}'),
+(610, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308111170"}'),
+(611, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308111172"}'),
+(612, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(613, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308153439"}'),
+(614, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308153440"}'),
+(615, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308153441"}'),
+(616, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308153443"}'),
+(617, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308153445"}'),
+(618, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(619, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308190645"}'),
+(620, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308190646"}'),
+(621, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308190647"}'),
+(622, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308190649"}'),
+(623, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308190651"}'),
+(624, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(625, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308245939"}'),
+(626, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308245941"}'),
+(627, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308245940"}'),
+(628, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308245943"}'),
+(629, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308245945"}'),
+(630, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(631, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308270297"}'),
+(632, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308270298"}'),
+(633, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308270299"}'),
+(634, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308270301"}'),
+(635, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308270303"}'),
+(636, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(637, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308335121"}'),
+(638, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308335122"}'),
+(639, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308335123"}'),
+(640, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308335125"}'),
+(641, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308335127"}'),
+(642, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(643, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308372279"}'),
+(644, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308372281"}'),
+(645, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308372280"}'),
+(646, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308372283"}'),
+(647, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308372285"}'),
+(648, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(649, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308408956"}'),
+(650, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308408958"}'),
+(651, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308408957"}'),
+(652, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308408960"}'),
+(653, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308408962"}'),
+(654, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","input-profile":"Andru00e9","input-avatar":"https://dyn.web.whatsapp.com/pp?t=s&u=5511998701740%40c.us&i=1425034879","input-background":"bg-yellow","_":"1448308408965"}'),
+(655, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","input-profile":"Andru00e9","input-avatar":"https://dyn.web.whatsapp.com/pp?t=s&u=5511998701740%40c.us&i=1425034879","input-background":"bg-yellow","_":"1448308408967"}'),
+(656, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","input-profile":"Andru00e9","input-avatar":"https://dyn.web.whatsapp.com/pp?t=s&u=5511998701740%40c.us&i=1425034879","input-background":"bg-yellow","_":"1448308408969"}'),
+(657, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(658, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308525988"}'),
+(659, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308525989"}'),
+(660, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308525990"}'),
+(661, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308525992"}'),
+(662, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308525994"}'),
+(663, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(664, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308576260"}'),
+(665, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308576261"}'),
+(666, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308576262"}'),
+(667, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308576264"}'),
+(668, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308576266"}'),
+(669, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","input-profile":"","input-avatar":"https://dyn.web.whatsapp.com/pp?t=s&u=5511985665711-1428954517%40g.us&i=1446225179","input-background":"bg-blue","_":"1448308576271"}'),
+(670, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","input-profile":"","input-avatar":"https://dyn.web.whatsapp.com/pp?t=s&u=5511985665711-1428954517%40g.us&i=1446225179","input-background":"bg-blue","_":"1448308576272"}'),
+(671, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(672, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308630888"}'),
+(673, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308630890"}'),
+(674, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308630889"}'),
+(675, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308630892"}'),
+(676, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308630894"}'),
+(677, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(678, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308718676"}'),
+(679, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308718677"}'),
+(680, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308718678"}'),
+(681, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308718680"}'),
+(682, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308718682"}'),
+(683, 1, '2015-11-23', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles"}'),
+(684, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308746372"}'),
+(685, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308746373"}'),
+(686, 1, '2015-11-23', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308746374"}'),
+(687, 1, '2015-11-23', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308746376"}'),
+(688, 1, '2015-11-23', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"7quztpj7d86w29oil8gshy421hh0k9","role":"1","page":"profiles","_":"1448308746378"}');
 
 -- --------------------------------------------------------
 
@@ -363,13 +820,13 @@ INSERT INTO `sys_log` (`id`, `id_user`, `date`, `id_page`, `action`, `data`) VAL
 --
 
 CREATE TABLE IF NOT EXISTS `sys_messages` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `id_user_to` int(11) NOT NULL,
   `id_user_from` int(11) NOT NULL,
   `content` text NOT NULL,
   `date` datetime NOT NULL,
   `read` varchar(1) NOT NULL DEFAULT 'N'
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sys_messages`
@@ -379,7 +836,9 @@ INSERT INTO `sys_messages` (`id`, `id_user_to`, `id_user_from`, `content`, `date
 (1, 1, 2, 'teste', '2015-10-29 15:42:59', 'N'),
 (2, 1, 4, 'teste', '2015-10-29 15:44:06', 'N'),
 (3, 1, 4, 'lll', '2015-10-29 21:48:02', 'N'),
-(4, 1, 3, 'kkk', '2015-11-03 21:19:48', 'N');
+(4, 1, 3, 'kkk', '2015-11-03 21:19:48', 'N'),
+(5, 1, 4, 'kosoakskasa', '2015-11-23 10:29:37', 'N'),
+(6, 1, 3, 'ookdskasodkas', '2015-11-23 10:29:42', 'N');
 
 -- --------------------------------------------------------
 
@@ -412,7 +871,7 @@ INSERT INTO `sys_pages` (`id`, `name`, `url`, `icon`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `sys_payment` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `name` varchar(15) NOT NULL,
   `type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -424,7 +883,7 @@ CREATE TABLE IF NOT EXISTS `sys_payment` (
 --
 
 CREATE TABLE IF NOT EXISTS `sys_roles` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `name` varchar(25) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
@@ -480,7 +939,7 @@ CREATE TABLE IF NOT EXISTS `sys_signature` (
 --
 
 CREATE TABLE IF NOT EXISTS `sys_users` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `username` varchar(14) DEFAULT NULL,
   `email` varchar(150) NOT NULL,
   `password` varchar(14) DEFAULT NULL,
@@ -494,7 +953,7 @@ CREATE TABLE IF NOT EXISTS `sys_users` (
 --
 
 INSERT INTO `sys_users` (`id`, `username`, `email`, `password`, `token`, `status`, `role`) VALUES
-(1, 'caiomelzer', 'melzer.caio@gmail.com', 'mewtwo', 'cll1tj9rppb65hfr6rt56bhg4cjif6r', 'A', 1),
+(1, 'caiomelzer', 'melzer.caio@gmail.com', 'mewtwo', '7quztpj7d86w29oil8gshy421hh0k9', 'A', 1),
 (2, 'andrecr12', 'andrecr12@hotmail.com', 'teste', '62gu9sikpstx4jzb5by4s', 'A', 1),
 (3, 'reginaldomelo', 'reginaldo@teste.com', 'teste', NULL, 'A', 1),
 (4, 'admin', 'admin@admin.com', 'teste', NULL, 'A', 1);
@@ -560,13 +1019,14 @@ INSERT INTO `sys_users_roles` (`id`, `id_username`, `id_role`) VALUES
 -- Stand-in structure for view `vw_app_profiles`
 --
 CREATE TABLE IF NOT EXISTS `vw_app_profiles` (
-`id` int(11)
+`background` varchar(10)
+,`id` int(11)
+,`avatar` text
 ,`profile` varchar(20)
 ,`date` datetime
 ,`user_id` int(11)
 ,`status` varchar(1)
 );
-
 -- --------------------------------------------------------
 
 --
@@ -579,7 +1039,6 @@ CREATE TABLE IF NOT EXISTS `vw_chat_last_messages` (
 ,`id_user_to` int(11)
 ,`content` text
 );
-
 -- --------------------------------------------------------
 
 --
@@ -592,7 +1051,6 @@ CREATE TABLE IF NOT EXISTS `vw_chat_last_messages_andre` (
 ,`date` datetime
 ,`rank` bigint(22)
 );
-
 -- --------------------------------------------------------
 
 --
@@ -608,7 +1066,6 @@ CREATE TABLE IF NOT EXISTS `vw_sys_chat` (
 ,`avatar_user_to` text
 ,`avatar_user_from` text
 );
-
 -- --------------------------------------------------------
 
 --
@@ -628,7 +1085,6 @@ CREATE TABLE IF NOT EXISTS `vw_sys_users` (
 ,`avatar` text
 ,`company` varchar(100)
 );
-
 -- --------------------------------------------------------
 
 --
@@ -636,7 +1092,7 @@ CREATE TABLE IF NOT EXISTS `vw_sys_users` (
 --
 DROP TABLE IF EXISTS `vw_app_profiles`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_app_profiles` AS select `app_profiles`.`id` AS `id`,`app_profiles`.`profile` AS `profile`,`app_profiles`.`date` AS `date`,`vw_sys_users`.`id` AS `user_id`,`app_profiles_active`.`status` AS `status` from (((`app_profiles` join `app_profiles_user` on((`app_profiles_user`.`id_profile` = `app_profiles`.`id`))) join `vw_sys_users` on((`vw_sys_users`.`id` = `app_profiles_user`.`id_user`))) join `app_profiles_active` on((`app_profiles`.`id` = `app_profiles_active`.`id_profile`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_app_profiles` AS select `app_profiles`.`background` AS `background`,`app_profiles`.`id` AS `id`,`app_profiles`.`avatar` AS `avatar`,`app_profiles`.`profile` AS `profile`,`app_profiles`.`date` AS `date`,`vw_sys_users`.`id` AS `user_id`,`app_profiles_active`.`status` AS `status` from (((`app_profiles` join `app_profiles_user` on((`app_profiles_user`.`id_profile` = `app_profiles`.`id`))) join `vw_sys_users` on((`vw_sys_users`.`id` = `app_profiles_user`.`id_user`))) join `app_profiles_active` on((`app_profiles`.`id` = `app_profiles_active`.`id_profile`)));
 
 -- --------------------------------------------------------
 
@@ -682,67 +1138,67 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- Indexes for table `app_profiles`
 --
 ALTER TABLE `app_profiles`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `app_services`
 --
 ALTER TABLE `app_services`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sys_log`
 --
 ALTER TABLE `sys_log`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sys_messages`
 --
 ALTER TABLE `sys_messages`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sys_pages`
 --
 ALTER TABLE `sys_pages`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sys_payment`
 --
 ALTER TABLE `sys_payment`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sys_roles`
 --
 ALTER TABLE `sys_roles`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sys_roles_pages`
 --
 ALTER TABLE `sys_roles_pages`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sys_signature`
 --
 ALTER TABLE `sys_signature`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sys_users`
 --
 ALTER TABLE `sys_users`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sys_users_roles`
 --
 ALTER TABLE `sys_users_roles`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -752,37 +1208,37 @@ ALTER TABLE `sys_users_roles`
 -- AUTO_INCREMENT for table `app_profiles`
 --
 ALTER TABLE `app_profiles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `app_services`
 --
 ALTER TABLE `app_services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `sys_log`
 --
 ALTER TABLE `sys_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=268;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=689;
 --
 -- AUTO_INCREMENT for table `sys_messages`
 --
 ALTER TABLE `sys_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `sys_payment`
 --
 ALTER TABLE `sys_payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `sys_roles`
 --
 ALTER TABLE `sys_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `sys_users`
 --
 ALTER TABLE `sys_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --
@@ -791,7 +1247,7 @@ ALTER TABLE `sys_users`
 -- Constraints for table `sys_signature`
 --
 ALTER TABLE `sys_signature`
-  ADD CONSTRAINT `sys_signature_ibfk_1` FOREIGN KEY (`id`) REFERENCES `sys_users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `sys_signature_ibfk_1` FOREIGN KEY (`id`) REFERENCES `sys_users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

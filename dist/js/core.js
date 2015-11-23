@@ -290,6 +290,15 @@ function afterLoad(params){
     $(document).trigger('loadPageFinish');
 }
 
+function getFormData($form){
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+    $.map(unindexed_array, function(n, i){
+        indexed_array[n['name']] = n['value'];
+    });
+    return indexed_array;
+}
+
 function setGlobalEvents(){
     $(document)
     .on('loadPageStart', function(){
@@ -310,6 +319,22 @@ function setGlobalEvents(){
     });
     initRouter();
     notifications();
+}
+
+function loadTemplate(params){
+    var tlp;
+    $.ajax({
+        async:false,
+        url: params.template,
+        success: function(res){
+            tlp = res;
+            $.each(params.data, function(i,v){
+                var re = new RegExp('\\{\\{'+ i +'\\}\\}','g');
+                tlp = tlp.replace(re, v);
+            });
+        }
+    });
+    return tlp;
 }
 
 $(function ($) {

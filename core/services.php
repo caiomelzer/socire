@@ -91,6 +91,64 @@ if(isset($_GET['user'])){
 								$response->message = $errors->service_auth_missing_url;
 							}
 							break;
+						case 'profiles':
+							if(isset($_GET['crud'])){
+								$crud = $_GET['crud'];
+								switch ($crud) {
+									case 'create':
+										if(isset($_GET['input-profile']) && isset($_GET['input-avatar']) && isset($_GET['input-background'])){
+											$sql = "INSERT INTO `app_profiles`(`profile`, `avatar`, `background`, `date`) VALUES ('".$_GET['input-profile']."','".$_GET['input-avatar']."','".$_GET['input-background']."',NOW())";
+											if (mysqli_query($conn, $sql)) {
+												$profile_id = mysqli_insert_id($conn);
+												$sql = "INSERT INTO `app_profiles_active`(`id_profile`, `status`) VALUES ('".$profile_id."','A')";
+												if (mysqli_query($conn, $sql)) {
+													$profile_user = getUserId($user);
+													$sql = "INSERT INTO `app_profiles_user`(`id_profile`, `id_user`) VALUES ('".$profile_id."','".$profile_user."')";
+													if (mysqli_query($conn, $sql)) {
+														$response->success = true;
+													}
+													else{
+														$response->message = $errors->error_while_creating;
+													}
+												}
+												else{
+													$response->message = $errors->error_while_creating;
+												}
+											} 
+											else {
+											    $response->message = $errors->error_while_creating;
+											}
+										}
+										else{
+											$response->message = $errors->service_crud_missing_parameters;
+										}	
+										break;
+									case 'read':
+										$sql = "SELECT * FROM vw_app_profiles WHERE user_id = '".getUserId($user)."'";
+										$result = mysqli_query($conn, $sql);	
+										if(mysqli_num_rows($result) > 0) {
+											$profile = array();
+											$i=0;
+											while($row = mysqli_fetch_assoc($result)){
+												$profile[$i]['profile'] = $row['profile'];
+												$profile[$i]['avatar'] = $row['avatar'];
+												$profile[$i]['id'] = $row['id'];
+												$profile[$i]['background'] = $row['background'];
+												$i++;
+											}
+											$response->profile = $profile;
+											$response->success = true;
+										} 
+										break;
+									default:
+										$response->message = $errors->service_crud_undefined;
+										break;
+								}
+							}
+							else{
+								$response->message = $errors->service_crud_missing;
+							}	
+							break;	
 						default:
 							$response->success = false;
 							break;

@@ -21,7 +21,11 @@ $lang = (object) array(
 		'message_problem_to_send' => 'Something is wrong while trying to send a message',
 		'message_missing_content' => 'Missing message',
 		'log_error_set' => 'Error when trying to set log',
-		'service_connect_social' => 'Error when trying to connect on Social' 
+		'service_connect_social' => 'Error when trying to connect on Social',
+		'service_crud_missing' => 'Missing CRUD operation',
+		'service_crud_undefined' => 'CRUD operation is undefined',
+		'error_while_creating' => 'CRUD, error while trying to create data',
+		'service_crud_missing_parameters' => 'CRUD, missing parameters'
 	),
 	'messages' => (object) array()
 );
