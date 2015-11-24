@@ -36,7 +36,24 @@ if(isset($_GET['user'])){
 					$service = $_GET['service'];
 					global $conn;
 					switch ($service) {
-							
+						case 'listServices':
+							$sql = "SELECT * FROM app_services";
+							$result = mysqli_query($conn, $sql);	
+							if(mysqli_num_rows($result) > 0) {
+								$services = array();
+								$i=0;
+								while($row = mysqli_fetch_assoc($result)){
+									$services[$i]['id'] = $row['id'];
+									$services[$i]['service'] = $row['service'];
+									$services[$i]['url'] = $row['url'];
+									$services[$i]['icon'] = $row['icon'];
+									$services[$i]['background'] = $row['background'];
+									$i++;
+								}
+								$response->services = $services;
+								$response->success = true;
+							} 
+							break;	
 						case 'social':
 							include_once('socialall.php');
 							$app_id = '5651e7666a9763030030eb32';

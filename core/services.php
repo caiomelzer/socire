@@ -105,6 +105,42 @@ if(isset($_GET['user'])){
 													$profile_user = getUserId($user);
 													$sql = "INSERT INTO `app_profiles_user`(`id_profile`, `id_user`) VALUES ('".$profile_id."','".$profile_user."')";
 													if (mysqli_query($conn, $sql)) {
+														for($i=0; $i<sizeof($_GET);$i++){
+															if(isset($_GET[$i.'-input-enable'])){
+																$sql = "INSERT INTO `app_profile_services` (`id_service`, `id_profile`, `status`) VALUES (".$i.",'".getUserId($user)."','".$_GET[$i.'-input-enable']."')";
+																if(mysqli_query($conn, $sql)) {
+
+															    }
+															    else{
+															    	$response->message = $errors->error_while_creating;
+															    }	
+															    if($_GET[$i.'-input-tags'] != ''){
+																    $tags = explode($_GET[$i.'-input-tags'], ',');
+																    for($v=0; $v<sizeof($tags);$v++){
+																    	$sql = "INSERT INTO `app_services_parameters`(`id_service`, `type`, `content`) VALUES (".$i.",'H','".$tags[$v]."')";
+																		if(mysqli_query($conn, $sql)) {
+
+																	    }
+																	    else{
+																	    	$response->message = $errors->error_while_creating;
+																	    }
+																    }
+																}
+																if($_GET[$i.'-input-profiles'] != ''){
+																    $profiles = explode($_GET[$i.'-input-profiles'], ',');
+																    for($v=0; $v<sizeof($profiles);$v++){
+																    	$sql = "INSERT INTO `app_services_parameters`(`id_service`, `type`, `content`) VALUES (".$i.",'P','".$profiles[$v]."')";
+																		if(mysqli_query($conn, $sql)){
+
+																	    }
+																	    else{
+																	    	$response->message = $errors->error_while_creating;
+																	    }
+																    }
+																}    
+															}
+															
+														}
 														$response->success = true;
 													}
 													else{

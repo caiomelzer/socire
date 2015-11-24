@@ -7,6 +7,7 @@ function loadAppConfig(){
     app.config.front = app.config.url+'/rep/CaUP/';
     app.config.loginPage = app.config.url+'/rep/CaUP/index.html';
     app.config.services = app.config.server+'core/services.php';
+    app.config.social = app.config.server+'core/social.php';
     app.config.chat = app.config.server+'core/chat.php';
     app.config.failedPage = {
         url: 'pages/404.html',

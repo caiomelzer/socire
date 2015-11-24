@@ -36,10 +36,34 @@ var profiles = {
 	            	};
 	            	$.each(response.profile, function(i,v){
 						params.data = response.profile[i];
-						console.info(loadTemplate(params));
 						content += loadTemplate(params);
 	            	});
 	            	$('#profile-list').html('<div class="col-md-4">'+$('#profile-list .col-md-4:eq(0)').html()+ '</div>' + content);
+	            }
+	        }
+	    })
+	    .fail( function(e){
+	        return {success: false};
+	    });
+	},
+	listServices: function(){
+		$.ajax({
+	        url: app.config.social,
+	        data: $.extend({
+	            service: 'listServices'
+	        }, app.config.userData),
+	        success: function(res){
+	            var response = JSON.parse(res);
+	            if(response.success){
+	            	var content = '';
+	            	var params = {
+	            		template: 'pages/profiles-services.html'
+	            	};
+	            	$.each(response.services, function(i,v){
+						params.data = response.services[i];
+						content += loadTemplate(params);
+	            	});
+	            	$('#services-accordion').html(content);
 	            }
 	        }
 	    })
@@ -52,6 +76,7 @@ var profiles = {
 
 $(function($){
 	profiles.read();
+	profiles.listServices();
 	$(document).on('click','button[id="save-profile"]', function(){
 		profiles.create();
 	});
