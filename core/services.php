@@ -115,9 +115,9 @@ if(isset($_GET['user'])){
 															    	$response->message = $errors->error_while_creating;
 															    }	
 															    if($_GET[$i.'-input-tags'] != ''){
-																    $tags = explode($_GET[$i.'-input-tags'], ',');
+																    $tags = explode(',',$_GET[$i.'-input-tags']);
 																    for($v=0; $v<sizeof($tags);$v++){
-																    	$sql = "INSERT INTO `app_services_parameters`(`id_service`, `type`, `content`) VALUES (".$i.",'H','".$tags[$v]."')";
+																    	$sql = "INSERT INTO `app_services_parameters`(`id_service`, `type`, `content`, `id_profile`) VALUES (".$i.",'H','".$tags[$v]."','".$profile_id."')";
 																		if(mysqli_query($conn, $sql)) {
 
 																	    }
@@ -127,9 +127,9 @@ if(isset($_GET['user'])){
 																    }
 																}
 																if($_GET[$i.'-input-profiles'] != ''){
-																    $profiles = explode($_GET[$i.'-input-profiles'], ',');
+																    $profiles = explode(',',$_GET[$i.'-input-profiles']);
 																    for($v=0; $v<sizeof($profiles);$v++){
-																    	$sql = "INSERT INTO `app_services_parameters`(`id_service`, `type`, `content`) VALUES (".$i.",'P','".$profiles[$v]."')";
+																    	$sql = "INSERT INTO `app_services_parameters`(`id_service`, `type`, `content`, `id_profile`) VALUES (".$i.",'P','".$profiles[$v]."','".$profile_id."')";
 																		if(mysqli_query($conn, $sql)){
 
 																	    }
