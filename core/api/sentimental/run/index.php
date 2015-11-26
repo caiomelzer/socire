@@ -1,7 +1,4 @@
 <?php
-if (PHP_SAPI != 'cli') {
-	echo "<pre>";
-}
 
 $strings = array(
 	1 => $_GET['text']

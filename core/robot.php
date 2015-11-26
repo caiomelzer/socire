@@ -17,18 +17,20 @@ if(isset($_GET['service'])){
 	global $conn;
 	switch ($service) {
 		case 'twitter':
-			$ch = curl_init();
-			$timeout = 5; // set to zero for no timeout
-			curl_setopt ($ch, CURLOPT_URL, 'http://localhost/rep/CaUP/core/api/twitter/api/tweet.php?username=BarackObama');
-			curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-			$file_contents = curl_exec($ch);
-			curl_close($ch);
-			$file_contents = json_encode($file_contents, true);
-
-			// display file
-			echo $file_contents->created_at;
-
+			$url = 'http://localhost/rep/CaUP/core/api/twitter/api/tweet.php?hashtag=Delcídio';
+			$unparsed_json = file_get_contents($url);
+			$json_object = json_decode($unparsed_json);
+			for($i=0;$i<sizeof($json_object);$i++){
+				$dateConvert = explode(' ',$json_object[$i]->created_at);
+				$url = 'http://localhost/rep/CaUP/core/api/sentimental/run/index.php?text='.utf8_encode($json_object[$i]->text);
+				$unparsed_score = file_get_contents($url);
+				$parsed_score = json_decode($unparsed_score);
+				$dateConverted = $dateConvert[5].'-'.date("m", strtotime($dateConvert[1])).'-'.$dateConvert[2].' '.$dateConvert[3];
+				$sql = "INSERT INTO `app_services_content`(`username`, `content`, `location`, `url`, `service`, `lang`, `date`, `neg`, `pos`, `neu`, `point`) VALUES ('".$json_object[$i]->user->screen_name."','".$json_object[$i]->text."','".$json_object[$i]->user->location."','".$json_object[$i]->id."',1,'".$json_object[$i]->lang."','".$dateConverted."','".$parsed_score->data->score->neg."','".$parsed_score->data->score->pos."','".$parsed_score->data->score->neu."','".$parsed_score->data->dominant."')";
+				if(mysqli_query($conn, $sql)) {
+			    }
+			    $response->success = true;
+			}
 			break;	
 		default:
 			$response->success = false;
