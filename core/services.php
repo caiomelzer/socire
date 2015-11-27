@@ -170,6 +170,9 @@ if(isset($_GET['user'])){
 												$profile[$i]['avatar'] = $row['avatar'];
 												$profile[$i]['id'] = $row['id'];
 												$profile[$i]['background'] = $row['background'];
+												$profile[$i]['qtd_profiles'] = $row['qtd_profiles'];
+												$profile[$i]['qtd_hashtag'] = $row['qtd_hashtag'];
+												$profile[$i]['content'] = $row['content'];
 												$i++;
 											}
 											$response->profile = $profile;
