@@ -19,12 +19,9 @@ function call_api($endpoint, $parameters) {
 	return json_decode($response);
 }
 
-$params = array('text' => $_GET['text']);
-$sentiment = call_api('sentiment', $params);
-$language = call_api('language', $params);
+//$params = array('text' => $_GET['text']);
+//$sentiment = call_api('sentiment', $params);
+//$language = call_api('language', $params);
 
-echo sprintf("Sentiment: %s (%F)", $sentiment->polarity, $sentiment->polarity_confidence),
-  	PHP_EOL;
-echo sprintf("Language: %s (%F)", $language->lang, $language->confidence),
-  	PHP_EOL;
+//echo json_encode($sentiment, JSON_PRETTY_PRINT);
 ?>

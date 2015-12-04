@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.12
+-- version 4.2.11
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Nov 26, 2015 at 10:30 AM
--- Server version: 5.6.25
--- PHP Version: 5.6.11
+-- Host: 127.0.0.1
+-- Generation Time: Dec 04, 2015 at 07:32 PM
+-- Server version: 5.6.21
+-- PHP Version: 5.6.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `app`
@@ -28,19 +28,22 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `app_profiles`;
 CREATE TABLE IF NOT EXISTS `app_profiles` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `profile` varchar(20) NOT NULL,
   `date` datetime NOT NULL,
   `avatar` text NOT NULL,
   `background` varchar(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_profiles`
 --
 
 INSERT INTO `app_profiles` (`id`, `profile`, `date`, `avatar`, `background`) VALUES
-(55, 'Caio-teste', '2015-11-24 21:43:58', 'teste', 'bg-yellow');
+(56, 'Barack Obama', '2015-11-27 11:51:04', 'https://pbs.twimg.com/profile_images/451007105391022080/iu1f7brY_400x400.png', 'bg-blue'),
+(57, 'PanicAtTheDisco', '2015-11-27 14:15:42', 'https://pbs.twimg.com/profile_images/657032625014611968/amlZneu2_400x400.jpg', 'bg-yellow'),
+(58, 'PanicAtTheDisco', '2015-11-27 14:15:42', 'https://pbs.twimg.com/profile_images/657032625014611968/amlZneu2_400x400.jpg', 'bg-yellow'),
+(59, 'BTG', '2015-12-04 15:56:52', 'https://pbs.twimg.com/profile_images/557984705098694656/Co273HZ-_400x400.jpeg', 'bg-blue');
 
 -- --------------------------------------------------------
 
@@ -106,7 +109,11 @@ INSERT INTO `app_profiles_active` (`id_profile`, `status`) VALUES
 (52, 'A'),
 (53, 'A'),
 (54, 'A'),
-(55, 'A');
+(55, 'A'),
+(56, 'A'),
+(57, 'A'),
+(58, 'A'),
+(59, 'A');
 
 -- --------------------------------------------------------
 
@@ -172,7 +179,11 @@ INSERT INTO `app_profiles_user` (`id_profile`, `id_user`) VALUES
 (52, 1),
 (53, 1),
 (54, 1),
-(55, 1);
+(55, 1),
+(56, 1),
+(57, 1),
+(58, 1),
+(59, 1);
 
 -- --------------------------------------------------------
 
@@ -233,7 +244,16 @@ INSERT INTO `app_profile_services` (`id_service`, `id_profile`, `status`) VALUES
 (1, 1, 'A'),
 (2, 1, 'I'),
 (1, 1, 'A'),
-(2, 1, 'I');
+(2, 1, 'I'),
+(1, 1, 'A'),
+(2, 1, 'I'),
+(1, 1, 'A'),
+(2, 1, 'I'),
+(1, 1, 'A'),
+(2, 1, 'I'),
+(1, 1, 'A'),
+(2, 1, 'I'),
+(3, 1, 'A');
 
 -- --------------------------------------------------------
 
@@ -243,12 +263,12 @@ INSERT INTO `app_profile_services` (`id_service`, `id_profile`, `status`) VALUES
 
 DROP TABLE IF EXISTS `app_services`;
 CREATE TABLE IF NOT EXISTS `app_services` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `service` varchar(10) NOT NULL,
   `url` text NOT NULL,
   `icon` text NOT NULL,
   `background` varchar(15) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_services`
@@ -256,7 +276,8 @@ CREATE TABLE IF NOT EXISTS `app_services` (
 
 INSERT INTO `app_services` (`id`, `service`, `url`, `icon`, `background`) VALUES
 (1, 'Twitter', 'core/api/twitter/api/tweet.php', 'fa-twitter-square', 'box-primary'),
-(2, 'Youtube', 'url', 'fa-youtube-square', 'box-danger');
+(2, 'Youtube', 'url', 'fa-youtube-square', 'box-danger'),
+(3, 'Google', 'core/api/google/index.php', 'fa-google-square', 'box-primary');
 
 -- --------------------------------------------------------
 
@@ -269,52 +290,39 @@ CREATE TABLE IF NOT EXISTS `app_services_content` (
   `username` text NOT NULL,
   `content` text NOT NULL,
   `location` text NOT NULL,
-  `url` varchar(500) NOT NULL,
+  `url` varchar(700) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `service` int(11) NOT NULL,
   `lang` varchar(2) NOT NULL,
-  `point` varchar(3) NOT NULL,
-  `neu` float NOT NULL,
-  `pos` float NOT NULL,
-  `neg` float NOT NULL
+  `api_snt_polarity` varchar(3) NOT NULL,
+  `api_snt_neu` float NOT NULL,
+  `api_snt_pos` float NOT NULL,
+  `api_snt_neg` float NOT NULL,
+  `api_anl_pnt` float DEFAULT NULL,
+  `api_anl_polarity` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `app_services_content`
 --
 
-INSERT INTO `app_services_content` (`username`, `content`, `location`, `url`, `date`, `service`, `lang`, `point`, `neu`, `pos`, `neg`) VALUES
-('caiomelzer', 'I scored 3588 points at 2048, a game where you join numbers to score high! #2048game http://t.co/ekX6DaNiyG via @gabrielecirulli', '-21.780221,-50.788041', '443575371942739968', '2014-03-12 05:33:04', 1, 'en', 'neu', 0.333, 0.333, 0.333),
-('caiomelzer', '@oab_brasil @OAB_sp Preciso localizar o Dr. Advogado Franco Andrey Barbosa Granja de Souza, que perdeu um documento.', '-21.780221,-50.788041', '466615207176200192', '2014-05-14 19:25:09', 1, 'pt', 'neu', 0.333, 0.333, 0.333),
-('caiomelzer', '@CETSP_ tem rodÃ­zio normal amanhÃ£?', '-21.780221,-50.788041', '478590744899645440', '2014-06-16 20:31:40', 1, 'pt', 'neu', 0.333, 0.333, 0.333),
-('caiomelzer', 'Go @CBF_Futebol! #WorldCup Who are you supporting? http://t.co/BIQq8gxTcx', '-21.780221,-50.788041', '484771612722733056', '2014-07-03 21:52:13', 1, 'en', 'neu', 0.333, 0.333, 0.333),
-('caiomelzer', 'Infelizmente sem @neymarjr, agora Ã© hora do @fredgol9 #FredKiller', '-21.780221,-50.788041', '485436127864963072', '2014-07-05 17:52:46', 1, 'pt', 'neu', 0.333, 0.333, 0.333),
-('caiomelzer', 'Sublime Text Giveaway http://t.co/chIL4l87aB via @@sublimetxttips', '-21.780221,-50.788041', '486167102080839680', '2014-07-07 18:17:24', 1, 'en', 'pos', 0.25, 0.5, 0.25),
-('caiomelzer', 'https://t.co/T6jKU0pCTf #kdcuecao #FestaDaPlayboyVanessaMesquita #HeyMeSDVComHeyBrother', '-21.780221,-50.788041', '487349658071879681', '2014-07-11 00:36:27', 1, 'un', 'neu', 0.333, 0.333, 0.333),
-('caiomelzer', '@Mari_Graciolli prazer ET', '-21.780221,-50.788041', '515499563906785280', '2014-09-26 16:54:08', 1, 'pt', 'neu', 0.333, 0.333, 0.333),
-('caiomelzer', '@mary_mc hahahaha', '-21.780221,-50.788041', '539968799429369857', '2014-12-03 04:26:08', 1, 'tl', 'neu', 0.333, 0.333, 0.333),
-('caiomelzer', 'Waiting to come back... #kendoui #ios #mobile #Phonegap', '-21.780221,-50.788041', '540552491818295296', '2014-12-04 19:05:31', 1, 'en', 'neu', 0.333, 0.333, 0.333),
-('caiomelzer', '[My Twt Addiction] "Are you sure you are on twitter?" (rank=99.7%) via http://t.co/07MPA7j7aG', '-21.780221,-50.788041', '540854804184977409', '2014-12-05 15:06:48', 1, 'en', 'neu', 0.333, 0.333, 0.333),
-('caiomelzer', 'Protest the Mac App Store with a freedom loving bundle of 10 Top Mac AppsÂ for just $15! And a free copy of iMazing! http://t.co/vFlcLvKvxX', '-21.780221,-50.788041', '557243138369392640', '2015-01-19 20:28:11', 1, 'en', 'neg', 0.25, 0.25, 0.5),
-('caiomelzer', '@PGG_news VocÃªs tem alguma posiÃ§Ã£o sobre as obras do NEAR MORUMBI? #atraso', '-21.780221,-50.788041', '575628049951162369', '2015-03-11 15:03:16', 1, 'pt', 'neu', 0.333, 0.333, 0.333),
-('caiomelzer', 'Pra ganhar eu faria uma piada a lÃ¡ Rafinha Bastos com a Wanessa #CQCVinDiesel', '-21.780221,-50.788041', '582733578175430658', '2015-03-31 05:38:06', 1, 'pt', 'neu', 0.333, 0.333, 0.333),
-('caiomelzer', 'Eu daria uma raquetada no Dan! Hahahah #CQCVinDiesel', '-21.780221,-50.788041', '582734069647220736', '2015-03-31 05:40:03', 1, 'pt', 'neu', 0.333, 0.333, 0.333),
-('caiomelzer', '#NowPlaying "El Corrido de la Roca" de Ariel Camacho y Los Plebes Del Rancho de El Karma friday kkkkkk â™« http://t.co/lT1ReHxxLQ', '-21.780221,-50.788041', '591572352506429443', '2015-04-24 15:00:14', 1, 'es', 'neu', 0.333, 0.333, 0.333),
-('caiomelzer', 'Descubra @happn_app, o aplicativo para encontrar as pessoas que vocÃª cruzou http://t.co/mmYGx0B4vF', '-21.780221,-50.788041', '599581100449669120', '2015-05-16 17:24:08', 1, 'pt', 'neu', 0.333, 0.333, 0.333),
-('caiomelzer', 'Descubra @happn_app, o aplicativo para encontrar as pessoas que vocÃª cruzou http://t.co/mmYGx0B4vF', '-21.780221,-50.788041', '599953231045885954', '2015-05-17 18:02:51', 1, 'pt', 'neu', 0.333, 0.333, 0.333),
-('caiomelzer', 'A volta de Ramiro https://t.co/TsF3Mngq62 via @vakinha @DaniloGentili da forÃ§a ai!', '-21.780221,-50.788041', '638011636951973888', '2015-08-30 18:33:22', 1, 'pt', 'neu', 0.333, 0.333, 0.333),
-('BarackObama', 'The international community is committed to #ActOnClimateâ€”show your support for global action: https://t.co/yQZV3HB089', 'Washington, DC', '667441436728664065', '2015-11-19 22:36:53', 1, 'en', 'neu', 0.333, 0.333, 0.333),
-('BarackObama', '"Progress isnâ€™t guaranteed. Itâ€™s not inevitable. Itâ€™s something that has to be fought for." â€”President Obama https://t.co/GhtHOQNU5u', 'Washington, DC', '667474195660435456', '2015-11-20 00:47:03', 1, 'en', '', 0, 0, 0),
-('BarackObama', 'Record-breaking temperatures in October keeps 2015 on track to be the hottest year ever: https://t.co/CplyuXjhDU', 'Washington, DC', '667788216230129665', '2015-11-20 21:34:52', 1, 'en', 'neu', 0.333, 0.333, 0.333),
-('BarackObama', 'Getting help is easy. Check out your options and #GetCovered today: https://t.co/GdJw8C26Yn https://t.co/OAh3bawk7w', 'Washington, DC', '667812070478319616', '2015-11-20 23:09:39', 1, 'en', 'neu', 0.333, 0.333, 0.333),
-('BarackObama', 'RT @WhiteHouse: "In the face of terror, we stand as one." â€”@VP Biden: https://t.co/lsBGVUPAWV', 'Washington, DC', '668139787958796289', '2015-11-21 20:51:53', 1, 'en', 'neu', 0.333, 0.333, 0.333),
-('BarackObama', 'Get a close look inside the first-ever @OFA Organizing Director Summit: https://t.co/egN28SJ0SP', 'Washington, DC', '668846942957408256', '2015-11-23 19:41:52', 1, 'en', 'neu', 0.333, 0.333, 0.333),
-('BarackObama', 'RT @FactsOnClimate: American companies are using a record amount of clean energy â†’ https://t.co/J0rBqxkaIq #ActOnClimate #COP21 https://t.câ€¦', 'Washington, DC', '668933428620857347', '2015-11-24 01:25:32', 1, 'en', 'neu', 0.333, 0.333, 0.333),
-('BarackObama', 'Read how @OFA volunteers in Tennessee are making sure that everyone has access to quality, affordable health care: https://t.co/Sc7zDxRI9Y', 'Washington, DC', '669233514047377408', '2015-11-24 21:17:58', 1, 'en', 'neu', 0.333, 0.333, 0.333),
-('BarackObama', 'RT @FactsOnClimate: "What a powerful rebuke to the terrorists it will be when the world stands as oneâ€ â€”@POTUS #ActOnClimate #COP21 https:/â€¦', 'Washington, DC', '669345146022981632', '2015-11-25 04:41:33', 1, 'en', 'neu', 0.333, 0.333, 0.333),
-('BarackObama', 'Read from @GinaEPA on how the United States is leading the international effort to #ActOnClimate: https://t.co/1H3ZafxtPo', 'Washington, DC', '669583869755027456', '2015-11-25 20:30:09', 1, 'en', 'neu', 0.333, 0.333, 0.333),
-('BarackObama', 'LIVE: President Obama is celebrating the 68th anniversary of the National Thanksgiving Turkey presentation. https://t.co/SwdlqcbFaq', 'Washington, DC', '669603363412033537', '2015-11-25 21:47:37', 1, 'en', 'neu', 0.333, 0.333, 0.333),
-('BarackObama', 'RT @WhiteHouse: .@POTUS on the tragic shooting of 17-year-old Laquan McDonald: https://t.co/CJ93od5PXO https://t.co/QRAqO5PnaC', 'Washington, DC', '669698699010957312', '2015-11-26 04:06:26', 1, 'en', 'neu', 0.333, 0.333, 0.333);
+INSERT INTO `app_services_content` (`username`, `content`, `location`, `url`, `date`, `service`, `lang`, `api_snt_polarity`, `api_snt_neu`, `api_snt_pos`, `api_snt_neg`, `api_anl_pnt`, `api_anl_polarity`) VALUES
+('PanicAtTheDisco', '"LA Devotee" is available everywhere now. Go get it on @AppleMusic https://t.co/oLibsrsTH9', 'Underneath the Epcot Center', '6.7070393554871E+17', '2015-11-28 22:40:53', 1, 'en', 'neu', 0, 0, 0, 0.832664, NULL),
+('PanicAtTheDisco', 'Raging tonight? ðŸ™Œheard LA Devotee is perfect for your pre + post party needs ðŸ˜‰Add it to your @Spotify playlists https://t.co/w5ENTC9iqN', 'Underneath the Epcot Center', '6.7071902356754E+17', '2015-11-28 23:40:51', 1, 'en', 'neu', 0.25, 0.25, 0.5, 0.980174, NULL),
+('BarackObama', 'Read why the international climate talks in Paris are so important: https://t.co/FlasnjEIdK #COP21', 'Washington, DC', '6.7139322929261E+17', '2015-11-30 20:19:54', 1, 'en', 'neu', 0.333, 0.333, 0.333, 0.967835, NULL),
+('BarackObama', 'Watch President Obama discuss how to build a framework for progress on the global effort to tackle climate change. https://t.co/9zQWCyqYzA', 'Washington, DC', '6.71420677099E+17', '2015-11-30 22:08:58', 1, 'en', 'neu', 0.333, 0.333, 0.333, 0.993075, NULL),
+('BarackObama', 'The global talks on climate change have begun. Join the conversation: https://t.co/HSeUsM9avN #UnitedOnClimate', 'Washington, DC', '6.71440123784E+17', '2015-11-30 23:26:14', 1, 'en', 'neu', 0.333, 0.333, 0.333, 0.991219, NULL),
+('BarackObama', 'Stand up for global action on climate changeâ€”add your name: https://t.co/MuaIyh1rkj #ActOnClimate https://t.co/OOG1VviHCw', 'Washington, DC', '6.714672339237E+17', '2015-12-01 01:13:58', 1, 'en', 'neu', 0.25, 0.5, 0.25, 0.994535, NULL),
+('BarackObama', 'Be a part of this historic moment in the fight against climate changeâ€”join the #UnitedOnClimate conversation: https://t.co/47SrSAKaqp #COP21', 'Washington, DC', '6.717457129677E+17', '2015-12-01 19:40:33', 1, 'en', 'neu', 0.333, 0.333, 0.333, 0.910887, NULL),
+('BarackObama', 'RT @WhiteHouse: Big news: 154 companies are calling for strong global action on climate change â†’ https://t.co/IU2TIZKAPI #COP21 https://t.câ€¦', 'Washington, DC', '6.7180768743315E+17', '2015-12-01 23:46:48', 1, 'en', 'neu', 0.333, 0.333, 0.333, 0.993671, NULL),
+('BarackObama', 'Sixty years later, we remember the heroism of Rosa Parks and recommit to the fight for justice and equality. https://t.co/NOHa4cv8DL', 'Washington, DC', '6.7183288751625E+17', '2015-12-02 01:26:57', 1, 'en', 'neu', 0.333, 0.333, 0.333, 0.924502, NULL),
+('PanicAtTheDisco', 'RT @ernestbaker: WHEN I THREW ON THAT PANIC AND @alexrussellglo DABBED TO IT IN FRONT OF 1000 PEOPLE https://t.co/E8oy8xx0Bc', 'Underneath the Epcot Center', '6.7187055122127E+17', '2015-12-02 03:56:36', 1, 'en', 'neu', 0.333, 0.333, 0.333, 0.889666, NULL),
+('BarackObama', 'This is a huge step forward. #UnitedOnClimate https://t.co/E8jvEr1PXH', 'Washington, DC', '6.7209198367913E+17', '2015-12-02 18:36:30', 1, 'en', 'neu', 0.333, 0.333, 0.333, 0.486833, NULL),
+('PanicAtTheDisco', 'Made a mixtape with our bffs in @falloutboy for @pandora_radio. Listen to it here https://t.co/J5MjYbkahy https://t.co/AtYDsTrXVX', 'Underneath the Epcot Center', '6.7213228599975E+17', '2015-12-02 21:16:39', 1, 'en', 'neu', 0.333, 0.333, 0.333, 0.981137, NULL),
+('BarackObama', 'Countries all over the world are standing #UnitedOnClimateâ€”join the conversation to be part of this historic moment: https://t.co/mhF9PsXw28', 'Washington, DC', '6.7213462715105E+17', '2015-12-02 21:25:57', 1, 'en', 'neu', 0.333, 0.333, 0.333, 0.916092, NULL),
+('PanicAtTheDisco', 'RT @ddlovato: New favorite song = Victorious by Panic! At The Disco.. ðŸ™ŒðŸ¼ðŸ‘ðŸ¼ðŸ‘ðŸ¼ #obsessed', 'Underneath the Epcot Center', '6.7220682544659E+17', '2015-12-03 02:12:50', 1, 'en', 'neu', 0.333, 0.333, 0.333, 0.828917, NULL),
+('BarackObama', 'RT @WhiteHouse: Watch @POTUS deliver a statement on the shooting in San Bernardino.\nhttps://t.co/JixeyA8M2f', 'Washington, DC', '6.7249153961709E+17', '2015-12-03 21:04:11', 1, 'en', 'neu', 0.333, 0.333, 0.333, 0.920905, NULL),
+('BarackObama', 'The economy added 211,000 jobs in Novemberâ€”a record-breaking 69 consecutive months of private-sector job growth.', 'Washington, DC', '6.7281496588398E+17', '2015-12-04 18:29:22', 1, 'en', 'neu', 0.333, 0.333, 0.333, 0.868852, NULL);
 
 -- --------------------------------------------------------
 
@@ -335,79 +343,14 @@ CREATE TABLE IF NOT EXISTS `app_services_parameters` (
 --
 
 INSERT INTO `app_services_parameters` (`id_service`, `type`, `content`, `id_profile`) VALUES
-(1, 'H', 'dasdsad,dasd,asd,adsasda', 0),
-(1, 'H', '', 0),
-(2, 'H', '', 0),
-(2, 'H', '', 0),
-(1, 'H', 'dasdsad,dasd,asd,adsasda', 0),
-(1, 'H', '', 0),
-(2, 'H', '', 0),
-(2, 'H', '', 0),
-(1, 'H', 'dasdsad,dasd,asd,adsasda', 0),
-(1, 'H', '', 0),
-(2, 'H', '', 0),
-(2, 'H', '', 0),
-(1, 'H', 'dasdsad,dasd,asd,adsasda', 0),
-(1, 'H', '', 0),
-(2, 'H', '', 0),
-(2, 'H', '', 0),
-(1, 'H', 'dasdsad,dasd,asd,adsasda', 0),
-(1, 'H', '', 0),
-(2, 'H', '', 0),
-(2, 'H', '', 0),
-(1, 'H', '', 0),
-(2, 'H', '', 0),
-(1, 'H', '', 0),
-(2, 'H', '', 0),
-(1, 'H', '', 0),
-(1, 'P', 'dasdsad,dasd,asd,adsasda', 0),
-(2, 'H', '', 0),
-(2, 'P', '', 0),
-(1, 'P', '', 0),
-(1, 'P', ',', 0),
-(2, 'P', '', 0),
-(2, 'P', '', 0),
-(1, 'P', '', 0),
-(1, 'P', ',', 0),
-(2, 'P', '', 0),
-(2, 'P', '', 0),
-(1, 'P', '', 0),
-(1, 'P', ',', 0),
-(2, 'P', '', 0),
-(2, 'P', '', 0),
-(1, 'P', '', 0),
-(1, 'P', ',', 0),
-(2, 'P', '', 0),
-(2, 'P', '', 0),
-(1, 'P', '', 0),
-(1, 'P', ',', 0),
-(2, 'P', '', 0),
-(2, 'P', '', 0),
-(1, 'P', ',', 0),
-(1, 'P', ',', 0),
-(1, 'H', ',', 0),
-(1, 'P', ',', 0),
-(1, 'H', ',', 0),
-(1, 'P', ',', 0),
-(1, 'H', ',', 0),
-(1, 'P', ',', 0),
-(2, 'H', ',', 0),
-(2, 'P', ',', 0),
-(1, 'H', 'Teste', 0),
-(1, 'H', ' futebol', 0),
-(1, 'H', ' usa', 0),
-(1, 'P', 'BarackObama', 0),
-(1, 'P', ' neymarjr', 0),
-(1, 'H', 'Teste', 54),
-(1, 'H', ' futebol', 54),
-(1, 'H', ' usa', 54),
-(1, 'P', 'BarackObama', 54),
-(1, 'P', ' neymarjr', 54),
-(1, 'H', 'Teste', 55),
-(1, 'H', ' futebol', 55),
-(1, 'H', ' usa', 55),
-(1, 'P', 'BarackObama', 55),
-(1, 'P', ' neymarjr', 55);
+(1, 'P', 'BarackObama', 56),
+(1, 'P', 'PanicAtTheDisco', 57),
+(1, 'P', 'PanicAtTheDisco', 58),
+(1, 'P', 'PanicAtTheDisco', 56),
+(1, 'P', 'btg', 59),
+(3, 'H', 'BTG', 59),
+(3, 'H', ' AndrÃ© Esteves', 59),
+(3, 'H', ' Lava-Jato', 59);
 
 -- --------------------------------------------------------
 
@@ -417,13 +360,13 @@ INSERT INTO `app_services_parameters` (`id_service`, `type`, `content`, `id_prof
 
 DROP TABLE IF EXISTS `sys_log`;
 CREATE TABLE IF NOT EXISTS `sys_log` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `date` date NOT NULL,
   `id_page` int(11) NOT NULL,
   `action` text NOT NULL,
   `data` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=858 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=928 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `sys_log`
@@ -1289,7 +1232,77 @@ INSERT INTO `sys_log` (`id`, `id_user`, `date`, `id_page`, `action`, `data`) VAL
 (854, 1, '2015-11-24', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"f6p8njiexjfc4n29liz9sfvapvr96bt9","role":"1","page":"dashboard","input-profile":"Caio-teste","input-avatar":"teste","input-background":"bg-yellow","1-input-enable":"A","1-input-profiles":"BarackObama, neymarjr","1-input-tags":"Teste, futebol, usa","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","_":"1448408425546"}'),
 (855, 1, '2015-11-24', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"f6p8njiexjfc4n29liz9sfvapvr96bt9","role":"1","page":"dashboard","input-profile":"Caio-teste","input-avatar":"teste","input-background":"bg-yellow","1-input-enable":"A","1-input-profiles":"BarackObama, neymarjr","1-input-tags":"Teste, futebol, usa","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","_":"1448408425546"}'),
 (856, 1, '2015-11-24', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"f6p8njiexjfc4n29liz9sfvapvr96bt9","role":"1","page":"dashboard","input-profile":"Caio-teste","input-avatar":"teste","input-background":"bg-yellow","1-input-enable":"A","1-input-profiles":"BarackObama, neymarjr","1-input-tags":"Teste, futebol, usa","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","_":"1448408425595"}'),
-(857, 1, '2015-11-24', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"f6p8njiexjfc4n29liz9sfvapvr96bt9","role":"1","page":"dashboard","input-profile":"Caio-teste","input-avatar":"teste","input-background":"bg-yellow","1-input-enable":"A","1-input-profiles":"BarackObama, neymarjr","1-input-tags":"Teste, futebol, usa","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","_":"1448408425597"}');
+(857, 1, '2015-11-24', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"f6p8njiexjfc4n29liz9sfvapvr96bt9","role":"1","page":"dashboard","input-profile":"Caio-teste","input-avatar":"teste","input-background":"bg-yellow","1-input-enable":"A","1-input-profiles":"BarackObama, neymarjr","1-input-tags":"Teste, futebol, usa","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","_":"1448408425597"}'),
+(858, 1, '2015-11-27', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"530d6f4z27c766rzkoicywxlp11nhfr","role":"1","page":"dashboard"}'),
+(859, 1, '2015-11-27', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"530d6f4z27c766rzkoicywxlp11nhfr","role":"1","page":"dashboard","_":"1448632190757"}'),
+(860, 1, '2015-11-27', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"530d6f4z27c766rzkoicywxlp11nhfr","role":"1","page":"dashboard","_":"1448632190758"}'),
+(861, 1, '2015-11-27', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"530d6f4z27c766rzkoicywxlp11nhfr","role":"1","page":"dashboard","_":"1448632190759"}'),
+(862, 1, '2015-11-27', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"dashboard"}'),
+(863, 1, '2015-11-27', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"dashboard","_":"1448632197433"}'),
+(864, 1, '2015-11-27', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"dashboard","_":"1448632197434"}'),
+(865, 1, '2015-11-27', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"dashboard","_":"1448632197435"}'),
+(866, 1, '2015-11-27', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"dashboard","_":"1448632197437"}'),
+(867, 1, '2015-11-27', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"dashboard","_":"1448632197439"}'),
+(868, 1, '2015-11-27', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"dashboard","input-profile":"Barack Obama","input-avatar":"https://pbs.twimg.com/profile_images/451007105391022080/iu1f7brY_400x400.png","input-background":"bg-blue","1-input-enable":"A","1-input-profiles":"BarackObama","1-input-tags":"","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","_":"1448632197444"}'),
+(869, 1, '2015-11-27', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"dashboard","input-profile":"Barack Obama","input-avatar":"https://pbs.twimg.com/profile_images/451007105391022080/iu1f7brY_400x400.png","input-background":"bg-blue","1-input-enable":"A","1-input-profiles":"BarackObama","1-input-tags":"","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","_":"1448632197443"}'),
+(870, 1, '2015-11-27', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"dashboard","input-profile":"Barack Obama","input-avatar":"https://pbs.twimg.com/profile_images/451007105391022080/iu1f7brY_400x400.png","input-background":"bg-blue","1-input-enable":"A","1-input-profiles":"BarackObama","1-input-tags":"","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","_":"1448632197446"}'),
+(871, 1, '2015-11-27', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"dashboard","input-profile":"Barack Obama","input-avatar":"https://pbs.twimg.com/profile_images/451007105391022080/iu1f7brY_400x400.png","input-background":"bg-blue","1-input-enable":"A","1-input-profiles":"BarackObama","1-input-tags":"","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","_":"1448632197448"}'),
+(872, 1, '2015-11-27', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"dashboard","input-profile":"PanicAtTheDisco","input-avatar":"https://pbs.twimg.com/profile_images/657032625014611968/amlZneu2_400x400.jpg","input-background":"bg-yellow","1-input-enable":"A","1-input-profiles":"PanicAtTheDisco","1-input-tags":"","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","_":"1448632197454"}'),
+(873, 1, '2015-11-27', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"dashboard","input-profile":"PanicAtTheDisco","input-avatar":"https://pbs.twimg.com/profile_images/657032625014611968/amlZneu2_400x400.jpg","input-background":"bg-yellow","1-input-enable":"A","1-input-profiles":"PanicAtTheDisco","1-input-tags":"","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","_":"1448632197453"}'),
+(874, 1, '2015-11-27', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"dashboard","input-profile":"PanicAtTheDisco","input-avatar":"https://pbs.twimg.com/profile_images/657032625014611968/amlZneu2_400x400.jpg","input-background":"bg-yellow","1-input-enable":"A","1-input-profiles":"PanicAtTheDisco","1-input-tags":"","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","_":"1448632197456"}'),
+(875, 1, '2015-11-27', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"dashboard","input-profile":"PanicAtTheDisco","input-avatar":"https://pbs.twimg.com/profile_images/657032625014611968/amlZneu2_400x400.jpg","input-background":"bg-yellow","1-input-enable":"A","1-input-profiles":"PanicAtTheDisco","1-input-tags":"","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","_":"1448632197455"}'),
+(876, 1, '2015-11-27', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"dashboard","input-profile":"PanicAtTheDisco","input-avatar":"https://pbs.twimg.com/profile_images/657032625014611968/amlZneu2_400x400.jpg","input-background":"bg-yellow","1-input-enable":"A","1-input-profiles":"PanicAtTheDisco","1-input-tags":"","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","_":"1448632197463"}'),
+(877, 1, '2015-11-27', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"dashboard","input-profile":"PanicAtTheDisco","input-avatar":"https://pbs.twimg.com/profile_images/657032625014611968/amlZneu2_400x400.jpg","input-background":"bg-yellow","1-input-enable":"A","1-input-profiles":"PanicAtTheDisco","1-input-tags":"","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","_":"1448632197465"}'),
+(878, 1, '2015-11-27', 0, 'auth', '{"service":"auth","url":"pages/mensagens.html","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"dashboard","input-profile":"PanicAtTheDisco","input-avatar":"https://pbs.twimg.com/profile_images/657032625014611968/amlZneu2_400x400.jpg","input-background":"bg-yellow","1-input-enable":"A","1-input-profiles":"PanicAtTheDisco","1-input-tags":"","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","_":"1448632197473"}'),
+(879, 1, '2015-11-27', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"dashboard","input-profile":"PanicAtTheDisco","input-avatar":"https://pbs.twimg.com/profile_images/657032625014611968/amlZneu2_400x400.jpg","input-background":"bg-yellow","1-input-enable":"A","1-input-profiles":"PanicAtTheDisco","1-input-tags":"","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","_":"1448632197480"}'),
+(880, 1, '2015-11-27', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"dashboard","input-profile":"PanicAtTheDisco","input-avatar":"https://pbs.twimg.com/profile_images/657032625014611968/amlZneu2_400x400.jpg","input-background":"bg-yellow","1-input-enable":"A","1-input-profiles":"PanicAtTheDisco","1-input-tags":"","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","_":"1448632197482"}'),
+(881, 1, '2015-11-27', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles"}'),
+(882, 1, '2015-11-27', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448642981275"}'),
+(883, 1, '2015-11-27', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448642981276"}'),
+(884, 1, '2015-11-27', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448642981277"}'),
+(885, 1, '2015-11-27', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448642981279"}'),
+(886, 1, '2015-11-27', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448642981281"}'),
+(887, 1, '2015-11-27', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles"}'),
+(888, 1, '2015-11-27', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448643188236"}'),
+(889, 1, '2015-11-27', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448643188238"}'),
+(890, 1, '2015-11-27', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448643188237"}'),
+(891, 1, '2015-11-27', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448643188240"}'),
+(892, 1, '2015-11-27', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448643188242"}'),
+(893, 1, '2015-11-27', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles"}'),
+(894, 1, '2015-11-27', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448643205907"}'),
+(895, 1, '2015-11-27', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448643205908"}'),
+(896, 1, '2015-11-27', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448643205909"}'),
+(897, 1, '2015-11-27', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448643205911"}'),
+(898, 1, '2015-11-27', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448643205913"}'),
+(899, 1, '2015-11-27', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448643205921"}'),
+(900, 1, '2015-11-27', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448643205923"}'),
+(901, 1, '2015-11-27', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448643205931"}'),
+(902, 1, '2015-11-27', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448643205933"}'),
+(903, 1, '2015-11-27', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448643205935"}'),
+(904, 1, '2015-11-27', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448643205937"}'),
+(905, 1, '2015-11-27', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448643205940"}'),
+(906, 1, '2015-11-27', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448643205942"}'),
+(907, 1, '2015-11-27', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"z5n77eoj7rtl0udihh1znd35jhyta9k9","role":"1","page":"profiles","_":"1448643205955"}'),
+(908, 1, '2015-12-04', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"dashboard"}'),
+(909, 1, '2015-12-04', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"dashboard","_":"1449249671362"}'),
+(910, 1, '2015-12-04', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"dashboard","_":"1449249671364"}'),
+(911, 1, '2015-12-04', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"dashboard","_":"1449249671363"}'),
+(912, 1, '2015-12-04', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"dashboard","_":"1449249671366"}'),
+(913, 1, '2015-12-04', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"dashboard","_":"1449249671368"}'),
+(914, 1, '2015-12-04', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"profiles"}'),
+(915, 1, '2015-12-04', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"profiles","_":"1449251620732"}'),
+(916, 1, '2015-12-04', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"profiles","_":"1449251620733"}'),
+(917, 1, '2015-12-04', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"profiles","_":"1449251620734"}'),
+(918, 1, '2015-12-04', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"profiles","_":"1449251620736"}'),
+(919, 1, '2015-12-04', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"profiles","_":"1449251620738"}'),
+(920, 1, '2015-12-04', 0, 'profiles', '{"service":"profiles","crud":"create","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"profiles","input-profile":"BTG","input-avatar":"https://pbs.twimg.com/profile_images/557984705098694656/Co273HZ-_400x400.jpeg","input-background":"bg-blue","1-input-enable":"A","1-input-profiles":"btg","1-input-tags":"","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","3-input-enable":"A","3-input-profiles":"","3-input-tags":"BTG, Andru00e9 Esteves, Lava-Jato","_":"1449251620750"}'),
+(921, 1, '2015-12-04', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"profiles","input-profile":"BTG","input-avatar":"https://pbs.twimg.com/profile_images/557984705098694656/Co273HZ-_400x400.jpeg","input-background":"bg-blue","1-input-enable":"A","1-input-profiles":"btg","1-input-tags":"","2-input-enable":"I","2-input-profiles":"","2-input-tags":"","3-input-enable":"A","3-input-profiles":"","3-input-tags":"BTG, Andru00e9 Esteves, Lava-Jato","_":"1449251620751"}'),
+(922, 1, '2015-12-04', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"profiles"}'),
+(923, 1, '2015-12-04', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"profiles","_":"1449251818045"}'),
+(924, 1, '2015-12-04', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"profiles","_":"1449251818047"}'),
+(925, 1, '2015-12-04', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"profiles","_":"1449251818046"}'),
+(926, 1, '2015-12-04', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"profiles","_":"1449251818049"}'),
+(927, 1, '2015-12-04', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"et4mjb34xfgycik9z5vacepsa038r529","role":"1","page":"profiles","_":"1449251818051"}');
 
 -- --------------------------------------------------------
 
@@ -1299,7 +1312,7 @@ INSERT INTO `sys_log` (`id`, `id_user`, `date`, `id_page`, `action`, `data`) VAL
 
 DROP TABLE IF EXISTS `sys_messages`;
 CREATE TABLE IF NOT EXISTS `sys_messages` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `id_user_to` int(11) NOT NULL,
   `id_user_from` int(11) NOT NULL,
   `content` text NOT NULL,
@@ -1352,7 +1365,7 @@ INSERT INTO `sys_pages` (`id`, `name`, `url`, `icon`) VALUES
 
 DROP TABLE IF EXISTS `sys_payment`;
 CREATE TABLE IF NOT EXISTS `sys_payment` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `name` varchar(15) NOT NULL,
   `type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1365,7 +1378,7 @@ CREATE TABLE IF NOT EXISTS `sys_payment` (
 
 DROP TABLE IF EXISTS `sys_roles`;
 CREATE TABLE IF NOT EXISTS `sys_roles` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `name` varchar(25) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
@@ -1424,7 +1437,7 @@ CREATE TABLE IF NOT EXISTS `sys_signature` (
 
 DROP TABLE IF EXISTS `sys_users`;
 CREATE TABLE IF NOT EXISTS `sys_users` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `username` varchar(14) DEFAULT NULL,
   `email` varchar(150) NOT NULL,
   `password` varchar(14) DEFAULT NULL,
@@ -1438,7 +1451,7 @@ CREATE TABLE IF NOT EXISTS `sys_users` (
 --
 
 INSERT INTO `sys_users` (`id`, `username`, `email`, `password`, `token`, `status`, `role`) VALUES
-(1, 'caiomelzer', 'melzer.caio@gmail.com', 'mewtwo', 'f6p8njiexjfc4n29liz9sfvapvr96bt9', 'A', 1),
+(1, 'caiomelzer', 'melzer.caio@gmail.com', 'mewtwo', 'et4mjb34xfgycik9z5vacepsa038r529', 'A', 1),
 (2, 'andrecr12', 'andrecr12@hotmail.com', 'teste', '62gu9sikpstx4jzb5by4s', 'A', 1),
 (3, 'reginaldomelo', 'reginaldo@teste.com', 'teste', NULL, 'A', 1),
 (4, 'admin', 'admin@admin.com', 'teste', NULL, 'A', 1);
@@ -1515,8 +1528,10 @@ CREATE TABLE IF NOT EXISTS `vw_app_profiles` (
 ,`date` datetime
 ,`user_id` int(11)
 ,`status` varchar(1)
+,`qtd_hashtag` bigint(21)
+,`qtd_profiles` bigint(21)
+,`content` bigint(21)
 );
-
 -- --------------------------------------------------------
 
 --
@@ -1530,7 +1545,6 @@ CREATE TABLE IF NOT EXISTS `vw_chat_last_messages` (
 ,`id_user_to` int(11)
 ,`content` text
 );
-
 -- --------------------------------------------------------
 
 --
@@ -1544,7 +1558,6 @@ CREATE TABLE IF NOT EXISTS `vw_chat_last_messages_andre` (
 ,`date` datetime
 ,`rank` bigint(22)
 );
-
 -- --------------------------------------------------------
 
 --
@@ -1561,7 +1574,6 @@ CREATE TABLE IF NOT EXISTS `vw_sys_chat` (
 ,`avatar_user_to` text
 ,`avatar_user_from` text
 );
-
 -- --------------------------------------------------------
 
 --
@@ -1582,7 +1594,6 @@ CREATE TABLE IF NOT EXISTS `vw_sys_users` (
 ,`avatar` text
 ,`company` varchar(100)
 );
-
 -- --------------------------------------------------------
 
 --
@@ -1590,7 +1601,7 @@ CREATE TABLE IF NOT EXISTS `vw_sys_users` (
 --
 DROP TABLE IF EXISTS `vw_app_profiles`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_app_profiles` AS select `app_profiles`.`background` AS `background`,`app_profiles`.`id` AS `id`,`app_profiles`.`avatar` AS `avatar`,`app_profiles`.`profile` AS `profile`,`app_profiles`.`date` AS `date`,`vw_sys_users`.`id` AS `user_id`,`app_profiles_active`.`status` AS `status` from (((`app_profiles` join `app_profiles_user` on((`app_profiles_user`.`id_profile` = `app_profiles`.`id`))) join `vw_sys_users` on((`vw_sys_users`.`id` = `app_profiles_user`.`id_user`))) join `app_profiles_active` on((`app_profiles`.`id` = `app_profiles_active`.`id_profile`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_app_profiles` AS select `app_profiles`.`background` AS `background`,`app_profiles`.`id` AS `id`,`app_profiles`.`avatar` AS `avatar`,`app_profiles`.`profile` AS `profile`,`app_profiles`.`date` AS `date`,`vw_sys_users`.`id` AS `user_id`,`app_profiles_active`.`status` AS `status`,(select count(1) from `app_services_parameters` where ((`app_services_parameters`.`type` = 'H') and (`app_services_parameters`.`id_profile` = `app_profiles`.`id`))) AS `qtd_hashtag`,(select count(1) from `app_services_parameters` where ((`app_services_parameters`.`type` = 'P') and (`app_services_parameters`.`id_profile` = `app_profiles`.`id`))) AS `qtd_profiles`,(select distinct count(1) from (`app_services_parameters` join `app_services_content` on((`app_services_content`.`username` = `app_services_parameters`.`content`))) where (`app_services_parameters`.`id_profile` = `app_profiles`.`id`)) AS `content` from ((((`app_profiles` join `app_profiles_user` on((`app_profiles_user`.`id_profile` = `app_profiles`.`id`))) join `vw_sys_users` on((`vw_sys_users`.`id` = `app_profiles_user`.`id_user`))) join `app_profiles_active` on((`app_profiles`.`id` = `app_profiles_active`.`id_profile`))) join `app_services_parameters` on((`app_profiles`.`id` = `app_services_parameters`.`id_profile`))) group by `app_profiles`.`background`,`app_profiles`.`id`,`app_profiles`.`avatar`,`app_profiles`.`profile`,`app_profiles`.`date`,`vw_sys_users`.`id`,`app_profiles_active`.`status`,`app_services_parameters`.`type`;
 
 -- --------------------------------------------------------
 
@@ -1636,73 +1647,73 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- Indexes for table `app_profiles`
 --
 ALTER TABLE `app_profiles`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `app_services`
 --
 ALTER TABLE `app_services`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `app_services_content`
 --
 ALTER TABLE `app_services_content`
-  ADD PRIMARY KEY (`url`);
+ ADD PRIMARY KEY (`url`);
 
 --
 -- Indexes for table `sys_log`
 --
 ALTER TABLE `sys_log`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sys_messages`
 --
 ALTER TABLE `sys_messages`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sys_pages`
 --
 ALTER TABLE `sys_pages`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sys_payment`
 --
 ALTER TABLE `sys_payment`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sys_roles`
 --
 ALTER TABLE `sys_roles`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sys_roles_pages`
 --
 ALTER TABLE `sys_roles_pages`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sys_signature`
 --
 ALTER TABLE `sys_signature`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sys_users`
 --
 ALTER TABLE `sys_users`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sys_users_roles`
 --
 ALTER TABLE `sys_users_roles`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1712,37 +1723,37 @@ ALTER TABLE `sys_users_roles`
 -- AUTO_INCREMENT for table `app_profiles`
 --
 ALTER TABLE `app_profiles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=56;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=60;
 --
 -- AUTO_INCREMENT for table `app_services`
 --
 ALTER TABLE `app_services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `sys_log`
 --
 ALTER TABLE `sys_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=858;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=928;
 --
 -- AUTO_INCREMENT for table `sys_messages`
 --
 ALTER TABLE `sys_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `sys_payment`
 --
 ALTER TABLE `sys_payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `sys_roles`
 --
 ALTER TABLE `sys_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `sys_users`
 --
 ALTER TABLE `sys_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --
@@ -1751,7 +1762,7 @@ ALTER TABLE `sys_users`
 -- Constraints for table `sys_signature`
 --
 ALTER TABLE `sys_signature`
-  ADD CONSTRAINT `sys_signature_ibfk_1` FOREIGN KEY (`id`) REFERENCES `sys_users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `sys_signature_ibfk_1` FOREIGN KEY (`id`) REFERENCES `sys_users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
