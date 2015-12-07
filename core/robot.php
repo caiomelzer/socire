@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 global $conn;
 
 //INCLUDE FILES
@@ -60,10 +63,9 @@ if(isset($_GET['service'])){
 			$service_id = getServiceId($service);
 			$profilesList = getServicesProfiles($service_id);
 			for($a=0;$a<sizeof($profilesList);$a++){
-				$url = 'http://localhost/rep/CaUP/core/api/twitter/api/tweet.php?count=10&username='.$profilesList[$a];
+				$url = 'http://localhost/rep/CaUP/core/api/twitter/api/tweet.php?username='.$profilesList[$a];
 				$unparsed_json = file_get_contents($url);
 				$json_object = json_decode($unparsed_json);
-				echo $url;
 				for($i=0;$i<sizeof($json_object);$i++){
 					$dateConvert = explode(' ',$json_object[$i]->created_at);
 					$url = 'http://localhost/rep/CaUP/core/api/sentimental/run/index.php?text='.utf8_decode($json_object[$i]->text);
@@ -72,7 +74,7 @@ if(isset($_GET['service'])){
 					$dateConverted = $dateConvert[5].'-'.date("m", strtotime($dateConvert[1])).'-'.$dateConvert[2].' '.$dateConvert[3];
 					$params = array('text' => utf8_decode($json_object[$i]->text));
 					$sentiment = call_api('sentiment', $params);
-					$sql = "INSERT INTO `app_services_content`(`username`, `content`, `location`, `url`, `service`, `lang`, `date`, `api_snt_neg`, `api_snt_pos`, `api_snt_neu`, `api_snt_polatiry`, `api_anl_pnt` ,`api_anl_polarity`) VALUES ('".$json_object[$i]->user->screen_name."','".$json_object[$i]->text."','".$json_object[$i]->user->location."','".utf8_encode($json_object[$i]->id)."',".$service_id.",'".$json_object[$i]->lang."','".$dateConverted."','".$parsed_score->data->score->neg."','".$parsed_score->data->score->pos."','".$parsed_score->data->score->neu."','".$parsed_score->data->dominant."','".$sentiment->polarity_confidence."','".substr($sentiment->polarity, 0,3)."')";
+					$sql = "INSERT INTO `app_services_content`(`username`, `content`, `location`, `url`, `service`, `lang`, `date`, `api_snt_neg`, `api_snt_pos`, `api_snt_neu`, `api_snt_polarity`, `api_anl_pnt` ,`api_anl_polarity`) VALUES ('".$json_object[$i]->user->screen_name."','".$json_object[$i]->text."','".$json_object[$i]->user->location."','".utf8_encode($json_object[$i]->id)."',".$service_id.",'".$json_object[$i]->lang."','".$dateConverted."','".$parsed_score->data->score->neg."','".$parsed_score->data->score->pos."','".$parsed_score->data->score->neu."','".$parsed_score->data->dominant."','".$sentiment->polarity_confidence."','".substr($sentiment->polarity, 0,3)."')";
 					if(mysqli_query($conn, $sql)){
 				    }
 				}
