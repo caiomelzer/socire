@@ -1,0 +1,124 @@
+<?php
+	if(isset($_GET['crud'])){
+		$crud = $_GET['crud'];
+		switch ($crud) {
+			case 'create':
+				if(isset($_GET['input-profile']) && isset($_GET['input-avatar']) && isset($_GET['input-background'])){
+					$sql = "INSERT INTO `app_profiles`(`profile`, `avatar`, `background`, `date`) VALUES ('".$_GET['input-profile']."','".$_GET['input-avatar']."','".$_GET['input-background']."',NOW())";
+					if(mysqli_query($conn, $sql)) {
+						$profile_id = mysqli_insert_id($conn);
+						$sql = "INSERT INTO `app_profiles_active`(`id_profile`, `status`) VALUES ('".$profile_id."','A')";
+						if (mysqli_query($conn, $sql)) {
+							$profile_user = getUserId($user);
+							$sql = "INSERT INTO `app_profiles_user`(`id_profile`, `id_user`) VALUES ('".$profile_id."','".$profile_user."')";
+							if (mysqli_query($conn, $sql)) {
+								for($i=0; $i<sizeof($_GET);$i++){
+									if(isset($_GET[$i.'-input-enable'])){
+										$sql = "INSERT INTO `app_profile_services` (`id_service`, `id_profile`, `status`) VALUES (".$i.",'".getUserId($user)."','".$_GET[$i.'-input-enable']."')";
+										if(mysqli_query($conn, $sql)) {
+
+									    }
+									    else{
+									    	$response->message = $errors->error_while_creating;
+									    }	
+									    if($_GET[$i.'-input-tags'] != ''){
+										    $tags = explode(',',$_GET[$i.'-input-tags']);
+										    for($v=0; $v<sizeof($tags);$v++){
+										    	$sql = "INSERT INTO `app_services_parameters`(`id_service`, `type`, `content`, `id_profile`) VALUES (".$i.",'H','".$tags[$v]."','".$profile_id."')";
+												if(mysqli_query($conn, $sql)) {
+
+											    }
+											    else{
+											    	$response->message = $errors->error_while_creating;
+											    }
+										    }
+										}
+										if($_GET[$i.'-input-profiles'] != ''){
+										    $profiles = explode(',',$_GET[$i.'-input-profiles']);
+										    for($v=0; $v<sizeof($profiles);$v++){
+										    	$sql = "INSERT INTO `app_services_parameters`(`id_service`, `type`, `content`, `id_profile`) VALUES (".$i.",'P','".$profiles[$v]."','".$profile_id."')";
+												if(mysqli_query($conn, $sql)){
+
+											    }
+											    else{
+											    	$response->message = $errors->error_while_creating;
+											    }
+										    }
+										}    
+									}
+									
+								}
+								$response->success = true;
+							}
+							else{
+								$response->message = $errors->error_while_creating;
+							}
+						}
+						else{
+							$response->message = $errors->error_while_creating;
+						}
+					} 
+					else {
+					    $response->message = $errors->error_while_creating;
+					}
+				}
+				else{
+					$response->message = $errors->service_crud_missing_parameters;
+				}	
+				break;
+			case 'read':
+				$sql = "SELECT * FROM vw_app_profiles WHERE user_id = '".getUserId($user)."'";
+				$result = mysqli_query($conn, $sql);	
+				if(mysqli_num_rows($result) > 0) {
+					$profile = array();
+					$i=0;
+					while($row = mysqli_fetch_assoc($result)){
+						$profile[$i]['profile'] = $row['profile'];
+						$profile[$i]['avatar'] = $row['avatar'];
+						$profile[$i]['id'] = $row['id'];
+						$profile[$i]['background'] = $row['background'];
+						$profile[$i]['qtd_profiles'] = $row['qtd_profiles'];
+						$profile[$i]['qtd_hashtag'] = $row['qtd_hashtag'];
+						$profile[$i]['content'] = $row['content'];
+						$i++;
+					}
+					$response->profile = $profile;
+					$response->success = true;
+				} 
+				break;
+			case 'delete':
+				if(isset($_GET['profile'])){
+					$profile_id = $_GET['profile'];
+					$sql = "DELETE FROM `app_profiles` WHERE `id` = '".$profile_id."'";
+					if(mysqli_query($conn, $sql)) {
+						$sql = "DELETE FROM `app_profile_services` WHERE `id_profile` = '".$profile_id."'";
+						if(mysqli_query($conn, $sql)) {
+							$sql = "DELETE FROM `app_profile_parameters` WHERE `id_profile` = '".$profile_id."'";
+							if(mysqli_query($conn, $sql)) {
+								$response->success = true;
+						    }
+						    else{
+						    	$response->message = $errors->error_while_deleting;
+						    }
+					    }
+					    else{
+					    	$response->message = $errors->error_while_deleting;
+					    }	
+				    }
+				    else{
+				    	$response->message = $errors->error_while_deleting;
+				    }
+				}
+			    else{
+			    	$response->message = $errors->error_while_deleting;
+			    }    	
+				break;
+			default:
+				$response->message = $errors->service_crud_undefined;
+				break;
+		}
+	}
+	else{
+		$response->message = $errors->service_crud_missing;
+	}
+?>	

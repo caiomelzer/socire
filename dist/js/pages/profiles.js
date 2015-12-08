@@ -10,8 +10,12 @@ var profiles = {
 	        }, data),
 	        success: function(res){
 	            var response = JSON.parse(res);
+	            $('#modal-profile').modal('hide');
 	            if(response.success){
-	            	$('#modal-profile').modal('hide');
+	            	showSuccessMessage('profiles');
+	            }
+	            else{
+	            	showErrorMessage('profiles');
 	            }
 	        }
 	    })
@@ -46,6 +50,30 @@ var profiles = {
 	        return {success: false};
 	    });
 	},
+	delete: function(id){
+		$.ajax({
+	        url: app.config.services,
+	        data: $.extend({
+	            service: 'profiles',
+	            crud: 'delete',
+	            profile: id
+	        }, app.config.userData),
+	        success: function(res){
+	            var response = JSON.parse(res);
+	            if(response.success){
+	            	$('#'+id).parent().parent().parent().remove();
+	            	showSuccessMessage('profiles');
+				}
+				else{
+					showErrorMessage('profiles');
+				}
+	        }
+	    })
+	    .fail( function(e){
+	        return {success: false};
+	    });
+	    profiles.read();
+	},
 	listServices: function(){
 		$.ajax({
 	        url: app.config.social,
@@ -77,8 +105,17 @@ var profiles = {
 $(function($){
 	profiles.read();
 	profiles.listServices();
-	$(document).on('click','button[id="save-profile"]', function(){
+	$(document)
+	.on('click','button[id="save-profile"]', function(){
 		profiles.create();
+	})
+	.on('click','button[data-action="remove"]', function(e){
+		var id = $(this).attr('data-profile-id');
+		e.preventDefault();
+		$('#confirm-delete').on('click', function(){
+			profiles.delete(id);
+			$('#modal-confirm').modal('hide');
+		});
 	});
 });  
 

@@ -119,13 +119,37 @@ function loadHeader(params){
     $('.breadcrumb .active').text(params.title);
 }
 
+function showSuccessMessage(text){
+    var message = {
+        type: 'bg-green',
+        text: text
+    };
+    loadMessage(message);
+}
+
+function showAlertMessage(text){
+    var message = {
+        type: 'bg-yellow',
+        text: text
+    };
+    loadMessage(message);
+}
+
+function showErrorMessage(text){
+    var message = {
+        type: 'bg-red',
+        text: text
+    };
+    loadMessage(message);
+}
+
 function loadMessage(message){
     console.info('start message', message);
     $('#message-content .box-body .alert').addClass(message.type);
     $('#message-content .box-body .alert h4').before($('#message-content .row .alert h4 i')).text(message.text);
     $('#message-content').removeClass('hidden'); 
     setTimeout(function(){
-        $('#message-content').fadeOut()
+        $('#message-content').addClass('hidden');
     }, app.config.messageHideIn);
 }
 

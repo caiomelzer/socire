@@ -4,8 +4,8 @@
       <h3 class="widget-user-username">{{profile}}</h3>
       <h5 class="widget-user-desc"></h5>
       <span>
-        <button type="button"  data-widget="edit"><i class="fa fa-edit"></i></button>
-        <button type="button" data-widget="remove"><i class="fa fa-times"></i></button>
+        <button type="button" data-widget="edit" data-profile-id="{{id}}"><i class="fa fa-edit"></i></button>
+        <button type="button" data-action="remove" data-toggle="modal" data-target="#modal-confirm" data-profile-id="{{id}}"><i class="fa fa-times"></i></button>
       </span>
     </div>
     <div class="widget-user-image">

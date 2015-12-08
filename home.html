@@ -39,6 +39,19 @@
     <![endif]-->
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
+    <div class="modal fade" id="modal-confirm">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            Are you sure?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" id="confirm-delete">Confirm</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     <div class="wrapper">
 
       <header class="main-header">
@@ -180,7 +193,7 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                  <span class="hidden-xs">Vidraçaria Pereira</span>
+                  <span class="hidden-xs"></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
