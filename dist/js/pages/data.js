@@ -45,7 +45,7 @@ var data = {
 			var reader = new FileReader();
 			reader.onload = function(e){
 				var csvval=e.target.result.split("\n");
-				var csvvalue=csvval[0].split(",");
+				var csvvalue=csvval[0].split(';');
 				var inputrad="";
 				for(var i=0;i<csvvalue.length;i++){
 					data.previewStructure.push(csvvalue[i]);
@@ -56,7 +56,7 @@ var data = {
 				if(csvval.length>1){
 					var qtd = csvval.length>4 ? 4 : csvval.length;
 					for(var b=1;b<qtd;b++){
-						csvvalue=csvval[b].split(",");
+						csvvalue=csvval[b].split(';');
 						for(var i=0;i<csvvalue.length;i++){
 							var inputrad=inputrad+"<td>"+csvvalue[i]+"</td>";
 						}
