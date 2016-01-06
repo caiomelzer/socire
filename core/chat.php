@@ -25,22 +25,22 @@ function auth($user, $token, $role){
 }
 
 //CORE
-if(isset($_GET['user'])){
-	if(isset($_GET['token'])){
-		if(isset($_GET['role'])){
-			$user = $_GET['user'];
-			$token = $_GET['token'];
-			$role = $_GET['role'];
+if(isset($_POST['user'])){
+	if(isset($_POST['token'])){
+		if(isset($_POST['role'])){
+			$user = $_POST['user'];
+			$token = $_POST['token'];
+			$role = $_POST['role'];
 			if(auth($user, $token, $role)){
-				if(isset($_GET['service'])){
-					$service = $_GET['service'];
+				if(isset($_POST['service'])){
+					$service = $_POST['service'];
 					global $conn;
 					switch ($service) {
 						case 'send':
-							if(isset($_GET['user_from'])){
-								$user_from = $_GET['user_from'];
-								if(isset($_GET['content'])){
-									$content = $_GET['content'];
+							if(isset($_POST['user_from'])){
+								$user_from = $_POST['user_from'];
+								if(isset($_POST['content'])){
+									$content = $_POST['content'];
 									$sql = "SELECT id FROM sys_users WHERE username = '".$user."'";
 									$result = mysqli_query($conn, $sql);	
 									if(mysqli_num_rows($result) > 0) {
@@ -70,8 +70,8 @@ if(isset($_GET['user'])){
 							}
 							break;
 						case 'read':
-							if(isset($_GET['user_from'])){
-								$user_from = $_GET['user_from'];
+							if(isset($_POST['user_from'])){
+								$user_from = $_POST['user_from'];
 								$sql = "SELECT id FROM sys_users WHERE username = '".$user."'";
 								$result = mysqli_query($conn, $sql);	
 								if(mysqli_num_rows($result) > 0) {

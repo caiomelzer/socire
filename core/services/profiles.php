@@ -1,10 +1,10 @@
 <?php
-	if(isset($_GET['crud'])){
-		$crud = $_GET['crud'];
+	if(isset($_POST['crud'])){
+		$crud = $_POST['crud'];
 		switch ($crud) {
 			case 'create':
-				if(isset($_GET['input-profile']) && isset($_GET['input-avatar']) && isset($_GET['input-background'])){
-					$sql = "INSERT INTO `app_profiles`(`profile`, `avatar`, `background`, `date`) VALUES ('".$_GET['input-profile']."','".$_GET['input-avatar']."','".$_GET['input-background']."',NOW())";
+				if(isset($_POST['input-profile']) && isset($_POST['input-avatar']) && isset($_POST['input-background'])){
+					$sql = "INSERT INTO `app_profiles`(`profile`, `avatar`, `background`, `date`) VALUES ('".$_POST['input-profile']."','".$_POST['input-avatar']."','".$_POST['input-background']."',NOW())";
 					if(mysqli_query($conn, $sql)) {
 						$profile_id = mysqli_insert_id($conn);
 						$sql = "INSERT INTO `app_profiles_active`(`id_profile`, `status`) VALUES ('".$profile_id."','A')";
@@ -12,17 +12,17 @@
 							$profile_user = getUserId($user);
 							$sql = "INSERT INTO `app_profiles_user`(`id_profile`, `id_user`) VALUES ('".$profile_id."','".$profile_user."')";
 							if (mysqli_query($conn, $sql)) {
-								for($i=0; $i<sizeof($_GET);$i++){
-									if(isset($_GET[$i.'-input-enable'])){
-										$sql = "INSERT INTO `app_profile_services` (`id_service`, `id_profile`, `status`) VALUES (".$i.",'".getUserId($user)."','".$_GET[$i.'-input-enable']."')";
+								for($i=0; $i<sizeof($_POST);$i++){
+									if(isset($_POST[$i.'-input-enable'])){
+										$sql = "INSERT INTO `app_profile_services` (`id_service`, `id_profile`, `status`) VALUES (".$i.",'".getUserId($user)."','".$_POST[$i.'-input-enable']."')";
 										if(mysqli_query($conn, $sql)) {
 
 									    }
 									    else{
 									    	$response->message = $errors->error_while_creating;
 									    }	
-									    if($_GET[$i.'-input-tags'] != ''){
-										    $tags = explode(',',$_GET[$i.'-input-tags']);
+									    if($_POST[$i.'-input-tags'] != ''){
+										    $tags = explode(',',$_POST[$i.'-input-tags']);
 										    for($v=0; $v<sizeof($tags);$v++){
 										    	$sql = "INSERT INTO `app_services_parameters`(`id_service`, `type`, `content`, `id_profile`) VALUES (".$i.",'H','".$tags[$v]."','".$profile_id."')";
 												if(mysqli_query($conn, $sql)) {
@@ -33,8 +33,8 @@
 											    }
 										    }
 										}
-										if($_GET[$i.'-input-profiles'] != ''){
-										    $profiles = explode(',',$_GET[$i.'-input-profiles']);
+										if($_POST[$i.'-input-profiles'] != ''){
+										    $profiles = explode(',',$_POST[$i.'-input-profiles']);
 										    for($v=0; $v<sizeof($profiles);$v++){
 										    	$sql = "INSERT INTO `app_services_parameters`(`id_service`, `type`, `content`, `id_profile`) VALUES (".$i.",'P','".$profiles[$v]."','".$profile_id."')";
 												if(mysqli_query($conn, $sql)){
@@ -87,8 +87,8 @@
 				} 
 				break;
 			case 'delete':
-				if(isset($_GET['profile'])){
-					$profile_id = $_GET['profile'];
+				if(isset($_POST['profile'])){
+					$profile_id = $_POST['profile'];
 					$sql = "DELETE FROM `app_profiles` WHERE `id` = '".$profile_id."'";
 					if(mysqli_query($conn, $sql)) {
 						$sql = "DELETE FROM `app_profile_services` WHERE `id_profile` = '".$profile_id."'";

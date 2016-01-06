@@ -3,6 +3,7 @@ var profiles = {
 		var form = $("#form-profile");
 		var data = $.extend(app.config.userData, getFormData(form));
 		$.ajax({
+			type: 'POST',
 	        url: app.config.services,
 	        data: $.extend({
 	            service: 'profiles',
@@ -26,6 +27,7 @@ var profiles = {
 	},
 	read: function(){
 		$.ajax({
+			type: 'POST',
 	        url: app.config.services,
 	        data: $.extend({
 	            service: 'profiles',
@@ -52,6 +54,7 @@ var profiles = {
 	},
 	delete: function(id){
 		$.ajax({
+			type: 'POST',
 	        url: app.config.services,
 	        data: $.extend({
 	            service: 'profiles',
@@ -76,6 +79,7 @@ var profiles = {
 	},
 	listServices: function(){
 		$.ajax({
+			type: 'POST',
 	        url: app.config.social,
 	        data: $.extend({
 	            service: 'listServices'

@@ -19,7 +19,7 @@ function call_api($endpoint, $parameters) {
 	return json_decode($response);
 }
 
-//$params = array('text' => $_GET['text']);
+//$params = array('text' => $_POST['text']);
 //$sentiment = call_api('sentiment', $params);
 //$language = call_api('language', $params);
 

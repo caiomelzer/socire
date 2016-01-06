@@ -25,15 +25,15 @@ function auth($user, $token, $role){
 }
 
 //CORE
-if(isset($_GET['user'])){
-	if(isset($_GET['token'])){
-		if(isset($_GET['role'])){
-			$user = $_GET['user'];
-			$token = $_GET['token'];
-			$role = $_GET['role'];
+if(isset($_POST['user'])){
+	if(isset($_POST['token'])){
+		if(isset($_POST['role'])){
+			$user = $_POST['user'];
+			$token = $_POST['token'];
+			$role = $_POST['role'];
 			if(auth($user, $token, $role)){
-				if(isset($_GET['service'])){
-					$service = $_GET['service'];
+				if(isset($_POST['service'])){
+					$service = $_POST['service'];
 					global $conn;
 					switch ($service) {
 						case 'listServices':

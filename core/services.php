@@ -37,7 +37,7 @@ function getUserId($user){
 
 function setLog($user, $service, $dat){
 	global $conn, $response;
-	$sql = "INSERT INTO `sys_log`(`id_user`, `date`, `id_page`, `action`, `data`) VALUES ('".getUserId($user)."',NOW(),'','".$service."','".json_encode($_GET)."')";
+	$sql = "INSERT INTO `sys_log`(`id_user`, `date`, `id_page`, `action`, `data`) VALUES ('".getUserId($user)."',NOW(),'','".$service."','".json_encode($_POST)."')";
 	if (mysqli_query($conn, $sql)) {
 	    $response->success = true;
 	} 
@@ -47,15 +47,15 @@ function setLog($user, $service, $dat){
 }
 
 //CORE
-if(isset($_GET['user'])){
-	if(isset($_GET['token'])){
-		if(isset($_GET['role'])){
-			$user = $_GET['user'];
-			$token = $_GET['token'];
-			$role = $_GET['role'];
+if(isset($_POST['user'])){
+	if(isset($_POST['token'])){
+		if(isset($_POST['role'])){
+			$user = $_POST['user'];
+			$token = $_POST['token'];
+			$role = $_POST['role'];
 			if(auth($user, $token, $role)){
-				if(isset($_GET['service'])){
-					$service = $_GET['service'];
+				if(isset($_POST['service'])){
+					$service = $_POST['service'];
 					global $conn;
 					switch ($service) {
 						case 'getMenu':
@@ -75,8 +75,8 @@ if(isset($_GET['user'])){
 							} 
 							break;
 						case 'auth':
-							if(isset($_GET['url'])){
-								$page_url = $_GET['url'];
+							if(isset($_POST['url'])){
+								$page_url = $_POST['url'];
 								$sql = "SELECT * FROM sys_pages pages INNER JOIN sys_roles_pages roles ON roles.id_page = pages.id WHERE roles.id_role = '".$role."' AND pages.url = '".$page_url."'";
 								$result = mysqli_query($conn, $sql);	
 								if(mysqli_num_rows($result) > 0) {
@@ -106,7 +106,7 @@ if(isset($_GET['user'])){
 			else{
 				$response->message = $errors->user_token_is_wrong;
 			}
-			setLog($user, $_GET['service'], $response);
+			setLog($user, $_POST['service'], $response);
 		}
 		else{
 			$response->message = $errors->missing_role;
@@ -121,6 +121,5 @@ else{
 }
 
 mysqli_close($conn);
-//PRINT RESULT
 echo json_encode($response, JSON_PRETTY_PRINT);
 ?>

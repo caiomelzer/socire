@@ -1,3 +1,4 @@
+
 var app = {};
 app.config = {};
 
@@ -65,6 +66,7 @@ function loadPage(params){
         loadHeader(params);
         $('#main-content').empty();
         $.ajax({
+            type: 'POST',
             async: false,
             url: params.url,
             success: function(res){
@@ -100,6 +102,7 @@ function loadPage(params){
 
 function failedPage(){
     $.ajax({
+        type: 'POST',
         url: app.config.failedPage.url,
         success: function(res){
             $('#main-content').html(res);
@@ -110,7 +113,7 @@ function failedPage(){
 }
 
 function loadProfile(id, token){
-    console.info('teste');
+    console.info('passed here');
 }
 
 function loadHeader(params){
@@ -173,6 +176,7 @@ function notifications(){
 function checkNotifications(type){
     $.ajax({
         url: app.config.services,
+        type: 'POST',
         data: $.extend({
             service: 'checkNotifications',
             type: type
@@ -199,6 +203,7 @@ function ajaxError(params){
 function generateMenu(){
     $.ajax({
         url: app.config.services,
+        type: 'POST',
         data: $.extend({
             service: 'getMenu'
         }, app.config.userData),
@@ -275,6 +280,7 @@ function getRole(){
 function auth(urlLoad){
     var success = false;
     $.ajax({
+        type: 'POST',
         async: false,
         url: app.config.services,
         data: $.extend({
@@ -312,7 +318,7 @@ function afterLoad(params){
     if(params && params !== undefined && params.message){
         loadMessage(params.message);
     }
-    $(document).trigger('loadPageFinish');
+    $(document).trigger('loadPageFinish');  
 }
 
 function getFormData($form){
@@ -349,6 +355,7 @@ function setGlobalEvents(){
 function loadTemplate(params){
     var tlp;
     $.ajax({
+        type: 'POST',
         async:false,
         url: params.template,
         success: function(res){
@@ -367,6 +374,7 @@ $(function ($) {
     login();
     generateMenu();
     setGlobalEvents();
+    console.info(localStorage);
 });    
 
 

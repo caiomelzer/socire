@@ -3,6 +3,7 @@ var mensagens = {
 	currentUser : '', 
 	send: function(){
 		$.ajax({
+			type: 'POST',
 	        url: app.config.chat,
 	        data: $.extend({
 	            service: 'send',
@@ -23,6 +24,7 @@ var mensagens = {
 	},
 	list: function(){
 		$.ajax({
+			type: 'POST',
 	        url: app.config.chat,
 	        data: $.extend({
 	            service: 'list'
@@ -55,6 +57,7 @@ var mensagens = {
 	},
 	contacts: function(){
 		$.ajax({
+			type: 'POST',
 	        url: app.config.chat,
 	        data: $.extend({
 	            service: 'contacts'
@@ -90,6 +93,7 @@ var mensagens = {
 	},
 	chatRefresh: function(){
 		$.ajax({
+			type: 'POST',
 	        url: app.config.chat,
 	        data: $.extend({
 	            service: 'read',

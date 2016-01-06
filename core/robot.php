@@ -55,8 +55,8 @@ function getServicesHastags($service_id){
 
 
 //CORE
-if(isset($_GET['service'])){
-	$service = $_GET['service'];
+if(isset($_POST['service'])){
+	$service = $_POST['service'];
 	global $conn;
 	switch ($service) {
 		case 'twitter':

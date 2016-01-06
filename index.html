@@ -85,6 +85,7 @@
            $('#submit').on('click', function(){
              $.ajax({
               url: 'core/login.php',
+              type: 'POST',
               data: {
                 email: $('#email').val(),
                 token: setToken(),

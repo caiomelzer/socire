@@ -1,7 +1,7 @@
 <?php
 
 $strings = array(
-	1 => $_GET['text']
+	1 => $_POST['text']
 );
 
 echo '{"data":{';

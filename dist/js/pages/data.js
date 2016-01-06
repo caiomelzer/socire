@@ -1,36 +1,16 @@
 var data = {
 	create: function(){
-		console.info('save', data.previewStructure);
+		var form = $('#form-source');
 		var data = $.extend(app.config.userData, getFormData(form));
 		$.ajax({
-			url: app.config.services,
-	        type: 'POST',
+			type: 'POST',
+	        url: app.config.services,
 	        data: $.extend({
 	            service: 'sources',
 	            crud: 'create'
 	        }, data),
-	        cache: false,
-	        dataType: 'json',
-	        processData: false, 
-	        contentType: false, 
-	        success: function(data, textStatus, jqXHR)
-	        {
-	            if(typeof data.error === 'undefined')
-	            {
-	                // Success so call function to process the form
-	                submitForm(event, data);
-	            }
-	            else
-	            {
-	                // Handle errors here
-	                console.log('ERRORS: ' + data.error);
-	            }
-	        },
-	        error: function(jqXHR, textStatus, errorThrown)
-	        {
-	            // Handle errors here
-	            console.log('ERRORS: ' + textStatus);
-	            // STOP LOADING SPINNER
+	        success: function(){
+	            console.info(dataFm);
 	        }
 		});
 

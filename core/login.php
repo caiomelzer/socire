@@ -63,12 +63,12 @@ function login($email, $password, $token){
 }
 
 //CORE
-if(isset($_GET['email'])){
-	if(isset($_GET['password'])){
-		if(isset($_GET['token'])){
-			$email = $_GET['email'];
-			$token = $_GET['token'];
-			$password = $_GET['password'];
+if(isset($_POST['email'])){
+	if(isset($_POST['password'])){
+		if(isset($_POST['token'])){
+			$email = $_POST['email'];
+			$token = $_POST['token'];
+			$password = $_POST['password'];
 			if(login($email, $password, $token)){
 				$response->success = true;
 			}
