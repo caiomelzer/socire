@@ -26,7 +26,8 @@ $lang = (object) array(
 		'service_crud_undefined' => 'CRUD operation is undefined',
 		'error_while_creating' => 'CRUD, error while trying to create data',
 		'service_crud_missing_parameters' => 'CRUD, missing parameters',
-		'error_while_deleting' => 'CRUD, error while trying to delete data'
+		'error_while_deleting' => 'CRUD, error while trying to delete data',
+		'error_while_upload' => 'Error while upload file'
 	),
 	'messages' => (object) array()
 );

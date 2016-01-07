@@ -94,6 +94,9 @@ if(isset($_POST['user'])){
 						case 'profiles':
 							include_once('services/profiles.php');
 							break;	
+						case 'sources':
+							include_once('services/data.php');
+							break;		
 						default:
 							$response->success = false;
 							break;

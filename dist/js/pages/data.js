@@ -1,19 +1,55 @@
 var data = {
-	create: function(){
-		var form = $('#form-source');
-		var data = $.extend(app.config.userData, getFormData(form));
+	create: function(par){
+		par = JSON.parse(par);
+		var form = $("#form-source");
 		$.ajax({
 			type: 'POST',
 	        url: app.config.services,
 	        data: $.extend({
 	            service: 'sources',
-	            crud: 'create'
-	        }, data),
-	        success: function(){
-	            console.info(dataFm);
+	            crud: 'upload',
+	            extension: par.file.extension,
+	            filename: par.file.name
+	        }, app.config.userData),
+	        success: function(res){
+	            var response = JSON.parse(res);
+	            $('#modal-data').modal('hide');
+	            if(response.success){
+	            	showSuccessMessage('sources');
+	            }
+	            else{
+	            	showErrorMessage('sources');
+	            }
 	        }
-		});
-
+	    })
+	    .fail( function(e){
+	        return {success: false};
+	    });
+	    data.list();
+	},
+	list: function(){
+		console.info('List TO DO');
+		$.ajax({
+			type: 'POST',
+	        url: app.config.services,
+	        data: $.extend({
+	            service: 'sources',
+	            crud: 'list'
+	        }, app.config.userData),
+	        success: function(res){
+	            var response = JSON.parse(res);
+	            if(response.success){
+	            	showSuccessMessage('sources');
+	            }
+	            else{
+	            	showErrorMessage('sources');
+	            }
+	            console.info(res);
+	        }
+	    })
+	    .fail( function(e){
+	        return {success: false};
+	    });
 	},
 	preview: function(e){
 		var ext = $("input#input-file").val().split(".").pop().toLowerCase();
@@ -60,8 +96,20 @@ $(function($){
 	$(document)
 	.on('change','#input-file', function(e){
 		data.preview(e);
-	})
-	.on('click','button[id="save-data"]', function(){
-		data.create();
 	});
+	$("#form-source").on('submit',(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: "core/services/upload.php",
+            type: "POST",
+            data:  new FormData(this),
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(res){
+                console.info('das');
+                data.create(res);
+            }           
+       });
+    }));
 }); 

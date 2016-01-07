@@ -1,7 +1,6 @@
 <?php
 global $conn;
 
-
 //INCLUDE FILES
 include_once('lang.php');
 include_once('cone.php');

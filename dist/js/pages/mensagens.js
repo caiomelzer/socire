@@ -180,6 +180,6 @@ $(function($){
 			return false;
 		}
 	});
-	setInterval(function(){ mensagens.chatRefresh();}, 5000);
+	//setInterval(function(){ mensagens.chatRefresh();}, 5000);
 });  
 
