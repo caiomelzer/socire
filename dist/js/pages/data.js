@@ -1,4 +1,6 @@
 var data = {
+	sources: [],
+	table: null,
 	create: function(par){
 		par = JSON.parse(par);
 		var form = $("#form-source");
@@ -9,7 +11,10 @@ var data = {
 	            service: 'sources',
 	            crud: 'upload',
 	            extension: par.file.extension,
-	            filename: par.file.name
+	            filename: par.file.name,
+	            separator: $("#input-separator").val(),
+	            enclosure: $("#input-enclosure").val(),
+	            col: $("#input-columns").val()
 	        }, app.config.userData),
 	        success: function(res){
 	            var response = JSON.parse(res);
@@ -20,36 +25,51 @@ var data = {
 	            else{
 	            	showErrorMessage('sources');
 	            }
+	            data.list();
 	        }
 	    })
 	    .fail( function(e){
 	        return {success: false};
 	    });
-	    data.list();
+	    
 	},
 	list: function(){
-		console.info('List TO DO');
-		$.ajax({
-			type: 'POST',
-	        url: app.config.services,
-	        data: $.extend({
-	            service: 'sources',
-	            crud: 'list'
-	        }, app.config.userData),
-	        success: function(res){
-	            var response = JSON.parse(res);
-	            if(response.success){
-	            	showSuccessMessage('sources');
-	            }
-	            else{
-	            	showErrorMessage('sources');
-	            }
-	            console.info(res);
-	        }
-	    })
-	    .fail( function(e){
-	        return {success: false};
-	    });
+		if(data.table){
+			console.info('reload');
+			data.table.ajax.reload();
+		}
+		else{
+			console.info('load');
+			data.table  = $('#source-list').DataTable({
+				"paging": true,
+				"lengthChange": false,
+				"searching": false,
+				"ordering": true,
+				"autoWidth": false,
+				"ajax":{
+					"url": app.config.services,
+					"dataSrc": "source",
+					"data": $.extend({
+			            service: 'sources',
+			            crud: 'list'
+			        }, app.config.userData),
+			        "type":"POST"
+				},
+				"columns": [
+		            { "data": "type" , render: function(data){
+		            	return '<i class="fa fa-file-excel-o"></i>';
+		            }},
+		            { "data": "table" },
+		            { "data": "file_name" },
+		            { "data": "size" },
+		            { "data": "type" , render: function(data){
+		            	return '.'+data;
+		            }},
+		            { "data": "id" },
+		            { "data": "id" }
+		        ]
+		    });
+		}
 	},
 	preview: function(e){
 		var ext = $("input#input-file").val().split(".").pop().toLowerCase();
@@ -93,6 +113,7 @@ var data = {
 	previewStructure: []
 };
 $(function($){
+	data.list();
 	$(document)
 	.on('change','#input-file', function(e){
 		data.preview(e);
@@ -107,9 +128,10 @@ $(function($){
             cache: false,
             processData:false,
             success: function(res){
-                console.info('das');
                 data.create(res);
             }           
        });
     }));
 }); 
+
+

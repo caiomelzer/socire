@@ -27,7 +27,9 @@ $lang = (object) array(
 		'error_while_creating' => 'CRUD, error while trying to create data',
 		'service_crud_missing_parameters' => 'CRUD, missing parameters',
 		'error_while_deleting' => 'CRUD, error while trying to delete data',
-		'error_while_upload' => 'Error while upload file'
+		'error_while_upload' => 'Error while upload file',
+		'error_while_creating_table' => 'Error while creating table',
+		'error_while_loading_table' => 'Error while loading data into table'
 	),
 	'messages' => (object) array()
 );

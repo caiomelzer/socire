@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2016 at 08:43 PM
+-- Generation Time: Jan 08, 2016 at 06:15 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -374,19 +374,40 @@ CREATE TABLE IF NOT EXISTS `app_sources` (
   `date` datetime DEFAULT NULL,
   `type` varchar(10) DEFAULT NULL,
   `id_user` int(11) DEFAULT NULL,
-  `lines` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  `lines` int(11) DEFAULT NULL,
+  `table` varchar(100) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `app_sources`
 --
 
-INSERT INTO `app_sources` (`id`, `file_name`, `size`, `date`, `type`, `id_user`, `lines`) VALUES
-(1, 'NN160170830_Testedas_924.csv', NULL, '2016-01-07 17:19:30', 'csv', 1, NULL),
-(2, 'NN160170829_Testedas_820.csv', NULL, '2016-01-07 17:20:29', 'csv', 1, NULL),
-(3, 'NN160170840_dasda_921.csv', NULL, '2016-01-07 17:28:40', 'csv', 1, NULL),
-(4, 'NN160170839_dasda_462.csv', NULL, '2016-01-07 17:30:39', 'csv', 1, NULL),
-(5, 'NN160170849_dasda_594.csv', NULL, '2016-01-07 17:32:49', 'csv', 1, NULL);
+INSERT INTO `app_sources` (`id`, `file_name`, `size`, `date`, `type`, `id_user`, `lines`, `table`) VALUES
+(30, 'NN160180454_AGENDA_715.csv', NULL, '2016-01-08 13:40:54', 'csv', 1, NULL, 'NN160180454_AGENDA_715'),
+(31, 'NN160180412_TESTE_113.csv', NULL, '2016-01-08 13:43:12', 'csv', 1, NULL, 'NN160180412_TESTE_113'),
+(32, 'NN160180439_dasda_271.csv', NULL, '2016-01-08 13:54:39', 'csv', 1, NULL, 'NN160180439_dasda_271'),
+(33, 'NN160180403_dasa_961.csv', NULL, '2016-01-08 13:57:03', 'csv', 1, NULL, 'NN160180403_dasa_961'),
+(34, 'NN160180437_dsada_114.csv', NULL, '2016-01-08 13:57:37', 'csv', 1, NULL, 'NN160180437_dsada_114'),
+(35, 'NN160180402_sadsada_118.csv', NULL, '2016-01-08 13:59:02', 'csv', 1, NULL, 'NN160180402_sadsada_118'),
+(36, 'NN160180525_dasda_629.csv', NULL, '2016-01-08 14:06:25', 'csv', 1, NULL, 'NN160180525_dasda_629'),
+(37, 'NN160180533_dsada_806.csv', NULL, '2016-01-08 14:08:33', 'csv', 1, NULL, 'NN160180533_dsada_806'),
+(38, 'NN160180511__791.pdf', NULL, '2016-01-08 14:24:11', 'pdf', 1, NULL, 'NN160180511__791');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_sources_link`
+--
+
+DROP TABLE IF EXISTS `app_sources_link`;
+CREATE TABLE IF NOT EXISTS `app_sources_link` (
+  `source_left` int(11) NOT NULL,
+  `source_right` int(11) NOT NULL,
+  `field_left` varchar(100) NOT NULL,
+  `field_right` varchar(100) NOT NULL,
+  `join` varchar(100) NOT NULL,
+  `id_link` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -411,7 +432,150 @@ INSERT INTO `app_sources_permission` (`id_source`, `id_user`) VALUES
 (2, 1),
 (3, 1),
 (4, 1),
-(5, 1);
+(5, 1),
+(6, 1),
+(7, 1),
+(8, 1),
+(9, 1),
+(10, 1),
+(11, 1),
+(12, 1),
+(13, 1),
+(14, 1),
+(15, 1),
+(16, 1),
+(17, 1),
+(18, 1),
+(19, 1),
+(20, 1),
+(21, 1),
+(22, 1),
+(23, 1),
+(24, 1),
+(25, 1),
+(26, 1),
+(27, 1),
+(28, 1),
+(29, 1),
+(30, 1),
+(31, 1),
+(32, 1),
+(33, 1),
+(34, 1),
+(35, 1),
+(36, 1),
+(37, 1),
+(38, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `custom_nn160180111_agenda_240`
+--
+
+DROP TABLE IF EXISTS `custom_nn160180111_agenda_240`;
+CREATE TABLE IF NOT EXISTS `custom_nn160180111_agenda_240` (
+  `nome` varchar(255) DEFAULT NULL,
+  `telefone` varchar(255) DEFAULT NULL,
+  `cidade` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `custom_nn160180111_agenda_240`
+--
+
+INSERT INTO `custom_nn160180111_agenda_240` (`nome`, `telefone`, `cidade`) VALUES
+('nome', ' telefone', ' cidade\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('\r', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `custom_nn160180131_agenda_321`
+--
+
+DROP TABLE IF EXISTS `custom_nn160180131_agenda_321`;
+CREATE TABLE IF NOT EXISTS `custom_nn160180131_agenda_321` (
+  `nome` varchar(255) DEFAULT NULL,
+  `telefone` varchar(255) DEFAULT NULL,
+  `cidade` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `custom_nn160180131_agenda_321`
+--
+
+INSERT INTO `custom_nn160180131_agenda_321` (`nome`, `telefone`, `cidade`) VALUES
+('nome; telefone; cidade\r', NULL, NULL),
+('Caio; 980872469;sp\r', NULL, NULL),
+('Caio; 980872469;sp\r', NULL, NULL),
+('Caio; 980872469;sp\r', NULL, NULL),
+('Caio; 980872469;sp\r', NULL, NULL),
+('Caio; 980872469;sp\r', NULL, NULL),
+('Caio; 980872469;sp\r', NULL, NULL),
+('Caio; 980872469;sp\r', NULL, NULL),
+('Caio; 980872469;sp\r', NULL, NULL),
+('Caio; 980872469;sp\r', NULL, NULL),
+('Caio; 980872469;sp\r', NULL, NULL),
+('Caio; 980872469;sp\r', NULL, NULL),
+('Caio; 980872469;sp\r', NULL, NULL),
+('\r', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `custom_nn160180145_agenda2_288`
+--
+
+DROP TABLE IF EXISTS `custom_nn160180145_agenda2_288`;
+CREATE TABLE IF NOT EXISTS `custom_nn160180145_agenda2_288` (
+  `teste` varchar(255) DEFAULT NULL,
+  `teste2` varchar(255) DEFAULT NULL,
+  `teste3` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `custom_nn160180145_agenda2_288`
+--
+
+INSERT INTO `custom_nn160180145_agenda2_288` (`teste`, `teste2`, `teste3`) VALUES
+('nome', ' telefone', ' cidade\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('Caio', ' 980872469', 'sp\r'),
+('\r', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `custom_teste`
+--
+
+DROP TABLE IF EXISTS `custom_teste`;
+CREATE TABLE IF NOT EXISTS `custom_teste` (
+  `noname` blob
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -427,7 +591,7 @@ CREATE TABLE IF NOT EXISTS `sys_log` (
   `id_page` int(11) NOT NULL,
   `action` text NOT NULL,
   `data` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2209 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2488 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `sys_log`
@@ -2649,7 +2813,287 @@ INSERT INTO `sys_log` (`id`, `id_user`, `date`, `id_page`, `action`, `data`) VAL
 (2205, 1, '2016-01-07', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
 (2206, 1, '2016-01-07', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160170839_dasda_462.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
 (2207, 1, '2016-01-07', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
-(2208, 1, '2016-01-07', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160170849_dasda_594.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}');
+(2208, 1, '2016-01-07', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160170849_dasda_594.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2209, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2210, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160181211_dasda_575.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2211, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2212, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2213, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160181231_dsa_345.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2214, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2215, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160181212_dsa_148.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2216, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2217, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160181243_dsa_841.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2218, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2219, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160181205_dsa_575.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2220, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2221, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160181250_dsa_448.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2222, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2223, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160181213_dsa_804.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2224, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2225, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160181227_dsa_916.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2226, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2227, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160181249_dsa_813.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2228, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2229, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160181248_dsa_683.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2230, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2231, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160181206_dsa_150.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2232, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2233, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160181218_dsa_335.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2234, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2235, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160181204_dsa_154.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2236, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2237, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160181224_dsa_947.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2238, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2239, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160181245_dsa_293.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2240, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2241, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160181255_dsa_492.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2242, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2243, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160181237_dsa_319.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2244, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2245, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160181229_dsa_760.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2246, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2247, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160181204_dsa_346.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2248, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2249, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2250, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2251, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2252, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2253, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2254, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160180131_AGENDA_321.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2255, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2256, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160180124_AGENDA_929.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2257, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2258, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160180131_AGENDA_775.csv","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2259, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2260, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2261, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2262, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2263, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2264, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2265, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160180111_AGENDA_240.csv","separator":";","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2266, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2267, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2268, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2269, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2270, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2271, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2272, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160180145_AGENDA2_288.csv","separator":";","col":"teste,teste2,teste3","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2273, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2274, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2275, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2276, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2277, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2278, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2279, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2280, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2281, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2282, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2283, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2284, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}');
+INSERT INTO `sys_log` (`id`, `id_user`, `date`, `id_page`, `action`, `data`) VALUES
+(2285, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2286, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2287, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2288, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2289, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2290, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2291, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2292, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2293, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2294, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2295, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2296, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2297, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2298, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2299, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2300, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2301, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2302, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2303, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2304, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2305, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2306, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2307, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2308, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2309, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2310, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2311, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2312, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2313, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2314, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2315, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2316, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2317, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2318, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2319, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2320, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2321, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2322, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2323, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2324, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2325, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2326, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2327, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2328, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2329, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2330, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2331, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2332, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2333, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2334, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2335, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2336, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2337, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2338, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2339, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2340, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2341, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2342, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2343, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2344, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2345, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2346, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2347, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2348, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2349, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2350, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2351, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2352, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2353, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2354, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2355, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2356, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160180454_AGENDA_715.csv","separator":";","col":"","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2357, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2358, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2359, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2360, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2361, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2362, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2363, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2364, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2365, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2366, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2367, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2368, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2369, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2370, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2371, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160180412_TESTE_113.csv","separator":";","col":"","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2372, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2373, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2374, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2375, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2376, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2377, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2378, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2379, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2380, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2381, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2382, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2383, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2384, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2385, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2386, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2387, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2388, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2389, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2390, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160180439_dasda_271.csv","separator":";","col":";","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2391, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2392, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2393, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2394, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2395, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2396, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2397, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2398, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2399, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160180403_dasa_961.csv","separator":";","col":";","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2400, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2401, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2402, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2403, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2404, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2405, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2406, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160180437_dsada_114.csv","separator":";","col":";","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2407, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2408, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2409, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2410, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2411, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2412, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2413, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2414, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160180402_sadsada_118.csv","separator":";","col":";","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2415, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2416, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2417, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2418, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2419, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2420, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2421, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2422, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2423, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2424, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2425, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2426, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2427, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2428, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2429, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2430, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2431, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2432, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2433, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2434, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2435, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2436, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2437, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2438, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2439, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2440, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2441, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2442, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2443, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2444, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2445, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2446, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2447, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160180525_dasda_629.csv","separator":";","col":";","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2448, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2449, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2450, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2451, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2452, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2453, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2454, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"csv","filename":"NN160180533_dsada_806.csv","separator":";","col":";","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2455, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2456, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2457, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2458, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2459, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2460, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2461, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2462, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2463, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2464, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2465, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2466, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2467, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2468, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2469, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2470, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2471, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2472, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2473, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2474, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"upload","extension":"pdf","filename":"NN160180511__791.pdf","separator":"","col":"","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2475, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2476, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/mensagens.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2477, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/profiles.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2478, 1, '2016-01-08', 0, 'profiles', '{"service":"profiles","crud":"read","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2479, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2480, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2481, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2482, 1, '2016-01-08', 0, 'getMenu', '{"service":"getMenu","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2483, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/dashboard.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2484, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"messages","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2485, 1, '2016-01-08', 0, 'checkNotifications', '{"service":"checkNotifications","type":"notifications","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2486, 1, '2016-01-08', 0, 'auth', '{"service":"auth","url":"pages/data.html","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}'),
+(2487, 1, '2016-01-08', 0, 'sources', '{"service":"sources","crud":"list","user":"caiomelzer","token":"ig2hhor7gpb65hfrjz4wjgwcf8gxpqfr","role":"1","page":"data"}');
 
 -- --------------------------------------------------------
 
@@ -2888,7 +3332,8 @@ CREATE TABLE IF NOT EXISTS `vw_app_profiles` (
 --
 DROP VIEW IF EXISTS `vw_app_sources`;
 CREATE TABLE IF NOT EXISTS `vw_app_sources` (
-`id` int(11)
+`table` varchar(100)
+,`id` int(11)
 ,`file_name` varchar(255)
 ,`size` double
 ,`date` datetime
@@ -2974,7 +3419,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_app_sources`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_app_sources` AS select `app_sources`.`id` AS `id`,`app_sources`.`file_name` AS `file_name`,`app_sources`.`size` AS `size`,`app_sources`.`date` AS `date`,`app_sources`.`type` AS `type`,`app_sources`.`id_user` AS `id_user`,`app_sources`.`lines` AS `lines` from (`app_sources_permission` join `app_sources` on((`app_sources_permission`.`id_source` = `app_sources`.`id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_app_sources` AS select `app_sources`.`table` AS `table`,`app_sources`.`id` AS `id`,`app_sources`.`file_name` AS `file_name`,`app_sources`.`size` AS `size`,`app_sources`.`date` AS `date`,`app_sources`.`type` AS `type`,`app_sources`.`id_user` AS `id_user`,`app_sources`.`lines` AS `lines` from (`app_sources_permission` join `app_sources` on((`app_sources_permission`.`id_source` = `app_sources`.`id`)));
 
 -- --------------------------------------------------------
 
@@ -3112,12 +3557,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT for table `app_sources`
 --
 ALTER TABLE `app_sources`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=39;
 --
 -- AUTO_INCREMENT for table `sys_log`
 --
 ALTER TABLE `sys_log`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2209;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2488;
 --
 -- AUTO_INCREMENT for table `sys_messages`
 --
