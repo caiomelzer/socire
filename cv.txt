@@ -1,0 +1,106 @@
+Summary
+7+ years of demonstrated expertise in enterprise applications focusing on enterprise architecture and solid technical foundation for very large organizations.
+
+Specialities:
+- Enterprise Architecture processes
+- Web Development, including UI and UX
+- Cross enterprise development projects 
+- Development of Hybrid Applications
+- Cloud computing and open source products integration
+
+Excellent presentation, communication skills and ability to work with cross-functional teams to drive development and execution.
+
+Experience
+Business Consultant / SAP HANA at CSC - Computer Sciences Corporation
+Jan/2015 - Current
+
+Responsibilities:
+- Responsible for design and creating Tax Application inside XS Engine using 
+- Part of SAP HANA Team in Brazil
+- Working to support SAP HANA Tax application for customers
+- Responsible to implement SAP HANA Tax Solution on Volkswagen, to supply Brazil Tax requeriments
+- Responsible to certify CSC Application on SAP Labs
+
+Projects and Clients:
+- Implementation of CSC eDCA on SAP HANA - volkswagen - BR
+
+
+IT Consultant / SAP HANA at AGILE Solutions / SAP 
+Nov/2012 - Dec/2014
+
+Responsibilities:
+- Part of SAP HANA Global Team
+- Responsible to develop Company website and Wordpress Blog
+- Working to SAP and others clients to delivery Proof of Concepts, focused on SAP HANA
+- Development of Mock-ups for Alltax Platform, using SAPUI5
+- Responsible to manage SuccessFactors Pre Sales and Implementations
+- Transport and Support of Data using Oracle ODI as ETL tool
+- Responsible to develop UI of applications and integrate different technologies
+
+Projects and Clients:
+- Development of Customer Hierarchy App - Iron Mountain - USA (Remote)
+- Design UI of Application - SAP and TARGET - USA
+- AGILE website - AGILE - USA
+- Developement of AllTax Platform Mock-ups and Module - Alltax - Brazil
+- Implementation of SuccessFactors Package - UNIT - Brazil
+- SAP HANA PoC - Carrefour - Brazil
+- Support of R and ODI develoment - Iron Mountain - USA (Remote)
+- BSP development of SAP HR content - CODELCO - Chile (Remote)
+- Projetc Aurora, ODI develoment - Iron Mountain - USA (Remote)
+- SAP Consumer Insigth 365 - SAP - USA
+
+
+Infrastructure Architecture at Solvay Rhodia
+Mai/2011 - oct/2012
+
+Responsibilities:
+- Part of the Global Infrastructure Architecture Team, as a Standard developer
+- Expertise to prepare comparisons reports and guide all regions the best practices and the standard solutions which should be followed
+- Support on making decisions in global discussions
+- Technical support for studies
+- Researches of new tools
+- Test of them and proof of concepts.
+
+Projects and Clients:
+- Consumerization PoC, Citrix implementation
+- Ideation portal
+- Barcode
+
+
+Web Developer at Abril
+Mai/2009 - Mai/2012
+
+Responsibilities:
+- Part of the Web Developers team
+- Development of new tools to publish content, based on PHP and MySQL
+- Wordpress and MovableType management
+- Working to maintanance INFO and EXAME website
+- Support to publishers
+- Developement of templates, using HTML, CSS and Javascript
+
+Projects and Clients:
+- New website of EXAME magazine
+- Scanning of all INFO and EXAME magazine to portal, using ISSUU platform
+- New website of INFO magazine
+- INFO Toolbar
+
+
+Help Desk Analyst at Michael Page
+Feb/2009 - Apr/2012
+
+Responsibilities:
+- Part of the Help desk team
+- Support to Citrix XenApp and XenDesktop
+- Phone support to users from Mexico
+- New Devices configuration
+
+Support Analyst at teletech
+Jun/2008 - nov/2008
+
+Responsibilities:
+- Support by e-mail and phone
+- Part of the front team
+- Identify/Solve issues on laptops, cameras and printers
+
+Projects and Clients:
+- HP

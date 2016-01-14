@@ -118,7 +118,8 @@ $(function($){
 	.on('change','#input-file', function(e){
 		data.preview(e);
 	});
-	$("#form-source").on('submit',(function(e) {
+	$("#form-source")
+	.on('submit',(function(e) {
         e.preventDefault();
         $.ajax({
             url: "core/services/upload.php",
@@ -131,7 +132,8 @@ $(function($){
                 data.create(res);
             }           
        });
-    }));
+    }))
+    .validate();
 }); 
 
 
