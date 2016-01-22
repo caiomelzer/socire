@@ -1,8 +1,8 @@
 <?php
 	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "app";
+	$username = "socire_app";
+	$password = "Ca1603!!";
+	$dbname = "socire";
 
 	$conn = mysqli_connect($servername, $username, $password, $dbname);
 	if (!$conn) {
