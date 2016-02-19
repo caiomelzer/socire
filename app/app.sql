@@ -3410,7 +3410,7 @@ CREATE TABLE IF NOT EXISTS `vw_sys_users` (
 --
 DROP TABLE IF EXISTS `vw_app_profiles`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`vinic476_vini`@`localhost` SQL SECURITY DEFINER VIEW `vw_app_profiles` AS select `app_profiles`.`background` AS `background`,`app_profiles`.`id` AS `id`,`app_profiles`.`avatar` AS `avatar`,`app_profiles`.`profile` AS `profile`,`app_profiles`.`date` AS `date`,`vw_sys_users`.`id` AS `user_id`,`app_profiles_active`.`status` AS `status`,(select count(1) from `app_services_parameters` where ((`app_services_parameters`.`type` = 'H') and (`app_services_parameters`.`id_profile` = `app_profiles`.`id`))) AS `qtd_hashtag`,(select count(1) from `app_services_parameters` where ((`app_services_parameters`.`type` = 'P') and (`app_services_parameters`.`id_profile` = `app_profiles`.`id`))) AS `qtd_profiles`,(select distinct count(1) from (`app_services_parameters` join `app_services_content` on((`app_services_content`.`username` = `app_services_parameters`.`content`))) where (`app_services_parameters`.`id_profile` = `app_profiles`.`id`)) AS `content` from ((((`app_profiles` join `app_profiles_user` on((`app_profiles_user`.`id_profile` = `app_profiles`.`id`))) join `vw_sys_users` on((`vw_sys_users`.`id` = `app_profiles_user`.`id_user`))) join `app_profiles_active` on((`app_profiles`.`id` = `app_profiles_active`.`id_profile`))) join `app_services_parameters` on((`app_profiles`.`id` = `app_services_parameters`.`id_profile`))) group by `app_profiles`.`background`,`app_profiles`.`id`,`app_profiles`.`avatar`,`app_profiles`.`profile`,`app_profiles`.`date`,`vw_sys_users`.`id`,`app_profiles_active`.`status`,`app_services_parameters`.`type`;
+CREATE  VIEW `vw_app_profiles` AS select `app_profiles`.`background` AS `background`,`app_profiles`.`id` AS `id`,`app_profiles`.`avatar` AS `avatar`,`app_profiles`.`profile` AS `profile`,`app_profiles`.`date` AS `date`,`vw_sys_users`.`id` AS `user_id`,`app_profiles_active`.`status` AS `status`,(select count(1) from `app_services_parameters` where ((`app_services_parameters`.`type` = 'H') and (`app_services_parameters`.`id_profile` = `app_profiles`.`id`))) AS `qtd_hashtag`,(select count(1) from `app_services_parameters` where ((`app_services_parameters`.`type` = 'P') and (`app_services_parameters`.`id_profile` = `app_profiles`.`id`))) AS `qtd_profiles`,(select distinct count(1) from (`app_services_parameters` join `app_services_content` on((`app_services_content`.`username` = `app_services_parameters`.`content`))) where (`app_services_parameters`.`id_profile` = `app_profiles`.`id`)) AS `content` from ((((`app_profiles` join `app_profiles_user` on((`app_profiles_user`.`id_profile` = `app_profiles`.`id`))) join `vw_sys_users` on((`vw_sys_users`.`id` = `app_profiles_user`.`id_user`))) join `app_profiles_active` on((`app_profiles`.`id` = `app_profiles_active`.`id_profile`))) join `app_services_parameters` on((`app_profiles`.`id` = `app_services_parameters`.`id_profile`))) group by `app_profiles`.`background`,`app_profiles`.`id`,`app_profiles`.`avatar`,`app_profiles`.`profile`,`app_profiles`.`date`,`vw_sys_users`.`id`,`app_profiles_active`.`status`,`app_services_parameters`.`type`;
 
 -- --------------------------------------------------------
 
@@ -3419,7 +3419,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`vinic476_vini`@`localhost` SQL SECURITY DEFI
 --
 DROP TABLE IF EXISTS `vw_app_sources`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`vinic476_vini`@`localhost` SQL SECURITY DEFINER VIEW `vw_app_sources` AS select `app_sources`.`table` AS `table`,`app_sources`.`id` AS `id`,`app_sources`.`file_name` AS `file_name`,`app_sources`.`size` AS `size`,`app_sources`.`date` AS `date`,`app_sources`.`type` AS `type`,`app_sources`.`id_user` AS `id_user`,`app_sources`.`lines` AS `lines` from (`app_sources_permission` join `app_sources` on((`app_sources_permission`.`id_source` = `app_sources`.`id`)));
+CREATE  VIEW `vw_app_sources` AS select `app_sources`.`table` AS `table`,`app_sources`.`id` AS `id`,`app_sources`.`file_name` AS `file_name`,`app_sources`.`size` AS `size`,`app_sources`.`date` AS `date`,`app_sources`.`type` AS `type`,`app_sources`.`id_user` AS `id_user`,`app_sources`.`lines` AS `lines` from (`app_sources_permission` join `app_sources` on((`app_sources_permission`.`id_source` = `app_sources`.`id`)));
 
 -- --------------------------------------------------------
 
@@ -3428,7 +3428,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`vinic476_vini`@`localhost` SQL SECURITY DEFI
 --
 DROP TABLE IF EXISTS `vw_chat_last_messages`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`vinic476_vini`@`localhost` SQL SECURITY DEFINER VIEW `vw_chat_last_messages` AS select distinct `chat`.`id_user_from` AS `id_user_from`,`chat`.`avatar_user_from` AS `avatar_user_from`,`chat`.`user_from` AS `user_from`,`chat`.`id_user_to` AS `id_user_to`,(select `sys_messages`.`content` from `sys_messages` where (`sys_messages`.`id_user_from` = `chat`.`id_user_from`) order by `sys_messages`.`date` desc limit 0,1) AS `content` from `vw_sys_chat` `chat`;
+CREATE  VIEW `vw_chat_last_messages` AS select distinct `chat`.`id_user_from` AS `id_user_from`,`chat`.`avatar_user_from` AS `avatar_user_from`,`chat`.`user_from` AS `user_from`,`chat`.`id_user_to` AS `id_user_to`,(select `sys_messages`.`content` from `sys_messages` where (`sys_messages`.`id_user_from` = `chat`.`id_user_from`) order by `sys_messages`.`date` desc limit 0,1) AS `content` from `vw_sys_chat` `chat`;
 
 -- --------------------------------------------------------
 
@@ -3437,7 +3437,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`vinic476_vini`@`localhost` SQL SECURITY DEFI
 --
 DROP TABLE IF EXISTS `vw_chat_last_messages_andre`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`vinic476_vini`@`localhost` SQL SECURITY DEFINER VIEW `vw_chat_last_messages_andre` AS select `msg`.`id` AS `id`,`msg`.`id_user_from` AS `id_user_from`,`msg`.`content` AS `content`,`msg`.`date` AS `date`,(count(`msg2`.`date`) + 1) AS `rank` from (`sys_messages` `msg` left join `sys_messages` `msg2` on(((`msg`.`date` < `msg2`.`date`) and (`msg`.`id_user_from` = `msg2`.`id_user_from`)))) group by `msg`.`id`,`msg`.`id_user_from`,`msg`.`content`,`msg`.`date` order by `rank`;
+CREATE  VIEW `vw_chat_last_messages_andre` AS select `msg`.`id` AS `id`,`msg`.`id_user_from` AS `id_user_from`,`msg`.`content` AS `content`,`msg`.`date` AS `date`,(count(`msg2`.`date`) + 1) AS `rank` from (`sys_messages` `msg` left join `sys_messages` `msg2` on(((`msg`.`date` < `msg2`.`date`) and (`msg`.`id_user_from` = `msg2`.`id_user_from`)))) group by `msg`.`id`,`msg`.`id_user_from`,`msg`.`content`,`msg`.`date` order by `rank`;
 
 -- --------------------------------------------------------
 
@@ -3446,7 +3446,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`vinic476_vini`@`localhost` SQL SECURITY DEFI
 --
 DROP TABLE IF EXISTS `vw_sys_chat`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`vinic476_vini`@`localhost` SQL SECURITY DEFINER VIEW `vw_sys_chat` AS select `msg`.`content` AS `content`,`msg`.`date` AS `DATE`,`us1`.`fullname` AS `user_to`,`us2`.`fullname` AS `user_from`,`us1`.`id` AS `id_user_to`,`us2`.`id` AS `id_user_from`,`us1`.`avatar` AS `avatar_user_to`,`us2`.`avatar` AS `avatar_user_from` from ((`sys_messages` `msg` join `vw_sys_users` `us1` on((`us1`.`id` = `msg`.`id_user_to`))) join `vw_sys_users` `us2` on((`us2`.`id` = `msg`.`id_user_from`)));
+CREATE  VIEW `vw_sys_chat` AS select `msg`.`content` AS `content`,`msg`.`date` AS `DATE`,`us1`.`fullname` AS `user_to`,`us2`.`fullname` AS `user_from`,`us1`.`id` AS `id_user_to`,`us2`.`id` AS `id_user_from`,`us1`.`avatar` AS `avatar_user_to`,`us2`.`avatar` AS `avatar_user_from` from ((`sys_messages` `msg` join `vw_sys_users` `us1` on((`us1`.`id` = `msg`.`id_user_to`))) join `vw_sys_users` `us2` on((`us2`.`id` = `msg`.`id_user_from`)));
 
 -- --------------------------------------------------------
 
@@ -3455,7 +3455,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`vinic476_vini`@`localhost` SQL SECURITY DEFI
 --
 DROP TABLE IF EXISTS `vw_sys_users`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`vinic476_vini`@`localhost` SQL SECURITY DEFINER VIEW `vw_sys_users` AS select `users`.`id` AS `id`,`users`.`username` AS `username`,`users`.`email` AS `email`,`users`.`password` AS `password`,`users`.`token` AS `token`,`users`.`status` AS `status`,`users`.`role` AS `role`,`roles`.`name` AS `name`,`info`.`id_username` AS `id_username`,`info`.`fullname` AS `fullname`,`info`.`avatar` AS `avatar`,`info`.`company` AS `company` from ((`sys_users` `users` join `sys_users_info` `info` on((`users`.`id` = `info`.`id_username`))) join `sys_roles` `roles` on((`roles`.`id` = `users`.`role`)));
+CREATE  VIEW `vw_sys_users` AS select `users`.`id` AS `id`,`users`.`username` AS `username`,`users`.`email` AS `email`,`users`.`password` AS `password`,`users`.`token` AS `token`,`users`.`status` AS `status`,`users`.`role` AS `role`,`roles`.`name` AS `name`,`info`.`id_username` AS `id_username`,`info`.`fullname` AS `fullname`,`info`.`avatar` AS `avatar`,`info`.`company` AS `company` from ((`sys_users` `users` join `sys_users_info` `info` on((`users`.`id` = `info`.`id_username`))) join `sys_roles` `roles` on((`roles`.`id` = `users`.`role`)));
 
 --
 -- Indexes for dumped tables
