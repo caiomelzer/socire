@@ -1,5 +1,5 @@
 <?php
-	$servername = "localhost";
+	$servername = "socire.com:3306";
 	$username = "socire_adm";
 	$password = "mewtwo";
 	$dbname = "socire_app";
