@@ -98,7 +98,13 @@
                   for(var i in response.user){
                     localStorage.setItem(i,response.user[i]);
                   }
-                  window.location.href = 'http://'+window.location.hostname+response.user.app_url; 
+                  if(window.location.hostname === "localhost"){
+                    window.location.href = 'http://'+window.location.hostname+'/rep/socire'+response.user.app_url;
+                  }
+                  else{
+                    window.location.href = 'http://'+window.location.hostname+response.user.app_url;
+                  }
+                   
                 }
                 else{
                   $('#box-login-message').removeClass('hidden').find('p').eq(0).text(response.message);

@@ -2,7 +2,30 @@
 var app = {};
 app.config = {};
 
-function loadAppConfig(){
+function loadAppConfigLocal(){
+    app.config.url = 'http://'+window.location.hostname;
+    app.config.server = app.config.url+'/rep/socire/app/';
+    app.config.front = app.config.url+'/rep/socire/app/';
+    app.config.loginPage = app.config.url+'/rep/socire/app/index.html';
+    app.config.services = app.config.server+'core/services.php';
+    app.config.social = app.config.server+'core/social.php';
+    app.config.chat = app.config.server+'core/chat.php';
+    app.config.failedPage = {
+        url: 'pages/404.html',
+        iconClass: '',
+        title: 'Página não encontrada!'
+    };    
+    app.config.port = '';
+    app.config.userData = {
+        user: getUser(),
+        token: getToken(),
+        role: getRole(),
+        page: getPage()
+    };
+    app.config.messageHideIn = 5000;
+}
+
+function loadAppConfigServer(){
     app.config.url = 'http://'+window.location.hostname;
     app.config.server = app.config.url+'/app/';
     app.config.front = app.config.url+'/app/';
@@ -370,7 +393,13 @@ function loadTemplate(params){
 }
 
 $(function ($) {
-    loadAppConfig();
+    if(window.location.hostname === "localhost"){
+        loadAppConfigLocal();
+    }
+    else{
+        loadAppConfigServer();
+    }
+    
     login();
     generateMenu();
     setGlobalEvents();
