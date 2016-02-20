@@ -2,13 +2,13 @@
 if(isset($_GET['code'])){
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL, "https://api.instagram.com/oauth/access_token");
-  $data = array('client_id' => 'e0f27ab07f6a47cf9a668fd86db4da5d', 'client_secret' => '7a1d9a5d041242f9844cb43004c5a64c','grant_type' => 'authorization_code', 'redirect_uri' => 'http://viniciusbueno.com/cmo/socire/app/core/services/instagram.php', 'code' => $_GET['code']);
+  $data = array('client_id' => 'e0f27ab07f6a47cf9a668fd86db4da5d', 'client_secret' => '7a1d9a5d041242f9844cb43004c5a64c','grant_type' => 'authorization_code', 'redirect_uri' => 'http://socire.com/app/core/services/instagram.php', 'code' => $_GET['code']);
   curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   $output = json_decode(curl_exec($ch));
   $access_token = $output->access_token;
   curl_close($ch);
-  $url = 'http://viniciusbueno.com/cmo/socire/core/app/services/instagram.php?access_token='.$access_token.'&instagram_id='.$output->user->id.'&profile_picture='.$output->user->profile_picture.'&instagram_username='.$output->user->username;
+  $url = 'http://socire.com/app/core/services/instagram.php?access_token='.$access_token.'&instagram_id='.$output->user->id.'&profile_picture='.$output->user->profile_picture.'&instagram_username='.$output->user->username;
   $url = str_replace(".jpg", "", $url);
   $url = str_replace("https://", "", $url);
   echo '<META http-equiv="refresh" content="1;URL='.$url.'"> ';
