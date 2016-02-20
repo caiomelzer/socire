@@ -8,8 +8,8 @@
 	}
 	$username = "socire_adm";
 	$password = "mewtwo";
-	$username = "root";
-	$password = "";
+	//$username = "root";
+	//$password = "";
 	$dbname = "socire_app";
 
 	$conn = mysqli_connect($servername, $username, $password, $dbname);
