@@ -66,6 +66,9 @@ var instagram = {
 						if(instagram.manage.selectedAccount !== null){
 							content += '<option value="'+instagram.manage.selectedAccount.id+'">'+instagram.manage.selectedAccount.instagram_username+'</option>';
 						}
+						else{
+							content += '<option value=""></option>';
+						}
 						$.each(response.instagram, function(i,v){
 							content += '<option value="'+response.instagram[i].id+'">'+response.instagram[i].instagram_username+'</option>';
 						});
@@ -120,12 +123,13 @@ var instagram = {
 					}
 					else{
 						$('.instagram-more-photos').remove();
+						instagram.manage.lastMediaId = null;
 					}
 					console.info(instagram.manage.lastMediaId);
 					$('#content-photos').html($('#content-photos').html()+content);
 					$('.instagram-photos').on('click', function(){
-						console.info($(this));
-						instagram.manage.showContentMedia(user);
+						console.info($(this).attr('photo-id'));
+						instagram.manage.showMediaDetail(user, $(this).attr('photo-id'));
 					});
 					$('.instagram-more-photos').on('click', function(){
 						instagram.manage.showContentMedia(user);
@@ -133,8 +137,30 @@ var instagram = {
 				}
 			});
 		},
-		showContentMediaMore: function(user){
-
+		showMediaDetail: function(user, media){
+			$('#modal-instagram').modal('show');
+			$.ajax({
+				type: 'GET',
+				dataType: "jsonp",
+				url: 'https://api.instagram.com/v1/media/'+media+'/?access_token='+user.access_token,
+				success: function(res){
+					console.info(res);
+					$('#media-detail-likes').html('<b>Likes</b> <a class="pull-right" id="media-detail-likes-count">'+res.data.likes.count+'</a>');
+					$('#media-src img').attr('src',res.data.images.standard_resolution.url);
+					$('#media-detail-caption').text(res.data.caption.text);
+					var hashtags = '';
+					$.each(res.data.tags, function(i,v){
+						hashtags += '<a class="label label-success">'+v+'</a>';
+					});
+					$('#media-detail-tags').html('<b>Tags</b><span class="pull-right">'+hashtags+'</span>');
+					var userInMedia = '';
+					$.each(res.data.users_in_photo, function(i,v){
+						userInMedia += '<img class="pull-right img-circle img-bordered-sm" src="'+v.user.profile_picture+'" width="30px" height="30px" alt="'+v.user.username+'" />';
+					});
+					$('#media-detail-users-in-photo').html('<b>Users in Media</b><div class="pull-right">'+userInMedia+'</div>');
+					$('#media-detail-comments').html('<b>Comments</b>');
+				}
+			});
 		}
 	}
 };
@@ -142,7 +168,7 @@ $(function($){
 	instagram.accounts.read();
 	$(document)
 	.on('click','#add-instagram', function(){
-		window.open("https://www.instagram.com/oauth/authorize/?client_id=e0f27ab07f6a47cf9a668fd86db4da5d&redirect_uri=http://socire.com/app/core/services/instagram.php&response_type=code&scope=public_content+follower_list+comments+relationships+likes",null,"height=4000,width=400,status=yes,toolbar=no,menubar=no,location=no");
+		window.open("https://www.instagram.com/oauth/authorize/?client_id=e0f27ab07f6a47cf9a668fd86db4da5d&redirect_uri=http://socire.com/app/core/services/instagram.php&response_type=code&scope=public_content+follower_list+comments+relationships+likes",null,"height=400,width=400,status=yes,toolbar=no,menubar=no,location=no");
 	});
 	$('.nav-tabs a').on('shown.bs.tab', function(event){
 		switch($(event.target).attr('href')){

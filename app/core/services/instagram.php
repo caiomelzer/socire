@@ -11,7 +11,7 @@ if(isset($_GET['code'])){
   $url = 'http://socire.com/app/core/services/instagram.php?access_token='.$access_token.'&instagram_id='.$output->user->id.'&profile_picture='.$output->user->profile_picture.'&instagram_username='.$output->user->username;
   $url = str_replace(".jpg", "", $url);
   $url = str_replace("https://", "", $url);
-  //echo '<META http-equiv="refresh" content="1;URL='.$url.'"> ';
+  echo '<META http-equiv="refresh" content="1;URL='.$url.'"> ';
 }
 else{
 ?>
@@ -44,5 +44,3 @@ $.ajax({
 <?php 
 }  
 ?>
-
-http://socire.com/app/core/services/instagram.php?code=46a24dae275c42b792c26871d7f7bfb0

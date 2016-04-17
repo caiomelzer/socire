@@ -104,6 +104,8 @@ if(isset($_POST['user'])){
 								$crud = $_POST['crud'];
 								switch ($crud) {
 									case 'create':
+										$sql = "DELETE FROM `app_services_instagram` WHERE `id_username` = '".getUserId($user)."' AND `instagram_username` = '".$_POST['instagram_username']."'";
+										mysqli_query($conn, $sql);
 										$sql = "INSERT INTO `app_services_instagram`(`id_username`, `access_token`, `instagram_id`, `instagram_username`, `profile_picture`) VALUES ('".getUserId($user)."','".$_POST['access_token']."','".$_POST['instagram_id']."','".$_POST['instagram_username']."','https://".$_POST['profile_picture'].".jpg')";
 										if(mysqli_query($conn, $sql)) {
 											$response->success = true;

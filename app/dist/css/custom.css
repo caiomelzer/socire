@@ -160,3 +160,29 @@
 	font-size: 1.2em;
 }
 
+#modal-instagram div .modal-content .modal-body {
+	float: left;
+}
+
+#modal-instagram div .modal-content .modal-body #media-src img{
+	width: 100%;
+}
+
+
+#modal-instagram div .modal-content .modal-body #media-detail .list-group-item {
+    float: left !important;
+    width: 100% !important;
+    /* height: auto; */
+}
+
+#modal-instagram div .modal-content .modal-body #media-detail .list-group-item span {
+	display: block;
+    width: 85%;
+}
+
+
+#modal-instagram div .modal-content .modal-body #media-detail .list-group-item span a {
+    float: left !important;
+    margin: 2px;
+}
+
