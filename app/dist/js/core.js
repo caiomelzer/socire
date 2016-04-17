@@ -322,7 +322,7 @@ function auth(urlLoad){
 
 function login(){
     loadProfile(null,null);
-    $('.user-menu a img').attr('src',localStorage.getItem('app_avatar'));
+    //$('.user-menu a img').attr('src',localStorage.getItem('app_avatar'));
     $('.user-menu a span').text(localStorage.getItem('app_fullname'));
     $('.user-menu .dropdown-menu .user-header img').attr('src',localStorage.getItem('app_avatar'));
     $('.user-menu .dropdown-menu .user-header p').text(localStorage.getItem('app_fullname'));
