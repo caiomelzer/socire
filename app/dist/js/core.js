@@ -372,7 +372,7 @@ function setGlobalEvents(){
         cache: false
     });
     initRouter();
-    //notifications();
+    notifications();
 }
 
 function loadTemplate(params){
