@@ -1,3 +1,0 @@
--- Create snackbar for each ajax request
--- Adjust datepicker start and end date from all modals
--- Apply style from Marker
