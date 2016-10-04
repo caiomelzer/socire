@@ -1,0 +1,32 @@
+<% for(var i=0; i<trips.length; i++) { %>
+    <div class="list-group-item">
+	  <div class="row-action-primary">
+	    <i class="material-icons">map</i>
+	  </div>
+	  <div class="row-content">
+	    <div class="least-content">
+	    	<% if (!trips[i].places || trips[i].places == 0) { %> 
+	    		No places yet
+	    	<% } else { %>
+	    		<% if (trips[i].places.length == 1) { %> 
+	    			<%= trips[i].places.length %> place
+		    	<% } else { %>
+		    		<%= trips[i].places.length %> places
+		    	<% } %>	
+	    	<% } %>	
+		</div>
+	    <h2 class="list-group-item-heading"><%= trips[i].trip_name %> (	<%= trips[i]._id %>)</h2>
+		<p class="list-group-item-text text-muted">Start at <%= moment(trips[i].startAt).format('MMMM Do YYYY') %> from <%= moment(trips[i].endtAt).format('MMMM Do YYYY') %></p>
+		<p class="list-group-item-text text-muted">Cost: 
+			<strong class="text-warning">
+				<% if (trips[i].cost > 0) { %> 
+	    			U$ <%= trips[i].cost %>
+		    	<% } else { %>
+		    		U$ 0.00
+		    	<% } %>
+		    </strong></p>
+		</div>
+	</div>
+	<div class="list-group-separator"></div>
+
+<% } %>

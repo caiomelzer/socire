@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 500px; }
+      #target {
+        width: 345px;
+      }
+      .controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+.pac-container {
+  font-family: Roboto;
+}
+
+#type-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+    </style>
+  <title>Material Design for Bootstrap</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Mobile support -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Material Design fonts -->
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Material Design -->
+  <link href="static/dist/css/bootstrap-material-design.css" rel="stylesheet">
+  <link href="static/dist/css/ripples.min.css" rel="stylesheet">
+
+  <!-- Dropdown.js -->
+  <link href="//cdn.rawgit.com/FezVrasta/dropdown.js/master/jquery.dropdown.css" rel="stylesheet">
+
+  <!-- Page style -->
+  <link href="static/index.css" rel="stylesheet">
+
+  <!-- jQuery -->
+  <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+
+  <script type="text/javascript" src="static/ejs_production.js"></script>
+
+  <script type="text/javascript" src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
+  
+  <script type="text/javascript" src="static/js/bootstrap-material-datetimepicker.js"></script>
+
+  <link rel="stylesheet" href="static/css/bootstrap-material-datetimepicker.css" />
+
+</head>
+<body>
+
+<div class="header-panel shadow-z-2">
+  <div class="container-fluid">
+	<div class="row">
+      <div class="col-xs-12">
+        <h1>TripPlanner</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid main">
+  <div class="row">
+    <nav class="col-xs-3 menu">
+      <ul>
+        <li class="active withripple" data-target="#trip">Trips</li>
+        <li class="withripple" data-target="#explore">Explore</li>
+        <li class="withripple" data-target="#guide">Guide</li>
+        <li class="withripple" data-target="#locations">Locations</li>
+      </ul>
+    </nav>
+    <div class="pages col-xs-9">
+      <div class="row">
+        <div class="col-xs-10">
+          <div class="well page active" id="trip">
+            <h1 class="header">Trips
+            <p class="bs-component btn-group-sm">
+              <a href="javascript:void(0)" class="btn btn-primary btn-fab pull-right" data-toggle="modal" data-target="#trip-add">
+                <i class="material-icons">add</i>
+              </a>
+            </p>  
+            </h1>
+            <hr>
+            <div class="bs-component">
+              <div class="list-group" id="list_trips">
+              </div> 
+            </div>    
+          </div>
+          <div class="well page" id="explore">
+            <h1 class="header">Explore</h1>
+            <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+            <div id="map"></div>
+          </div>
+          <div class="well page" id="guide">
+            <h1 class="header">Guide
+              <p class="bs-component btn-group-sm">
+                <a href="javascript:void(0)" class="btn btn-primary btn-fab pull-right" data-toggle="modal" data-target="#item-add">
+                  <i class="material-icons">add</i>
+                </a>
+              </p>
+            </h1>
+            <hr>
+            <div class="form-group label-floating is-empty">
+              <label for="select111" class="control-label">Trip</label>
+              <select id="guide_trip_select" class="form-control"></select>
+            </div>
+            <div class="bs-component">
+              <div class="list-group" id="list_guide_items">
+                
+              </div>
+            </div>  
+          </div> 
+          <div class="well page" id="locations">
+            <h1 class="header">Locations
+            <p class="bs-component btn-group-sm">
+              <a href="javascript:void(0)" class="btn btn-primary btn-fab pull-right" data-toggle="modal" data-target="#trip-add">
+                <i class="material-icons">add</i>
+              </a>
+            </p>  
+            </h1>
+            <hr>
+            <div class="bs-component">
+              <div class="list-group" id="list_trips">
+              </div> 
+            </div>    
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="trip-add" class="modal fade" tabindex="-1" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Add new Trip</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group label-floating is-empty">
+          <label for="i5" class="control-label">Trip Name</label>
+          <input type="trip" class="form-control" id="trip-1">
+        </div>
+        <div class="form-group label-floating is-empty">
+          <label for="i5" class="control-label">Start At</label>
+          <input type="tripDate" class="form-control" id="tripStartAt">
+        </div>
+        <div class="form-group label-floating is-empty">
+          <label for="i5" class="control-label">End At</label>
+          <input type="tripDate" class="form-control" id="tripEndAt">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary add_trip btn-raised" data-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="place-add" class="modal fade" tabindex="-1" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Add new Place</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group label-floating is-empty">
+          <label for="select111" class="control-label">Trip</label>
+          <select id="trip_list_select" class="form-control"></select>
+        </div>
+        <div class="form-group label-floating is-empty">
+          <label for="select112" class="control-label">Category</label>
+          <select id="place_category" class="form-control"></select>
+        </div>
+        <div class="form-group label-floating is-empty">
+          <label for="i5" class="control-label">Start At</label>
+          <input type="tripDateTime" class="form-control" id="placeStartAt">
+        </div>
+        <div class="form-group label-floating is-empty">
+          <label for="i5" class="control-label">Start At</label>
+          <input type="tripDateTime" class="form-control" id="placeEndAt">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary add_place btn-raised" data-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="item-add" class="modal fade" tabindex="-1" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Add new Item</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group label-floating is-empty">
+          <label for="select111" class="control-label">Type</label>
+          <select id="trip_list_select" class="form-control"></select>
+        </div>
+        <div class="form-group label-floating is-empty">
+          <label for="i5" class="control-label">Start At</label>
+          <input type="tripDateTime" class="form-control" id="itemStartAt">
+        </div>
+        <div class="form-group label-floating is-empty">
+          <label for="i5" class="control-label">Start At</label>
+          <input type="tripDateTime" class="form-control" id="itemEndAt">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary add_place btn-raised" data-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Open source code -->
+<script>
+  window.page = window.location.hash || "#trip";
+
+  $(document).ready(function () {
+    if (window.page != "#trip") {
+      $(".menu").find("li[data-target=" + window.page + "]").trigger("click");
+    }
+  });
+
+  $(window).on("resize", function () {
+    $("html, body").height($(window).height());
+    $(".main, .menu").height($(window).height() - $(".header-panel").outerHeight());
+    $(".pages").height($(window).height());
+  }).trigger("resize");
+
+  $(".menu li").click(function () {
+    // Menu
+    if (!$(this).data("target")) return;
+    if ($(this).is(".active")) return;
+    $(".menu li").not($(this)).removeClass("active");
+    $(".page").not(page).removeClass("active").hide();
+    window.page = $(this).data("target");
+    var page = $(window.page);
+    window.location.hash = window.page;
+    $(this).addClass("active");
+
+    page.show();
+
+    var totop = setInterval(function () {
+      $(".pages").animate({scrollTop: 0}, 0);
+    }, 1);
+
+    setTimeout(function () {
+      page.addClass("active");
+      setTimeout(function () {
+        clearInterval(totop);
+      }, 1000);
+    }, 100);
+
+    switch(page.selector){
+      case '#trip':
+          app.listTrip(localStorage.getItem('_id'));
+        break;
+      case '#guide':
+          var list_trips = app.populateListTrip(localStorage.getItem('_id'));
+          $('#guide_trip_select').html(list_trips);
+        break;  
+    }
+
+  });
+
+  function cleanSource(html) {
+    var lines = html.split(/\n/);
+
+    lines.shift();
+    lines.splice(-1, 1);
+
+    var indentSize = lines[0].length - lines[0].trim().length,
+        re = new RegExp(" {" + indentSize + "}");
+
+    lines = lines.map(function (line) {
+      if (line.match(re)) {
+        line = line.substring(indentSize);
+      }
+
+      return line;
+    });
+
+    lines = lines.join("\n");
+
+    return lines;
+  }
+
+  $("#opensource").click(function () {
+    $.get(window.location.href, function (data) {
+      var html = $(data).find(window.page).html();
+      html = cleanSource(html);
+      $("#source-modal pre").text(html);
+      $("#source-modal").modal();
+    });
+  });
+</script>
+
+<!-- Twitter Bootstrap -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Google Maps API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzqBo4dj3KvFN250WvTYNrfFJVyxsKegw&libraries=places&callback=initMap" async defer></script>
+
+<!-- Material Design for Bootstrap -->
+<script src="static/dist/js/material.js"></script>
+<script src="static/dist/js/ripples.min.js"></script>
+
+<script>
+  $.material.init();
+</script>
+<script src="http://fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
+
+<!-- Sliders -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script>
+<script>
+// This sample uses the Place Autocomplete widget to allow the user to search
+// for and select a place. The sample then displays an info window containing
+// the place ID and other information about the place that the user has
+// selected.
+
+// This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+//
+function initApp(){
+  localStorage.setItem('_id','<%= user._id %>');
+  var place_category = app.populateListCategory();
+  $('#place_category').html(place_category);
+}
+
+$('.add_trip').on('click', function(){
+  var trip = {
+    trip_name: $('#trip-1').val(),
+    startAt: $('#tripStartAt').val(),
+    endAt: $('#tripEndAt').val()
+  };
+  app.addTrip(trip);
+});
+
+$('#guide_trip_select').on('change', function(){
+  $.ajax({
+      url:'/trip/'+$('#guide_trip_select').val(),
+      type: 'GET',
+      jsonp: true,
+      success: function(resp){
+        if(resp[0].items.length > 0){
+          var items = sortByKey(resp[0].items, 'startAt');
+          var html = new EJS({url: '/static/list_guide_items.ejs'}).render({items:items});
+        }
+        else{
+          var html = 'You have no items yet!';
+        }
+        localStorage.setItem('currentTripStartDate', resp[0].startAt);
+        localStorage.setItem('currentTripEndDate', resp[0].endAt);
+        localStorage.setItem('currentTrip',$('#guide_trip_select').val());
+        adjustTripDateRange();
+        $('#list_guide_items').html(html);
+        $('.item-guide').on('click', function(){
+          console.info('dasdasda', this);
+        });
+      }
+    })
+});
+
+var app = {
+  addTrip: function(trip) {
+    $.ajax({
+      url:'/trip',
+      type: 'POST',
+      jsonp: true,
+      data: {
+        trip_name : trip.trip_name,
+        startAt : trip.startAt,
+        endAt : trip.endAt,
+        owner_id : localStorage.getItem('_id')
+      },
+      success: function(resp){
+        app.listTrip(localStorage.getItem('_id'));
+      }
+    })
+    .done(function(){
+      $('#trip-1').val('');
+      $('#tripStartAt').val('');
+      $('#tripEndAt').val('');
+    });
+  },
+  populateListCategory: function(){
+    var list = '<option value=""></option>';
+    $.ajax({
+      url:'/category',
+      type: 'GET',
+      async: false,
+      jsonp: true,
+      success: function(resp){
+        if(resp.length > 0){
+          $.each(resp, function(i,v){
+            list += '<option value="'+v._id+'">'+v.category_name+'</option>';
+          });
+        }
+      }
+    });
+    return list;
+  },
+  populateListTrip: function(user){
+    var list = '<option value=""></option>';
+    $.ajax({
+      url:'/trip',
+      type: 'GET',
+      async: false,
+      jsonp: true,
+      data: {
+        owner_id : user
+      },
+      success: function(resp){
+        if(resp.length > 0){
+          $.each(resp, function(i,v){
+            console.info(v._id);
+            list += '<option value="'+v._id+'">'+v.trip_name+'</option>';
+          });
+        }
+      }
+    });
+    return list;
+  },
+  listTrip: function(user){
+    $.ajax({
+      url:'/trip',
+      type: 'GET',
+      jsonp: true,
+      data: {
+        owner_id : user
+      },
+      success: function(resp){
+        if(resp.length > 0){
+          var html = new EJS({url: '/static/list_trips.ejs'}).render({trips:resp});
+        }
+        else{
+          var html = 'You have no trips yet!';
+        }
+        $('#list_trips').html(html);
+      }
+    });
+  },
+  addPlace:  function(place){
+    $.ajax({
+      url:'/place',
+      type: 'POST',
+      jsonp: true,
+      data: {
+        category_id: $('#place_category').val(),
+        place_id : place.place_id,
+        place_name : place.name,
+        place_url : place.url,
+        trip_id : $('#trip_list_select').val(),
+        placeStartAt : $('#placeStartAt').val(),
+        placeEndAt : $('#placeEndAt').val(),
+      },
+      success: function(resp){
+        console.info(resp);
+      }
+    });
+  }
+};
+
+
+function adjustTripDateRange(){
+  $('#placeStartAt').bootstrapMaterialDatePicker('setMinDate', moment(localStorage.getItem('currentTripStartDate')));
+  $('#placeStartAt').bootstrapMaterialDatePicker('setMaxDate', moment(localStorage.getItem('currentTripEndDate')));
+  $('#placeEndAt').bootstrapMaterialDatePicker({ weekStart : 0, format : 'YYYY/MM/DD HH:mm' });
+  $('#placeStartAt').bootstrapMaterialDatePicker({ weekStart : 0, format : 'YYYY/MM/DD HH:mm' }).on('change', function(e, date){
+    $('#placeEndAt').bootstrapMaterialDatePicker('setMinDate', date);
+    $('#placeEndAt').bootstrapMaterialDatePicker('setMaxDate', moment(localStorage.getItem('currentTripEndDate')));
+  });
+
+  $('#itemStartAt').bootstrapMaterialDatePicker('setMinDate', moment(localStorage.getItem('currentTripStartDate')));
+  $('#itemStartAt').bootstrapMaterialDatePicker('setMaxDate', moment(localStorage.getItem('currentTripEndDate')));
+  $('#itemEndAt').bootstrapMaterialDatePicker({ weekStart : 0, format : 'YYYY/MM/DD HH:mm' });
+  $('#itemStartAt').bootstrapMaterialDatePicker({ weekStart : 0, format : 'YYYY/MM/DD HH:mm' }).on('change', function(e, date){
+    $('#itemEndAt').bootstrapMaterialDatePicker('setMinDate', date);
+    $('#itemEndAt').bootstrapMaterialDatePicker('setMaxDate', moment(localStorage.getItem('currentTripEndDate')));
+  });
+}
+
+$('#tripStartAt').bootstrapMaterialDatePicker('setMinDate', moment());
+$('#tripEndAt').bootstrapMaterialDatePicker({ weekStart : 0, format : 'YYYY/MM/DD HH:mm' });
+$('#tripStartAt').bootstrapMaterialDatePicker({ weekStart : 0, format : 'YYYY/MM/DD HH:mm' }).on('change', function(e, date){
+  $('#tripEndAt').bootstrapMaterialDatePicker('setMinDate', date);
+});
+
+//tripDateTime
+$('#placeStartAt').bootstrapMaterialDatePicker('setMinDate', moment(localStorage.getItem('currentTripStartDate')));
+$('#placeStartAt').bootstrapMaterialDatePicker('setMaxDate', moment(localStorage.getItem('currentTripEndDate')));
+$('#placeEndAt').bootstrapMaterialDatePicker({ weekStart : 0, format : 'YYYY/MM/DD HH:mm' });
+$('#placeStartAt').bootstrapMaterialDatePicker({ weekStart : 0, format : 'YYYY/MM/DD HH:mm' }).on('change', function(e, date){
+  $('#placeEndAt').bootstrapMaterialDatePicker('setMinDate', date);
+  $('#placeEndAt').bootstrapMaterialDatePicker('setMaxDate', moment(localStorage.getItem('currentTripEndDate')));
+});
+
+function sortByKey(array, key) {
+    return array.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+}
+
+initApp();
+
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -33.8688, lng: 151.2195},
+    zoom: 13
+  });
+
+  var input = document.getElementById('pac-input');
+
+  var autocomplete = new google.maps.places.Autocomplete(input);
+  autocomplete.bindTo('bounds', map);
+
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  var infowindow = new google.maps.InfoWindow();
+  var marker = new google.maps.Marker({
+    map: map
+  });
+  marker.addListener('click', function() {
+    infowindow.open(map, marker);
+    console.info(marker);
+  });
+
+  autocomplete.addListener('place_changed', function() {
+    infowindow.close();
+    var place = autocomplete.getPlace();
+    if (!place.geometry) {
+      return;
+    }
+
+    if (place.geometry.viewport) {
+      map.fitBounds(place.geometry.viewport);
+    } else {
+      map.setCenter(place.geometry.location);
+      map.setZoom(17);
+    }
+
+    // Set the position of the marker using the place ID and location.
+    marker.setPlace({
+      placeId: place.place_id,
+      location: place.geometry.location
+    });
+
+    marker.setVisible(true);
+    var html = new EJS({url: '/static/info_place.ejs'}).render({place : place});
+    infowindow.setContent(html);
+    var list_trips = app.populateListTrip(localStorage.getItem('_id'));
+    $('#trip_list_select').html(list_trips);
+    infowindow.open(map, marker);
+    $('.add_place').on('click', function(){
+      app.addPlace(place);
+    });
+  });
+}
+</script>
+
+
+<!-- Dropdown.js -->
+<script src="https://cdn.rawgit.com/FezVrasta/dropdown.js/master/jquery.dropdown.js"></script>
+<script>
+  $("#dropdown-menu select").dropdown();
+</script>
+
+</body>
+</html>
